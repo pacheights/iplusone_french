@@ -9,10 +9,10 @@ export const LISTENING_UNLOCK_COUNT = 15
 
 /**
  * Element ids the learner actually knows — cards graded good/easy (or hard)
- * that haven't since lapsed. `repetitions` climbs on every non-"again" grade and
- * resets to 0 on "again", so `repetitions >= 1` is exactly "recalled at least
- * once and not currently forgotten." A single "again" drops the word back out of
- * the listening vocabulary until it's re-learned.
+ * that haven't since lapsed. `reps` climbs on every non-"again" grade and
+ * resets to 0 on "again", so `reps >= 1` is exactly "recalled at least once and
+ * not currently forgotten." A single "again" drops the word back out of the
+ * listening vocabulary until it's re-learned.
  */
 export function getKnownElementIds(
   cards: Card[],
@@ -21,7 +21,7 @@ export function getKnownElementIds(
   const known = new Set<string>()
   for (const card of cards) {
     const state = states[card.id]
-    if (state && state.repetitions >= 1) known.add(card.element)
+    if (state && state.reps >= 1 && card.element) known.add(card.element)
   }
   return known
 }

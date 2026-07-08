@@ -8,6 +8,8 @@ interface FlashcardProps {
   onSpeak: (text: string) => void
   onGrade: (grade: Grade) => void
   speechUnlocked: boolean
+  /** Highlight the target word on the English (front) side too. */
+  highlightEnglish: boolean
 }
 
 function Sentence({ segments }: { segments: Segment[] }) {
@@ -22,7 +24,7 @@ function Sentence({ segments }: { segments: Segment[] }) {
   )
 }
 
-export function Flashcard({ card, onSpeak, onGrade, speechUnlocked }: FlashcardProps) {
+export function Flashcard({ card, onSpeak, onGrade, speechUnlocked, highlightEnglish }: FlashcardProps) {
   const [revealed, setRevealed] = useState(false)
 
   // Reset to the front (English) whenever a new card appears.
@@ -48,7 +50,7 @@ export function Flashcard({ card, onSpeak, onGrade, speechUnlocked }: FlashcardP
     })
   }
 
-  const note = elementById[card.element]?.note
+  const element = card.element ? elementById[card.element] : undefined
 
   return (
     <div
@@ -63,7 +65,13 @@ export function Flashcard({ card, onSpeak, onGrade, speechUnlocked }: FlashcardP
           <p className="flashcard-sentence">
             <Sentence segments={card.segments} />
           </p>
-          {note && <p className="grammar-note">{note}</p>}
+          {element && (
+            <p className="element-gloss">
+              <span className="element-gloss-surface">{element.surface}</span> — {element.gloss}
+            </p>
+          )}
+          {element?.note && <p className="grammar-note">{element.note}</p>}
+          {card.note && <p className="grammar-note">{card.note}</p>}
           <button
             type="button"
             className="play-button"
@@ -89,7 +97,11 @@ export function Flashcard({ card, onSpeak, onGrade, speechUnlocked }: FlashcardP
         </>
       ) : (
         <p className="flashcard-sentence">
-          <Sentence segments={card.translation} />
+          <Sentence
+            segments={
+              highlightEnglish ? card.translation : card.translation.map((s) => ({ text: s.text }))
+            }
+          />
         </p>
       )}
     </div>

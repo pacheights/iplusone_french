@@ -38,6 +38,6 @@ export function computeQueue(
 export function getLearnedElements(cards: Card[], states: Record<string, CardState>): Element[] {
   return cards
     .filter((card) => states[card.id])
-    .map((card) => elementById[card.element])
+    .map((card) => (card.element ? elementById[card.element] : undefined))
     .filter((el): el is Element => Boolean(el))
 }

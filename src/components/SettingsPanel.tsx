@@ -7,6 +7,8 @@ interface SettingsPanelProps {
   newWordsPerDay: number
   onSetNewWordsPerDay: (n: number) => void
   newWordsToday: number
+  highlightEnglish: boolean
+  onSetHighlightEnglish: (on: boolean) => void
 }
 
 export function SettingsPanel({
@@ -16,6 +18,8 @@ export function SettingsPanel({
   newWordsPerDay,
   onSetNewWordsPerDay,
   newWordsToday,
+  highlightEnglish,
+  onSetHighlightEnglish,
 }: SettingsPanelProps) {
   const [open, setOpen] = useState(false)
 
@@ -54,6 +58,16 @@ export function SettingsPanel({
             <span className="new-words-today">
               {newWordsToday}/{newWordsPerDay} introduced today
             </span>
+          </label>
+
+          <h2>Display</h2>
+          <label className="highlight-english-field">
+            <input
+              type="checkbox"
+              checked={highlightEnglish}
+              onChange={(e) => onSetHighlightEnglish(e.target.checked)}
+            />
+            <span>Highlight the target word in English</span>
           </label>
 
           <h2>Voice</h2>
