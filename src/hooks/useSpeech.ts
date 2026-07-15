@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { loadVoiceURI, saveVoiceURI } from '../engine/storage'
+import { loadSpeechRate, loadVoiceURI, saveSpeechRate, saveVoiceURI } from '../engine/storage'
 
 // Flip to true to log voice selection and per-utterance diagnostics.
 const DEBUG = false
@@ -49,9 +49,15 @@ function rankVoices(available: SpeechSynthesisVoice[], savedURI: string | null):
 export function useSpeech() {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
   const [selectedVoice, setSelectedVoiceState] = useState<SpeechSynthesisVoice | null>(null)
+  const [rate, setRateState] = useState(() => loadSpeechRate())
   // Browsers block speechSynthesis until the user interacts with the page
   // (erroring "not-allowed"). Callers can hold off auto-speaking until then.
   const [unlocked, setUnlocked] = useState(false)
+
+  // Keep the latest rate in a ref so speak() (memoized on selectedVoice) always
+  // reads the current value without needing to re-create the callback.
+  const rateRef = useRef(rate)
+  rateRef.current = rate
 
   // Ranked fallback list, kept in a ref so speak() always sees the latest.
   const rankedRef = useRef<SpeechSynthesisVoice[]>([])
@@ -83,7 +89,8 @@ export function useSpeech() {
         log('0 voices yet — waiting for voiceschanged')
         return
       }
-      const ranked = rankVoices(available, loadVoiceURI())
+      const savedURI = loadVoiceURI()
+      const ranked = rankVoices(available, savedURI)
       rankedRef.current = ranked
       setVoices(available)
       log(
@@ -91,7 +98,11 @@ export function useSpeech() {
         ranked.slice(0, 4).map(describe),
       )
       setSelectedVoiceState((current) => {
-        const next = current ?? ranked[0] ?? null
+        // Honor the user's saved choice as the default even if it's a remote
+        // voice (rankVoices deprioritizes those for *fallback*, but the saved
+        // voice is still the explicit selection). Fall back to the top rank.
+        const saved = savedURI ? available.find((v) => v.voiceURI === savedURI) : undefined
+        const next = current ?? saved ?? ranked[0] ?? null
         log('default voice:', describe(next))
         return next
       })
@@ -119,6 +130,11 @@ export function useSpeech() {
     saveVoiceURI(voice.voiceURI)
     // Move the explicit choice to the front of the fallback list.
     rankedRef.current = [voice, ...rankedRef.current.filter((v) => v.voiceURI !== voice.voiceURI)]
+  }, [])
+
+  const setRate = useCallback((next: number) => {
+    setRateState(next)
+    saveSpeechRate(next)
   }, [])
 
   const speak = useCallback(
@@ -150,6 +166,7 @@ export function useSpeech() {
       const tryVoice = (index: number) => {
         const voice = candidates[index]
         const utterance = new SpeechSynthesisUtterance(trimmed)
+        utterance.rate = rateRef.current
         if (voice) {
           utterance.voice = voice
           utterance.lang = voice.lang
@@ -211,5 +228,5 @@ export function useSpeech() {
   // Stop watchdog timers when the hook unmounts.
   useEffect(() => clearWatchdog, [])
 
-  return { voices, selectedVoice, setSelectedVoice, speak, unlocked }
+  return { voices, selectedVoice, setSelectedVoice, rate, setRate, speak, unlocked }
 }

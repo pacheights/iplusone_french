@@ -91,6 +91,12 @@ export function validateDeck(cards: Card[] = CARDS): Violation[] {
     }
     if (run.length) runs.push(run)
 
+    // Agreement forms unlocked "for free" by this card (rules.md): they become
+    // known here but are not highlighted, so learn them before verifying the
+    // non-highlighted remainder — a plural adjective next to a new pronoun then
+    // counts as known rather than as an un-highlighted unknown.
+    for (const unit of el.free ?? []) learn(unit)
+
     for (const tokens of runs) {
       const unknown = firstUnknown(tokens)
       if (unknown !== null) {
@@ -103,20 +109,33 @@ export function validateDeck(cards: Card[] = CARDS): Violation[] {
     }
 
     const units = unitsFor(el)
-    const declared = units.flat().slice().sort().join(' ')
-    const highlighted = newTokens.slice().sort().join(' ')
+    const provideTokens = units.flat()
+    const provideSet = new Set(provideTokens)
+    const freeSet = new Set((el.free ?? []).flat())
+    const highlightedSet = new Set(newTokens)
+
+    // Every token the element provides must be highlighted…
+    const missing = provideTokens.filter((t) => !highlightedSet.has(t))
+    // …and every highlighted token that isn't part of the element must be a free
+    // agreement form or an already-known word shown for review emphasis (e.g. a
+    // blue plural-agreement highlight sitting next to the new pronoun+verb).
+    const badExtras = newTokens.filter(
+      (t) => !provideSet.has(t) && !freeSet.has(t) && !known.has(t),
+    )
 
     if (newTokens.length === 0) {
       violations.push({ cardId: card.id, kind: 'no-new', detail: 'card highlights no new element' })
-    } else if (declared !== highlighted) {
+    } else if (missing.length || badExtras.length) {
       violations.push({
         cardId: card.id,
         kind: 'mismatch',
-        detail: `highlighted "${highlighted}" != element "${el.id}" provides "${declared}"`,
+        detail:
+          `highlighted "${newTokens.slice().sort().join(' ')}" != element "${el.id}" provides "${provideTokens.slice().sort().join(' ')}"` +
+          (badExtras.length ? ` (unexpected: ${badExtras.join(', ')})` : ''),
       })
     }
 
-    if (newTokens.length && units.every((u) => known.has(u.join(' ')))) {
+    if (units.every((u) => known.has(u.join(' ')))) {
       violations.push({ cardId: card.id, kind: 'not-new', detail: `element "${el.id}" is already known` })
     }
 

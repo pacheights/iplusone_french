@@ -119,6 +119,26 @@ body {
   cursor: pointer;
 }
 
+.speech-rate-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.speech-rate-field input[type='range'] {
+  flex: 1;
+}
+
+.speech-rate-value {
+  opacity: 0.7;
+  font-size: 13px;
+  min-width: 42px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .sidebar-button {
   font-size: 16px;
   background: none;
@@ -228,6 +248,23 @@ body {
 .undo-button:hover {
   opacity: 1;
   background: var(--btn-bg);
+}
+
+.cards-remaining {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.cards-remaining-breakdown {
+  font-size: 12px;
+  opacity: 0.8;
 }
 
 .listening {

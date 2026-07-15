@@ -14,8 +14,8 @@ import type { ListeningChoice } from '../types'
  * the union of surface forms provided by the item's declared `requires`.
  */
 
-/** The element ids introduced within the first 60 cards. */
-const FIRST_60 = new Set(CARDS.slice(0, 60).map((c) => c.element).filter((e): e is string => !!e))
+/** Every element id actually taught somewhere in the deck. */
+const TAUGHT = new Set(CARDS.map((c) => c.element).filter((e): e is string => !!e))
 
 /** Every word form an element makes known (its surface, or its `provides` units). */
 function wordsOf(elementId: string): string[] {
@@ -77,7 +77,16 @@ function tokensToCheck(sentence: string): string[] {
 
 function allowedWords(requires: string[]): Set<string> {
   const set = new Set<string>()
-  for (const id of requires) for (const w of wordsOf(id)) set.add(w)
+  for (const id of requires) {
+    for (const w of wordsOf(id)) {
+      // Agreement endings are free once the base word is known (rules.md #1):
+      // accept the plural (-s) and feminine (-e / -es) forms of any known word.
+      set.add(w)
+      set.add(`${w}s`)
+      set.add(`${w}e`)
+      set.add(`${w}es`)
+    }
+  }
   // l' before a vowel is written 'le' by tokensToCheck; if the item only has a
   // feminine article (la), accept 'le' as its elided stand-in and vice versa.
   if (set.has('la')) set.add('le')
@@ -96,12 +105,12 @@ describe('listening bank', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('only requires real elements, all within the first 60 cards', () => {
+  it('only requires elements that are actually taught in the deck', () => {
     const problems: string[] = []
     for (const item of LISTENING_ITEMS) {
       for (const id of item.requires) {
         if (!elementById[id]) problems.push(`${item.id}: unknown element "${id}"`)
-        else if (!FIRST_60.has(id)) problems.push(`${item.id}: "${id}" is beyond card 60`)
+        else if (!TAUGHT.has(id)) problems.push(`${item.id}: "${id}" is never taught by a card`)
       }
     }
     expect(problems, problems.join('\n')).toEqual([])

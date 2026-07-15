@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useState, type MouseEvent } from 'react'
 import type { Card, Grade, Segment } from '../types'
 import { cardText } from '../types'
 import { elementById } from '../data/elements'
@@ -27,10 +27,15 @@ function Sentence({ segments }: { segments: Segment[] }) {
 export function Flashcard({ card, onSpeak, onGrade, speechUnlocked, highlightEnglish }: FlashcardProps) {
   const [revealed, setRevealed] = useState(false)
 
-  // Reset to the front (English) whenever a new card appears.
-  useEffect(() => {
+  // Reset to the front (English) whenever a new card appears. Done during render
+  // rather than in an effect so the reset lands *before* the new card paints —
+  // an effect runs after render, which would flash the next card's French answer
+  // for one frame when grading from the back side.
+  const [shownCardId, setShownCardId] = useState(card.id)
+  if (card.id !== shownCardId) {
+    setShownCardId(card.id)
     setRevealed(false)
-  }, [card.id])
+  }
 
   const stopAndRun = (fn: () => void) => (e: MouseEvent) => {
     e.stopPropagation()
@@ -39,9 +44,8 @@ export function Flashcard({ card, onSpeak, onGrade, speechUnlocked, highlightEng
 
   // Speak the French only on an actual user-initiated flip to the back, not via
   // an effect keyed on `revealed` — that would fire with the *previous* card's
-  // stale revealed=true the instant card.id changes (before the reset effect
-  // above catches up), playing once spuriously on mount and once again on the
-  // real reveal.
+  // stale revealed=true the instant card.id changes, playing once spuriously on
+  // mount and once again on the real reveal.
   const flip = () => {
     setRevealed((r) => {
       const next = !r

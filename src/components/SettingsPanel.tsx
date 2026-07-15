@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { MAX_SPEECH_RATE, MIN_SPEECH_RATE } from '../engine/storage'
 
 interface SettingsPanelProps {
   voices: SpeechSynthesisVoice[]
   selectedVoice: SpeechSynthesisVoice | null
   onSelectVoice: (voice: SpeechSynthesisVoice) => void
+  speechRate: number
+  onSetSpeechRate: (rate: number) => void
   newWordsPerDay: number
   onSetNewWordsPerDay: (n: number) => void
   newWordsToday: number
@@ -15,6 +18,8 @@ export function SettingsPanel({
   voices,
   selectedVoice,
   onSelectVoice,
+  speechRate,
+  onSetSpeechRate,
   newWordsPerDay,
   onSetNewWordsPerDay,
   newWordsToday,
@@ -68,6 +73,19 @@ export function SettingsPanel({
               onChange={(e) => onSetHighlightEnglish(e.target.checked)}
             />
             <span>Highlight the target word in English</span>
+          </label>
+
+          <h2>Speech speed</h2>
+          <label className="speech-rate-field">
+            <input
+              type="range"
+              min={MIN_SPEECH_RATE}
+              max={MAX_SPEECH_RATE}
+              step={0.05}
+              value={speechRate}
+              onChange={(e) => onSetSpeechRate(Number(e.target.value))}
+            />
+            <span className="speech-rate-value">{speechRate.toFixed(2)}×</span>
           </label>
 
           <h2>Voice</h2>

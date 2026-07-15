@@ -21,6 +21,14 @@ export interface Element {
   gloss: string
   note?: string
   provides?: string[][]
+  /**
+   * Agreement forms this card unlocks "for free" (rules.md: an ending is free
+   * once the base word is known) — e.g. the plural `occupés` when the base
+   * `occupé` is already learned. Unlike `provides`, these become known without
+   * being highlighted, so a plural adjective sitting next to a new pronoun stays
+   * un-highlighted rather than counting as the card's new thing.
+   */
+  free?: string[][]
 }
 
 export interface Card {

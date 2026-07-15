@@ -41,7 +41,7 @@ function App() {
   const [view, setView] = useState<View>('learn')
   const [newWordsPerDay, setNewWordsPerDayState] = useState(() => loadNewWordsPerDay())
   const [highlightEnglish, setHighlightEnglishState] = useState(() => loadHighlightEnglish())
-  const { voices, selectedVoice, setSelectedVoice, speak, unlocked } = useSpeech()
+  const { voices, selectedVoice, setSelectedVoice, rate, setRate, speak, unlocked } = useSpeech()
 
   const setNewWordsPerDay = (n: number) => {
     setNewWordsPerDayState(n)
@@ -58,6 +58,8 @@ function App() {
     [states, newWordsPerDay],
   )
   const currentCard = forcedCard ?? queue[0]
+  const reviewCount = queue.filter((c) => states[c.id]).length
+  const newCount = queue.length - reviewCount
   const learned = useMemo(() => getLearnedElements(CARDS, states), [states])
   const newWordsToday = useMemo(() => countIntroducedToday(states, new Date()), [states])
 
@@ -138,6 +140,8 @@ function App() {
           voices={voices}
           selectedVoice={selectedVoice}
           onSelectVoice={setSelectedVoice}
+          speechRate={rate}
+          onSetSpeechRate={setRate}
           newWordsPerDay={newWordsPerDay}
           onSetNewWordsPerDay={setNewWordsPerDay}
           newWordsToday={newWordsToday}
@@ -156,6 +160,16 @@ function App() {
           >
             ↶ Undo
           </button>
+        )}
+        {activeView === 'learn' && currentCard && (
+          <div className="cards-remaining">
+            <span className="cards-remaining-total">
+              {queue.length} {queue.length === 1 ? 'card' : 'cards'} left
+            </span>
+            <span className="cards-remaining-breakdown">
+              {reviewCount} reviewing · {newCount} new
+            </span>
+          </div>
         )}
         {activeView === 'listen' ? (
           <ListeningTest items={listeningPool} onSpeak={speak} speechUnlocked={unlocked} />

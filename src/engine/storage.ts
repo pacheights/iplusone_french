@@ -3,11 +3,17 @@ import type { CardState } from '../types'
 const SRS_STATE_KEY = 'srs-state-v2'
 const SRS_STATE_KEY_V1 = 'srs-state-v1'
 const TTS_VOICE_KEY = 'tts-voice-v1'
+const TTS_RATE_KEY = 'tts-rate-v1'
 const LISTENING_PROGRESS_KEY = 'listening-progress-v1'
 const NEW_WORDS_PER_DAY_KEY = 'new-words-per-day-v1'
 const HIGHLIGHT_ENGLISH_KEY = 'highlight-english-v1'
 
 export const DEFAULT_NEW_WORDS_PER_DAY = 10
+
+/** How fast the voice speaks. 1 = normal; the Web Speech API accepts 0.1–10. */
+export const DEFAULT_SPEECH_RATE = 1
+export const MIN_SPEECH_RATE = 0.5
+export const MAX_SPEECH_RATE = 1.5
 
 /** Whether the target word is highlighted on the English (front) side. Off by default. */
 export function loadHighlightEnglish(): boolean {
@@ -94,6 +100,17 @@ export function loadVoiceURI(): string | null {
 
 export function saveVoiceURI(voiceURI: string): void {
   localStorage.setItem(TTS_VOICE_KEY, voiceURI)
+}
+
+export function loadSpeechRate(): number {
+  const raw = localStorage.getItem(TTS_RATE_KEY)
+  const n = raw ? Number(raw) : NaN
+  if (!Number.isFinite(n)) return DEFAULT_SPEECH_RATE
+  return Math.min(MAX_SPEECH_RATE, Math.max(MIN_SPEECH_RATE, n))
+}
+
+export function saveSpeechRate(rate: number): void {
+  localStorage.setItem(TTS_RATE_KEY, String(rate))
 }
 
 /**
