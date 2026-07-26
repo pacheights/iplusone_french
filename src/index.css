@@ -1,33 +1,69 @@
 :root {
-  color-scheme: light dark;
-  --bg: #fff;
-  --text: #16171d;
-  --border: #e5e4e7;
-  --card-bg: #fafafa;
-  --vocab-bg: #fde68a;
-  --grammar-bg: #bae6fd;
-  --btn-bg: #f4f3ec;
-  --again-bg: #fecaca;
-  --hard-bg: #fed7aa;
-  --good-bg: #bbf7d0;
-  --easy-bg: #a7f3d0;
-}
+  color-scheme: light;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16171d;
-    --text: #f3f4f6;
-    --border: #2e303a;
-    --card-bg: #1f2028;
-    --btn-bg: #2e303a;
-  }
+  /* --- Windows 95 palette --- */
+  --desktop: #008080; /* the iconic teal desktop */
+  --bg: #008080;
+  --text: #000000;
+
+  --face: #c0c0c0; /* silver panel face */
+  --card-bg: #c0c0c0;
+  --btn-bg: #c0c0c0;
+
+  --hilite: #ffffff; /* bevel highlight */
+  --face-light: #dfdfdf;
+  --shadow: #808080; /* bevel shadow */
+  --dk-shadow: #0a0a0a; /* bevel outer shadow */
+  --border: #808080;
+
+  --title: #000080; /* navy title bar */
+  --title2: #1084d0;
+  --title-text: #ffffff;
+
+  /* Highlights: yellow = vocab, blue = grammar (house convention) */
+  --vocab-bg: #ffff00;
+  --grammar-bg: #00c0ff;
+
+  /* Grade brights */
+  --again-bg: #ff5555;
+  --hard-bg: #ffaa00;
+  --good-bg: #00d060;
+  --easy-bg: #00d0d0;
+
+  /* Reusable Win95 bevels ------------------------------------------------- */
+  /* raised: buttons, panels sitting on the desktop */
+  --bevel-out: inset -1px -1px 0 var(--dk-shadow), inset 1px 1px 0 var(--hilite),
+    inset -2px -2px 0 var(--shadow), inset 2px 2px 0 var(--face-light);
+  /* pressed: a raised control being clicked */
+  --bevel-in: inset -1px -1px 0 var(--hilite), inset 1px 1px 0 var(--dk-shadow),
+    inset -2px -2px 0 var(--face-light), inset 2px 2px 0 var(--shadow);
+  /* well: sunken inputs / lists */
+  --bevel-well: inset -1px -1px 0 var(--hilite), inset 1px 1px 0 var(--shadow),
+    inset -2px -2px 0 var(--face-light), inset 2px 2px 0 var(--dk-shadow);
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 18px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Chunky 90s system font stack */
+  font: 15px/145% Tahoma, 'MS Sans Serif', Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: none;
+}
+
+/* Sharp corners everywhere — 90s UI had no rounding. */
+button,
+input,
+.flashcard,
+.listening,
+.settings-popover,
+.sidebar-panel {
+  border-radius: 0;
+}
+
+:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
 }
 
 #app {
@@ -48,33 +84,71 @@ body {
   position: relative;
 }
 
-.settings-button {
-  font-size: 22px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 10px;
+/* ---- Generic raised chrome button (settings gear, sidebar, tabs, etc.) ---- */
+.settings-button,
+.sidebar-button,
+.view-tab,
+.undo-button,
+.play-button,
+.listening-next,
+.back-to-listen,
+.explain-button,
+.modal-close,
+.grade-buttons button,
+.option-button {
+  font: inherit;
+  color: var(--text);
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out);
+  padding: 6px 12px;
   cursor: pointer;
+}
+
+.settings-button:active,
+.sidebar-button:active,
+.view-tab:active,
+.undo-button:active,
+.play-button:active,
+.listening-next:active,
+.back-to-listen:active,
+.explain-button:active,
+.modal-close:active,
+.grade-buttons button:active,
+.option-button:not(:disabled):active {
+  box-shadow: var(--bevel-in);
+  padding: 7px 11px 5px 13px; /* nudge label down-right when pressed */
+}
+
+.settings-button {
+  font-size: 20px;
+  padding: 4px 10px;
 }
 
 .settings-popover {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   width: 280px;
   max-height: 320px;
   overflow-y: auto;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out), 3px 3px 0 rgba(0, 0, 0, 0.35);
   padding: 12px 16px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 10px 15px -3px;
   z-index: 10;
 }
 
-.settings-popover h2 {
-  font-size: 15px;
-  margin: 0 0 8px;
+.settings-popover h2,
+.sidebar-panel h2 {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: -12px -16px 10px;
+  padding: 4px 8px;
+  background: linear-gradient(90deg, var(--title), var(--title2));
+  color: var(--title-text);
 }
 
 .voice-list {
@@ -84,7 +158,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .new-words-field {
@@ -92,22 +166,27 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
-  font-size: 14px;
+  font-size: 13px;
+}
+
+.new-words-field input,
+.speech-rate-field input {
+  background: #fff;
+  color: #000;
+  box-shadow: var(--bevel-well);
+  border: none;
 }
 
 .new-words-field input {
   width: 60px;
   padding: 4px 6px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--card-bg);
-  color: inherit;
-  font-size: 14px;
+  font: inherit;
+  font-size: 13px;
 }
 
 .new-words-today {
   opacity: 0.7;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .highlight-english-field {
@@ -115,7 +194,7 @@ body {
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
 }
 
@@ -124,7 +203,7 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .speech-rate-field input[type='range'] {
@@ -132,45 +211,34 @@ body {
 }
 
 .speech-rate-value {
-  opacity: 0.7;
-  font-size: 13px;
+  opacity: 0.75;
+  font-size: 12px;
   min-width: 42px;
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
 .sidebar-button {
-  font-size: 16px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 10px;
-  cursor: pointer;
+  font-size: 15px;
 }
 
 .sidebar-panel {
   position: absolute;
   left: 0;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   width: 300px;
   max-height: 420px;
   overflow-y: auto;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out), 3px 3px 0 rgba(0, 0, 0, 0.35);
   padding: 12px 16px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 10px 15px -3px;
   z-index: 10;
 }
 
-.sidebar-panel h2 {
-  font-size: 15px;
-  margin: 0 0 8px;
-}
-
 .sidebar-empty {
-  font-size: 14px;
-  opacity: 0.7;
+  font-size: 13px;
+  opacity: 0.75;
   margin: 0;
 }
 
@@ -181,7 +249,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .learned-list li {
@@ -191,7 +259,7 @@ body {
 }
 
 .learned-gloss {
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .view-nav {
@@ -201,24 +269,19 @@ body {
 }
 
 .view-tab {
-  font: inherit;
-  font-size: 15px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: inherit;
+  font-size: 14px;
 }
 
 .view-tab-active {
-  background: var(--btn-bg);
-  font-weight: 600;
+  box-shadow: var(--bevel-in);
+  font-weight: bold;
 }
 
 .view-tab:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  color: var(--shadow);
+  text-shadow: 1px 1px 0 var(--hilite);
+  box-shadow: var(--bevel-out);
 }
 
 .deck {
@@ -234,20 +297,7 @@ body {
   position: absolute;
   top: 16px;
   left: 16px;
-  font: inherit;
-  font-size: 14px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: inherit;
-  opacity: 0.7;
-}
-
-.undo-button:hover {
-  opacity: 1;
-  background: var(--btn-bg);
+  font-size: 13px;
 }
 
 .cards-remaining {
@@ -258,22 +308,58 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
-  font-size: 14px;
-  opacity: 0.6;
+  font-size: 13px;
+  color: var(--title-text);
+  background: var(--title);
+  box-shadow: var(--bevel-out);
+  padding: 6px 10px;
 }
 
 .cards-remaining-breakdown {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+/* ---- Window-style panels: flashcard + listening test ---- */
+.listening,
+.flashcard {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out), 4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Fake Win95 title bar across the top of each window */
+.listening::before,
+.flashcard::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  background: linear-gradient(90deg, var(--title), var(--title2));
+  color: var(--title-text);
   font-size: 12px;
-  opacity: 0.8;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
+
+.flashcard::before {
+  content: '📖  Flashcard';
+}
+
+.listening::before {
+  content: '🎧  Listening';
 }
 
 .listening {
-  width: 100%;
-  max-width: 480px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--card-bg);
-  padding: 32px;
+  padding: 44px 32px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -288,20 +374,20 @@ body {
 }
 
 .listening-prompt {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: bold;
   margin: 0;
 }
 
 .listening-position {
-  font-size: 14px;
-  font-weight: 400;
-  opacity: 0.6;
+  font-size: 13px;
+  font-weight: normal;
+  opacity: 0.65;
 }
 
 .listening-score {
-  font-size: 14px;
-  opacity: 0.7;
+  font-size: 13px;
+  opacity: 0.75;
   margin: 0;
 }
 
@@ -318,20 +404,9 @@ body {
 }
 
 .option-button {
-  font: inherit;
-  font-size: 20px;
-  background: var(--btn-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  font-size: 18px;
   padding: 14px 18px;
-  cursor: pointer;
-  color: inherit;
   text-align: center;
-  transition: transform 0.05s ease;
-}
-
-.option-button:not(:disabled):hover {
-  transform: translateY(-1px);
 }
 
 .option-button:disabled {
@@ -340,19 +415,18 @@ body {
 
 .option-correct {
   background: var(--good-bg);
-  border-color: var(--good-bg);
-  color: #16171d;
-  font-weight: 600;
+  color: #000;
+  font-weight: bold;
 }
 
 .option-wrong {
   background: var(--again-bg);
-  border-color: var(--again-bg);
-  color: #16171d;
+  color: #000;
 }
 
 .option-dimmed {
-  opacity: 0.5;
+  color: var(--shadow);
+  text-shadow: 1px 1px 0 var(--hilite);
 }
 
 .listening-feedback {
@@ -365,48 +439,37 @@ body {
 
 .feedback-correct {
   margin: 0;
-  font-weight: 600;
-  color: #16a34a;
+  font-weight: bold;
+  color: #008000;
 }
 
 .feedback-wrong {
   margin: 0;
-  font-weight: 600;
-  color: #dc2626;
+  font-weight: bold;
+  color: #c00000;
 }
 
 .feedback-answer {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: bold;
   text-align: center;
 }
 
 .feedback-gloss {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   opacity: 0.8;
   text-align: center;
 }
 
 .listening-next {
-  font: inherit;
-  background: var(--btn-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
   padding: 10px 24px;
-  cursor: pointer;
-  color: inherit;
 }
 
 .flashcard {
-  width: 100%;
-  max-width: 480px;
   min-height: 220px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--card-bg);
-  padding: 40px 32px;
+  padding: 52px 32px 36px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -417,51 +480,177 @@ body {
 }
 
 .flashcard-sentence {
-  font-size: 28px;
+  font-size: 27px;
+  line-height: 140%;
+  font-weight: bold;
+  margin: 0;
+}
+
+.flashcard-translation {
+  font-size: 19px;
   line-height: 140%;
   margin: 0;
+  color: #333;
+}
+
+.listen-button {
+  font-size: 38px;
+  line-height: 1;
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out);
+  width: 88px;
+  height: 88px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listen-button:active {
+  box-shadow: var(--bevel-in);
+}
+
+.listen-hint {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.reveal-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.back-to-listen,
+.explain-button {
+  font-size: 13px;
+}
+
+/* ---- Explanation modal (Win95 dialog) --------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  background: #fff;
+  box-shadow: var(--bevel-out);
+  cursor: default;
+}
+
+.modal-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #3c3c3c;
+  color: #fff;
+}
+
+.modal-title {
+  font-weight: bold;
+  font-size: 17px;
+  letter-spacing: 2px;
+}
+
+.modal-x {
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 20px 24px;
+  color: #000;
+}
+
+.modal-body p {
+  margin: 0 0 14px;
+}
+
+.modal-body p:last-child {
+  margin-bottom: 0;
+}
+
+.explanation-list {
+  margin: 0 0 14px;
+  padding-left: 26px;
+}
+
+.explanation-list li {
+  margin-bottom: 6px;
+}
+
+.modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-top: 1px solid #ddd;
+}
+
+.modal-close {
+  padding: 8px 22px;
 }
 
 .highlight-vocab {
   background: var(--vocab-bg);
-  border-radius: 4px;
-  padding: 0 4px;
+  color: #000;
+  padding: 0 3px;
+  box-shadow: 0 0 0 1px #000;
 }
 
 .highlight-grammar {
   background: var(--grammar-bg);
-  border-radius: 4px;
-  padding: 0 4px;
+  color: #000;
+  padding: 0 3px;
+  box-shadow: 0 0 0 1px #000;
 }
 
 .element-gloss {
-  font-size: 16px;
+  font-size: 15px;
   margin: 0;
-  color: color-mix(in srgb, var(--text) 70%, transparent);
+  color: #333;
 }
 
 .element-gloss-surface {
-  font-weight: 600;
+  font-weight: bold;
   color: var(--text);
 }
 
 .grammar-note {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 145%;
   margin: 0;
   padding: 10px 14px;
-  border-left: 3px solid var(--grammar-bg);
-  background: color-mix(in srgb, var(--grammar-bg) 20%, transparent);
+  border-left: 4px solid var(--title);
+  background: #fffbe6;
+  box-shadow: var(--bevel-well);
   text-align: left;
 }
 
 .play-button {
-  font: inherit;
-  background: var(--btn-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
   padding: 8px 16px;
-  cursor: pointer;
 }
 
 .grade-buttons {
@@ -472,30 +661,32 @@ body {
 }
 
 .grade-buttons button {
-  font: inherit;
-  border: 1px solid var(--border);
-  border-radius: 8px;
   padding: 8px 16px;
-  cursor: pointer;
+  font-weight: bold;
+  color: #000;
 }
 
-.grade-again {
+.grade-buttons button.grade-again {
   background: var(--again-bg);
 }
 
-.grade-hard {
+.grade-buttons button.grade-hard {
   background: var(--hard-bg);
 }
 
-.grade-good {
+.grade-buttons button.grade-good {
   background: var(--good-bg);
 }
 
-.grade-easy {
+.grade-buttons button.grade-easy {
   background: var(--easy-bg);
 }
 
 .all-done {
-  font-size: 20px;
-  opacity: 0.85;
+  font-size: 19px;
+  font-weight: bold;
+  color: var(--text);
+  background: var(--face);
+  box-shadow: var(--bevel-out), 4px 4px 0 rgba(0, 0, 0, 0.35);
+  padding: 24px 32px;
 }

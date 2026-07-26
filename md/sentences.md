@@ -385,3 +385,46 @@
 363. Si j'avais de l'argent, j'achèterais une voiture - If I had money, I'd buy a car
 364. Si j'étais riche, je ne travaillerais pas - If I were rich, I wouldn't work
 365. Si vous étiez fatigué, vous pourriez rester à la maison - If you were tired, you could stay home
+
+## auto generated 6
+
+366. Venez avec moi - Come with me
+367. Restez ici - Stay here
+368. Prenez un café - Have a coffee
+369. Écoutez-moi - Listen to me
+370. Aidez-moi, s'il vous plaît - Help me, please
+371. Dites-moi la vérité - Tell me the truth
+372. Ne restez pas ici - Don't stay here
+373. Ne partez pas maintenant - Don't leave now
+374. N'oubliez pas - Don't forget
+375. N'oubliez pas votre téléphone - Don't forget your phone
+376. J'y vais - I'm going there
+377. J'y vais maintenant - I'm going there now
+378. Vous y allez? - Are you going there?
+379. Je n'y vais pas - I'm not going there
+380. Allons au marché - Let's go to the market
+381. Allons-y ensemble - Let's go there together
+382. Mangeons ensemble - Let's eat together
+383. J'en veux - I want some
+384. J'en veux un peu - I want a little
+385. Vous en voulez? - Do you want some?
+386. Je n'en veux pas - I don't want any
+387. J'en ai deux - I have two (of them)
+388. C'est la ville où j'habite - It's the city where I live
+389. C'est le restaurant où je mange - It's the restaurant where I eat
+390. Je connais un endroit où on mange bien - I know a place where we eat well
+391. Je ne travaille plus - I don't work anymore
+392. Je n'ai plus de café - I don't have any more coffee
+393. Je ne bois plus de café - I don't drink coffee anymore
+394. Il n'y a plus de pain - There's no more bread
+395. Je ne bois que de l'eau - I only drink water
+396. Je ne connais personne ici - I don't know anyone here
+397. Il n'y a personne ici - There's no one here
+398. Personne ne comprend - No one understands
+399. Ne dites rien - Don't say anything
+400. Je n'ai plus faim - I'm not hungry anymore
+401. Je ne veux plus travailler - I don't want to work anymore
+402. Maintenant, je comprends mieux - Now I understand better
+403. Écrivez-moi quand vous arrivez - Write to me when you arrive
+404. Appelez-moi ce soir - Call me tonight
+405. Ne m'oubliez pas - Don't forget me
