@@ -1,692 +1,240 @@
-:root {
-  color-scheme: light;
+/* Deliberately minimal — a blank canvas. Layout only, no theme. */
 
-  /* --- Windows 95 palette --- */
-  --desktop: #008080; /* the iconic teal desktop */
-  --bg: #008080;
-  --text: #000000;
-
-  --face: #c0c0c0; /* silver panel face */
-  --card-bg: #c0c0c0;
-  --btn-bg: #c0c0c0;
-
-  --hilite: #ffffff; /* bevel highlight */
-  --face-light: #dfdfdf;
-  --shadow: #808080; /* bevel shadow */
-  --dk-shadow: #0a0a0a; /* bevel outer shadow */
-  --border: #808080;
-
-  --title: #000080; /* navy title bar */
-  --title2: #1084d0;
-  --title-text: #ffffff;
-
-  /* Highlights: yellow = vocab, blue = grammar (house convention) */
-  --vocab-bg: #ffff00;
-  --grammar-bg: #00c0ff;
-
-  /* Grade brights */
-  --again-bg: #ff5555;
-  --hard-bg: #ffaa00;
-  --good-bg: #00d060;
-  --easy-bg: #00d0d0;
-
-  /* Reusable Win95 bevels ------------------------------------------------- */
-  /* raised: buttons, panels sitting on the desktop */
-  --bevel-out: inset -1px -1px 0 var(--dk-shadow), inset 1px 1px 0 var(--hilite),
-    inset -2px -2px 0 var(--shadow), inset 2px 2px 0 var(--face-light);
-  /* pressed: a raised control being clicked */
-  --bevel-in: inset -1px -1px 0 var(--hilite), inset 1px 1px 0 var(--dk-shadow),
-    inset -2px -2px 0 var(--face-light), inset 2px 2px 0 var(--shadow);
-  /* well: sunken inputs / lists */
-  --bevel-well: inset -1px -1px 0 var(--hilite), inset 1px 1px 0 var(--shadow),
-    inset -2px -2px 0 var(--face-light), inset 2px 2px 0 var(--dk-shadow);
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  /* Chunky 90s system font stack */
-  font: 15px/145% Tahoma, 'MS Sans Serif', Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: none;
-}
-
-/* Sharp corners everywhere — 90s UI had no rounding. */
-button,
-input,
-.flashcard,
-.listening,
-.settings-popover,
-.sidebar-panel {
-  border-radius: 0;
-}
-
-:focus-visible {
-  outline: 1px dotted #000;
-  outline-offset: -4px;
+  font-family: system-ui, sans-serif;
+  color: #111;
+  background: #fff;
 }
 
 #app {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
 }
 
-.topbar {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin: 16px;
-}
-
-.settings,
-.sidebar {
-  position: relative;
-}
-
-/* ---- Generic raised chrome button (settings gear, sidebar, tabs, etc.) ---- */
-.settings-button,
-.sidebar-button,
-.view-tab,
-.undo-button,
-.play-button,
-.listening-next,
-.back-to-listen,
-.explain-button,
-.modal-close,
-.grade-buttons button,
-.option-button {
-  font: inherit;
-  color: var(--text);
-  background: var(--face);
-  border: none;
-  box-shadow: var(--bevel-out);
-  padding: 6px 12px;
-  cursor: pointer;
-}
-
-.settings-button:active,
-.sidebar-button:active,
-.view-tab:active,
-.undo-button:active,
-.play-button:active,
-.listening-next:active,
-.back-to-listen:active,
-.explain-button:active,
-.modal-close:active,
-.grade-buttons button:active,
-.option-button:not(:disabled):active {
-  box-shadow: var(--bevel-in);
-  padding: 7px 11px 5px 13px; /* nudge label down-right when pressed */
-}
-
-.settings-button {
-  font-size: 20px;
-  padding: 4px 10px;
-}
-
-.settings-popover {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 6px);
-  width: 280px;
-  max-height: 320px;
-  overflow-y: auto;
-  background: var(--face);
-  border: none;
-  box-shadow: var(--bevel-out), 3px 3px 0 rgba(0, 0, 0, 0.35);
-  padding: 12px 16px;
-  z-index: 10;
-}
-
-.settings-popover h2,
-.sidebar-panel h2 {
-  font-size: 13px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: -12px -16px 10px;
-  padding: 4px 8px;
-  background: linear-gradient(90deg, var(--title), var(--title2));
-  color: var(--title-text);
-}
-
-.voice-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.new-words-field {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-size: 13px;
-}
-
-.new-words-field input,
-.speech-rate-field input {
-  background: #fff;
-  color: #000;
-  box-shadow: var(--bevel-well);
-  border: none;
-}
-
-.new-words-field input {
-  width: 60px;
-  padding: 4px 6px;
-  font: inherit;
-  font-size: 13px;
-}
-
-.new-words-today {
-  opacity: 0.7;
-  font-size: 12px;
-}
-
-.highlight-english-field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.speech-rate-field {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-size: 13px;
-}
-
-.speech-rate-field input[type='range'] {
-  flex: 1;
-}
-
-.speech-rate-value {
-  opacity: 0.75;
-  font-size: 12px;
-  min-width: 42px;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.sidebar-button {
-  font-size: 15px;
-}
-
-.sidebar-panel {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 6px);
-  width: 300px;
-  max-height: 420px;
-  overflow-y: auto;
-  background: var(--face);
-  border: none;
-  box-shadow: var(--bevel-out), 3px 3px 0 rgba(0, 0, 0, 0.35);
-  padding: 12px 16px;
-  z-index: 10;
-}
-
-.sidebar-empty {
-  font-size: 13px;
-  opacity: 0.75;
-  margin: 0;
-}
-
-.learned-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.learned-list li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.learned-gloss {
-  opacity: 0.75;
-}
-
-.view-nav {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.view-tab {
-  font-size: 14px;
-}
-
-.view-tab-active {
-  box-shadow: var(--bevel-in);
-  font-weight: bold;
-}
-
-.view-tab:disabled {
-  cursor: not-allowed;
-  color: var(--shadow);
-  text-shadow: 1px 1px 0 var(--hilite);
-  box-shadow: var(--bevel-out);
-}
-
-.deck {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  position: relative;
-}
-
-.undo-button {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-size: 13px;
-}
-
-.cards-remaining {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  font-size: 13px;
-  color: var(--title-text);
-  background: var(--title);
-  box-shadow: var(--bevel-out);
-  padding: 6px 10px;
-}
-
-.cards-remaining-breakdown {
-  font-size: 11px;
-  opacity: 0.85;
-}
-
-/* ---- Window-style panels: flashcard + listening test ---- */
-.listening,
-.flashcard {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  background: var(--face);
-  border: none;
-  box-shadow: var(--bevel-out), 4px 4px 0 rgba(0, 0, 0, 0.35);
-}
-
-/* Fake Win95 title bar across the top of each window */
-.listening::before,
-.flashcard::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-  background: linear-gradient(90deg, var(--title), var(--title2));
-  color: var(--title-text);
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 0.03em;
-}
-
-.flashcard::before {
-  content: '📖  Flashcard';
-}
-
-.listening::before {
-  content: '🎧  Listening';
-}
-
-.listening {
-  padding: 44px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.listening-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.listening-prompt {
-  font-size: 19px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.listening-position {
-  font-size: 13px;
-  font-weight: normal;
-  opacity: 0.65;
-}
-
-.listening-score {
-  font-size: 13px;
-  opacity: 0.75;
-  margin: 0;
-}
-
-.listening-play {
-  font-size: 20px;
-  padding: 12px 24px;
-}
-
-.listening-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-.option-button {
-  font-size: 18px;
-  padding: 14px 18px;
-  text-align: center;
-}
-
-.option-button:disabled {
-  cursor: default;
-}
-
-.option-correct {
-  background: var(--good-bg);
-  color: #000;
-  font-weight: bold;
-}
-
-.option-wrong {
-  background: var(--again-bg);
-  color: #000;
-}
-
-.option-dimmed {
-  color: var(--shadow);
-  text-shadow: 1px 1px 0 var(--hilite);
-}
-
-.listening-feedback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-}
-
-.feedback-correct {
-  margin: 0;
-  font-weight: bold;
-  color: #008000;
-}
-
-.feedback-wrong {
-  margin: 0;
-  font-weight: bold;
-  color: #c00000;
-}
-
-.feedback-answer {
-  margin: 0;
-  font-size: 17px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.feedback-gloss {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.8;
-  text-align: center;
-}
-
-.listening-next {
-  padding: 10px 24px;
-}
-
-.flashcard {
-  min-height: 220px;
-  padding: 52px 32px 36px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  cursor: pointer;
-}
-
-.flashcard-sentence {
-  font-size: 27px;
-  line-height: 140%;
-  font-weight: bold;
-  margin: 0;
-}
-
-.flashcard-translation {
-  font-size: 19px;
-  line-height: 140%;
-  margin: 0;
-  color: #333;
-}
-
-.listen-button {
-  font-size: 38px;
-  line-height: 1;
-  background: var(--face);
-  border: none;
-  box-shadow: var(--bevel-out);
-  width: 88px;
-  height: 88px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.listen-button:active {
-  box-shadow: var(--bevel-in);
-}
-
-.listen-hint {
-  font-size: 13px;
-  margin: 0;
-  opacity: 0.7;
-}
-
-.reveal-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.back-to-listen,
-.explain-button {
-  font-size: 13px;
-}
-
-/* ---- Explanation modal (Win95 dialog) --------------------------------- */
-.modal-backdrop {
+.settings {
   position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.5);
+  top: 1rem;
+  right: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
 }
 
-.modal {
+.settings-toggle {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.settings-body {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  width: 20rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
   display: flex;
   flex-direction: column;
+  gap: 0.85rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
+}
+
+.settings-body label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: #555;
+}
+
+.settings-body select,
+.settings-body input[type='range'] {
   width: 100%;
-  max-width: 640px;
-  max-height: 85vh;
+}
+
+.settings-value {
+  color: #111;
+}
+
+.settings-test {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   background: #fff;
-  box-shadow: var(--bevel-out);
-  cursor: default;
-}
-
-.modal-titlebar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background: #3c3c3c;
-  color: #fff;
-}
-
-.modal-title {
-  font-weight: bold;
-  font-size: 17px;
-  letter-spacing: 2px;
-}
-
-.modal-x {
-  font: inherit;
-  font-size: 16px;
-  line-height: 1;
-  color: #fff;
-  background: none;
-  border: none;
   cursor: pointer;
-  padding: 2px 4px;
 }
 
-.modal-body {
-  overflow-y: auto;
-  padding: 20px 24px;
-  color: #000;
-}
-
-.modal-body p {
-  margin: 0 0 14px;
-}
-
-.modal-body p:last-child {
-  margin-bottom: 0;
-}
-
-.explanation-list {
-  margin: 0 0 14px;
-  padding-left: 26px;
-}
-
-.explanation-list li {
-  margin-bottom: 6px;
-}
-
-.modal-foot {
+.settings-debug {
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
   display: flex;
-  justify-content: flex-end;
-  padding: 12px 16px;
-  border-top: 1px solid #ddd;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.modal-close {
-  padding: 8px 22px;
+.settings-debug-toggle {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.highlight-vocab {
-  background: var(--vocab-bg);
-  color: #000;
-  padding: 0 3px;
-  box-shadow: 0 0 0 1px #000;
-}
-
-.highlight-grammar {
-  background: var(--grammar-bg);
-  color: #000;
-  padding: 0 3px;
-  box-shadow: 0 0 0 1px #000;
-}
-
-.element-gloss {
-  font-size: 15px;
+.settings-log {
   margin: 0;
+  max-height: 14rem;
+  overflow: auto;
+  padding: 0.5rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: text;
+}
+
+.settings-log-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.settings-log-actions button {
+  flex: 1;
+  padding: 0.35rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.settings-note {
+  margin: 0;
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.settings-warning {
+  margin: 0;
+  color: #b42318;
+  line-height: 1.4;
+}
+
+
+.card {
+  width: min(34rem, 100%);
+  min-height: 16rem;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.french {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.english {
+  margin: 0;
+  color: #666;
+}
+
+/* The English counterpart of the word the gap took out. Weight only — the
+   yellow/blue highlight colours belong to the French side. */
+.gloss-target {
+  font-weight: 700;
   color: #333;
 }
 
-.element-gloss-surface {
-  font-weight: bold;
-  color: var(--text);
-}
-
-.grammar-note {
-  font-size: 14px;
-  line-height: 145%;
+.empty {
   margin: 0;
-  padding: 10px 14px;
-  border-left: 4px solid var(--title);
-  background: #fffbe6;
-  box-shadow: var(--bevel-well);
-  text-align: left;
+  color: #999;
 }
 
-.play-button {
-  padding: 8px 16px;
+.play {
+  align-self: flex-start;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #333;
+  /* Nudge the glyph off-centre: a triangle's optical centre sits left of its
+     bounding box, so a mathematically centred ▶ reads as too far left. */
+  padding-left: 0.2rem;
+  transition: background 0.15s, transform 0.1s;
 }
 
-.grade-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
+.play:hover {
+  background: #f4f4f4;
 }
 
-.grade-buttons button {
-  padding: 8px 16px;
-  font-weight: bold;
-  color: #000;
+.play:active {
+  transform: scale(0.94);
 }
 
-.grade-buttons button.grade-again {
-  background: var(--again-bg);
+.blank {
+  color: #999;
+  letter-spacing: 1px;
 }
 
-.grade-buttons button.grade-hard {
-  background: var(--hard-bg);
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
-.grade-buttons button.grade-good {
-  background: var(--good-bg);
+.choice {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-.grade-buttons button.grade-easy {
-  background: var(--easy-bg);
+.choice:hover:not(:disabled) {
+  background: #f4f4f4;
 }
 
-.all-done {
-  font-size: 19px;
-  font-weight: bold;
-  color: var(--text);
-  background: var(--face);
-  box-shadow: var(--bevel-out), 4px 4px 0 rgba(0, 0, 0, 0.35);
-  padding: 24px 32px;
+.choice-correct {
+  border-color: #17803d;
+  background: #e8f6ec;
+}
+
+.choice-wrong {
+  border-color: #b42318;
+  background: #fdeceb;
+}
+
+.choice-muted {
+  opacity: 0.45;
+}
+
+.next {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
 }

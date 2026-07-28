@@ -4,35 +4,11 @@ const SRS_STATE_KEY = 'srs-state-v2'
 const SRS_STATE_KEY_V1 = 'srs-state-v1'
 const TTS_VOICE_KEY = 'tts-voice-v1'
 const TTS_RATE_KEY = 'tts-rate-v1'
-const LISTENING_PROGRESS_KEY = 'listening-progress-v1'
-const NEW_WORDS_PER_DAY_KEY = 'new-words-per-day-v1'
-const HIGHLIGHT_ENGLISH_KEY = 'highlight-english-v1'
-
-export const DEFAULT_NEW_WORDS_PER_DAY = 10
 
 /** How fast the voice speaks. 1 = normal; the Web Speech API accepts 0.1–10. */
 export const DEFAULT_SPEECH_RATE = 1
 export const MIN_SPEECH_RATE = 0.5
 export const MAX_SPEECH_RATE = 1.5
-
-/** Whether the target word is highlighted on the English (front) side. Off by default. */
-export function loadHighlightEnglish(): boolean {
-  return localStorage.getItem(HIGHLIGHT_ENGLISH_KEY) === 'true'
-}
-
-export function saveHighlightEnglish(on: boolean): void {
-  localStorage.setItem(HIGHLIGHT_ENGLISH_KEY, String(on))
-}
-
-export function loadNewWordsPerDay(): number {
-  const raw = localStorage.getItem(NEW_WORDS_PER_DAY_KEY)
-  const n = raw ? Number(raw) : NaN
-  return Number.isFinite(n) && n > 0 ? Math.floor(n) : DEFAULT_NEW_WORDS_PER_DAY
-}
-
-export function saveNewWordsPerDay(n: number): void {
-  localStorage.setItem(NEW_WORDS_PER_DAY_KEY, String(n))
-}
 
 /** The pre-FSRS (SM-2) shape, kept only to migrate any saved v1 progress. */
 interface LegacyCardState {
@@ -113,23 +89,3 @@ export function saveSpeechRate(rate: number): void {
   localStorage.setItem(TTS_RATE_KEY, String(rate))
 }
 
-/**
- * Ids of listening items already shown in the current shuffle-bag cycle
- * (see `nextInCycle` in engine/listening.ts) — the last entry is the
- * question currently on screen, so reloading or switching tabs resumes
- * exactly where the learner left off instead of jumping to a new question.
- */
-export function loadListeningSeenIds(): string[] {
-  const raw = localStorage.getItem(LISTENING_PROGRESS_KEY)
-  if (!raw) return []
-  try {
-    const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) && parsed.every((id) => typeof id === 'string') ? parsed : []
-  } catch {
-    return []
-  }
-}
-
-export function saveListeningSeenIds(seenIds: string[]): void {
-  localStorage.setItem(LISTENING_PROGRESS_KEY, JSON.stringify(seenIds))
-}

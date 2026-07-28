@@ -70,6 +70,45 @@ use, not just recognition.
   changed slot — so a small step can still carry an old word.
 - Reach further as the deck grows: short reaches early, wider reaches late.
 
+## Across the deck
+
+The four tests judge one card. These two judge a band of forty — no single card can
+pass or fail them, so check them when the band is done.
+
+### Ask as often as you tell
+
+*Est-ce que* is the workhorse, and it should arrive early. It is a prefix: it turns
+any statement already known into a question and changes nothing else, so it costs one
+card to learn and is free forever after. Introduce it as soon as there is a *vous* or
+*tu* form to attach it to — inside the first twenty-five cards — and make it the
+default question from then on.
+
+About a quarter of every band should be a question. Three forms, in this order of
+weight:
+
+- ***Est-ce que*** — the default. Neutral, always correct, works with every verb.
+- **Intonation** — the statement with a rise: `Vous voulez un café ?` This is what
+  people say most; it costs nothing new after the first one, so use it freely.
+- **Inversion** — only where real speech still inverts. These are fixed formulas,
+  learned whole, not a pattern to generalise:
+  `Comment allez-vous ?` · `Quelle heure est-il ?` · `Puis-je …?` ·
+  `Pouvez-vous …?` · `Voulez-vous …?` · `Avez-vous …?`
+  Never invent a new inversion to drill the pattern — spoken French doesn't use it.
+
+### Keep the persons moving
+
+The card is heard before it is read, and person lives in small sounds: *veux / veut*
+are identical, *voulez / voulons* are not; *mange / mangent* collapse, *mangez*
+separates. A deck that sits in *je* drills the one form that needs it least.
+
+- No more than about half a band in *je*.
+- Every band uses at least four persons, plural included.
+- *tu* and *vous* both belong. *tu* is the everyday one between people who know each
+  other; *vous* is for strangers, work, and anyone older. Choose per sentence and
+  hold it — never mix the two inside one card.
+- Rule 4 picks *which* old word fills a slot; this picks *who* the sentence is about.
+  Changing person is still a small step (rule 2).
+
 ## And always
 
 - **Adult and real — not narrow, not dull.** The default voice is a grown-up's

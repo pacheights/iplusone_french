@@ -1,3 +1,5 @@
+import { spokenForm } from './engine/speech'
+
 export type ElementKind = 'vocab' | 'grammar'
 
 export interface Segment {
@@ -48,6 +50,14 @@ export interface Card {
    * word — e.g. the partitive collapsing to `de` under negation.
    */
   note?: string
+  /**
+   * What TTS says when the natural spoken form differs from what `spokenForm`
+   * derives from `segments` — the escape hatch for reductions the rules can't
+   * see, e.g. the silent plural in "Ils parlent" → "I parle". Omit it and the
+   * spoken form is derived automatically (see engine/speech.ts). Never shown on
+   * screen: the learner always reads standard written French.
+   */
+  speech?: string
 }
 
 /**
@@ -74,37 +84,18 @@ export interface CardState {
   introducedDate: string
 }
 
-/**
- * One selectable option in a listening question: the French `text` (never
- * shown — only spoken) paired with its English `translation` (what the button
- * displays). Showing English forces the learner to comprehend the audio rather
- * than pattern-match the written French against what they heard.
- */
-export interface ListeningChoice {
-  text: string
-  translation: string
-}
-
-/**
- * A listening-comprehension question. `answer` is spoken aloud and is the
- * correct choice; `distractors` are two near-homophone sentences that differ
- * from it by one hard-to-hear detail (a nasal vowel, a liaison, a swallowed
- * plural, a present-or-absent negation), so getting it right means parsing the
- * whole utterance, not catching a single keyword. Every sentence stays within
- * the learner's known vocabulary — `requires` lists the element ids that must
- * be learned before the item may appear (see src/engine/listening.test.ts).
- * `gloss` is a short post-answer hint naming what distinguished the choices.
- */
-export interface ListeningItem {
-  id: string
-  answer: ListeningChoice
-  distractors: [ListeningChoice, ListeningChoice]
-  gloss: string
-  requires: string[]
-}
-
 export type Grade = 'again' | 'hard' | 'good' | 'easy'
 
+/** The French (written) side of a card as a plain string — what is displayed. */
 export function cardText(card: Card): string {
   return card.segments.map((s) => s.text).join('')
+}
+
+/**
+ * What the TTS voice should speak: the card's explicit `speech` override when
+ * it has one, otherwise the reduction derived from the written French. Display
+ * always uses `cardText`; only audio uses this.
+ */
+export function cardSpeech(card: Card): string {
+  return card.speech ?? spokenForm(cardText(card))
 }

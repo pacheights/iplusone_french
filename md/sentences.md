@@ -13,6 +13,9 @@
 6. Je veux boire quelque chose - I want to drink something
 7. Vous voulez boire quelque chose? - You want to drink something?
 8. Vous voulez du café? - You want (some) coffee?
+
+8.5. Est-ce que vous voulez du café? - You want (some) coffee?
+
 9. Je veux du pain - I want (some) bread
 10. J'aime boire - I like to drink
 11. J'aime manger - I like to eat
