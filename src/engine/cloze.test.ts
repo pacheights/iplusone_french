@@ -75,4 +75,28 @@ describe('buildCloze', () => {
     expect(question.answer).toBe('mange')
     expect(question.before + question.answer + question.after).toBe('Je mange du pain')
   })
+
+  it('blanks the trailing half when an element highlights two separated runs', () => {
+    // ne … pas wraps the verb. "pas" is the half that carries the negation and
+    // the half that survives speech — "ne" is dropped outright in everyday
+    // French, so blanking it would ask the learner to hear what isn't said.
+    expect(buildCloze(byId('c18'), CARDS).answer).toBe('pas')
+    expect(buildCloze(byId('c238'), CARDS).answer).toBe('dépêche')
+  })
+
+  it('prefers the run that is exactly the element over the trailing one', () => {
+    // c361 teaches `resterais` but opens with the highlighted `votre place`.
+    expect(buildCloze(byId('c361'), CARDS).answer).toBe('resterais')
+    expect(buildCloze(byId('c53'), CARDS).answer).toBe('parce que')
+  })
+
+  it('never blanks one word out of a fixed multi-word chunk on a rest card', () => {
+    const restCard: Card = {
+      id: 'chunk-test',
+      segments: [{ text: 'Est-ce que vous mangez de la viande ?' }],
+      translation: [{ text: 'Do you eat meat?' }],
+    }
+    // "Est-ce" is the longest token, but it is half of `est-ce que`.
+    expect(buildCloze(restCard, CARDS).answer).toBe('mangez')
+  })
 })

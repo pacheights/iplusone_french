@@ -35,6 +35,13 @@ export const ELEMENTS: Element[] = [
     provides: [['quelque', 'chose']],
   },
   {
+    id: 'tu',
+    kind: 'vocab',
+    surface: 'tu',
+    gloss: 'you (one person you know well)',
+    note: 'French has two words for "you". tu is for one person you are close to — a friend, family, a child. vous is for a stranger, someone older, anyone at work, or more than one person. Pick one and stay with it: never switch inside a conversation. With tu, vouloir keeps the same form as je: je veux, tu veux.',
+  },
+  {
     id: 'vous_voulez',
     kind: 'vocab',
     surface: 'vous voulez',
@@ -95,6 +102,14 @@ export const ELEMENTS: Element[] = [
     provides: [['la'], ['viande']],
   },
   { id: 'mais', kind: 'vocab', surface: 'mais', gloss: 'but' },
+  {
+    id: 'est_ce_que',
+    kind: 'grammar',
+    surface: 'est-ce que',
+    gloss: 'yes/no question marker',
+    note: 'Put Est-ce que … ? in front of any statement and it becomes a yes/no question — nothing else changes: Vous mangez → Est-ce que vous mangez ? = Do you eat? This is the everyday way to ask, and it works with every verb.',
+    provides: [['est', 'ce', 'que']],
+  },
   { id: 'savoir', kind: 'vocab', surface: 'savoir', gloss: 'to know (infinitive)' },
   {
     id: 'elle_veut',
@@ -213,14 +228,6 @@ export const ELEMENTS: Element[] = [
   { id: 'la_adv', kind: 'vocab', surface: 'là', gloss: 'there' },
   { id: 'occupe', kind: 'vocab', surface: 'occupé', gloss: 'busy (m.)' },
   { id: 'travaillez', kind: 'vocab', surface: 'travaillez', gloss: 'work (travailler — vous form)' },
-  {
-    id: 'est_ce_que',
-    kind: 'grammar',
-    surface: 'est-ce que',
-    gloss: 'yes/no question marker',
-    note: 'Put Est-ce que … ? in front of a statement to make it a yes/no question: Vous travaillez → Est-ce que vous travaillez ? = Do you work?',
-    provides: [['est', 'ce', 'que']],
-  },
   { id: 'prends', kind: 'vocab', surface: 'prends', gloss: 'take / have (prendre — je form)' },
   { id: 'bus', kind: 'vocab', surface: 'bus', gloss: 'bus (le bus)' },
   {

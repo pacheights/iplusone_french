@@ -45,6 +45,12 @@ export const CARDS: Card[] = [
     translation: [t('I want to drink '), v('something')],
   },
   {
+    id: 'c6b',
+    element: 'tu',
+    segments: [v('Tu'), t(' veux boire quelque chose ?')],
+    translation: [v('You'), t(' want to drink something?')],
+  },
+  {
     id: 'c7',
     element: 'vous_voulez',
     segments: [v('Vous voulez'), t(' boire quelque chose ?')],
@@ -55,6 +61,12 @@ export const CARDS: Card[] = [
     element: 'du',
     segments: [t('Vous voulez '), g('du'), t(' café ?')],
     translation: [t('You want '), g('(some)'), t(' coffee?')],
+  },
+  {
+    id: 'c8b',
+    element: 'est_ce_que',
+    segments: [g('Est-ce que'), t(' vous voulez du café ?')],
+    translation: [g('Do'), t(' you want (some) coffee?')],
   },
   {
     id: 'c9',
@@ -136,6 +148,16 @@ export const CARDS: Card[] = [
     note: 'After a negative, the "some" word drops its article: de la viande → pas de viande (likewise du → de, de l\' → de).',
   },
   {
+    id: 'c22b',
+    segments: [t('Est-ce que vous mangez de la viande ?')],
+    translation: [t('Do you eat meat?')],
+  },
+  {
+    id: 'c22c',
+    segments: [t('Est-ce que tu veux du pain ?')],
+    translation: [t('Do you want some bread?')],
+  },
+  {
     id: 'c23',
     element: 'savoir',
     segments: [t('Je veux '), v('savoir')],
@@ -180,8 +202,8 @@ export const CARDS: Card[] = [
   {
     id: 'c30',
     element: 'etes',
-    segments: [t('Vous '), v('êtes'), t(' heureux')],
-    translation: [t('You '), v('are'), t(' happy')],
+    segments: [t('Est-ce que vous '), v('êtes'), t(' heureux ?')],
+    translation: [v('Are'), t(' you happy?')],
   },
   {
     id: 'c31',
@@ -204,8 +226,8 @@ export const CARDS: Card[] = [
   {
     id: 'c34',
     element: 'achetez',
-    segments: [t('Vous '), v('achetez'), t(' du pain au marché')],
-    translation: [t('You '), v('buy'), t(' bread at the market')],
+    segments: [t('Est-ce que vous '), v('achetez'), t(' du pain au marché ?')],
+    translation: [t('Do you '), v('buy'), t(' bread at the market?')],
   },
   {
     id: 'c35',
@@ -410,9 +432,8 @@ export const CARDS: Card[] = [
   },
   {
     id: 'c71',
-    element: 'est_ce_que',
-    segments: [g('Est-ce que'), t(" vous travaillez aujourd'hui ?")],
-    translation: [g('Do'), t(' you work today?')],
+    segments: [t("Est-ce que vous travaillez aujourd'hui ?")],
+    translation: [t('Do you work today?')],
   },
   { id: 'c72', segments: [t('Est-ce que vous voulez un café ?')], translation: [t('Do you want a coffee?')] },
   {

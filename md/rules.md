@@ -124,5 +124,8 @@ separates. A deck that sits in *je* drills the one form that needs it least.
 
 ## The whole check, in one line
 
-One new thing · one small named step from the last card · repetition that earns its
-place · old words pulled back in · real adult French · known words plus one.
+Per card: one new thing · one small named step from the last card · repetition that
+earns its place · old words pulled back in · real adult French · known words plus one.
+
+Per band: a quarter of the cards ask something · *est-ce que* carries most of them ·
+at least four persons · *je* under half.

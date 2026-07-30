@@ -52,23 +52,75 @@ function shuffle<T>(items: T[], random: () => number): T[] {
  * highlights nothing, so we blank its longest word instead: every word on a
  * rest card is known, so any of them is a fair recall target, and the longest
  * is reliably the content word rather than an article or pronoun.
+ *
+ * Some elements highlight two runs with known text between them — `ne … pas`
+ * around its verb, `me dépêche`, or a function word bundled with the first noun
+ * it serves (`au marché`, `une voiture`). Only one run can be the gap, so:
+ *
+ *   1. If a run is exactly the element's surface, that's the one — it's the
+ *      whole of what the card teaches (`parce que`, `Ils sont`, `resterais`).
+ *   2. Otherwise take the *last* run. The card is heard before it is read, and
+ *      the trailing half is the one that survives speech: `pas` carries the
+ *      negation while `ne` is dropped outright in everyday French, and `marché`
+ *      is audible where `au` reduces to almost nothing. Blanking the leading
+ *      function word would ask the learner to hear what isn't reliably said.
  */
 function findGap(card: Card): { start: number; end: number } {
-  const first = card.segments.findIndex((s) => s.highlight)
-  if (first !== -1) {
-    let last = first
-    while (last + 1 < card.segments.length && card.segments[last + 1].highlight) last++
-    const start = card.segments.slice(0, first).map((s) => s.text).join('').length
-    const end = start + card.segments.slice(first, last + 1).map((s) => s.text).join('').length
+  const runs: { start: number; end: number; text: string }[] = []
+  let offset = 0
+  for (const segment of card.segments) {
+    const previous = runs[runs.length - 1]
+    // Contiguous highlighted segments are one run; a plain segment breaks it.
+    if (segment.highlight && previous?.end === offset) {
+      previous.end = offset + segment.text.length
+      previous.text += segment.text
+    } else if (segment.highlight) {
+      runs.push({ start: offset, end: offset + segment.text.length, text: segment.text })
+    }
+    offset += segment.text.length
+  }
+
+  if (runs.length > 0) {
+    const surface = card.element ? elementById[card.element]?.surface : undefined
+    const exact =
+      surface === undefined
+        ? undefined
+        : runs.find((run) => run.text.trim().toLowerCase() === surface.toLowerCase())
+    const { start, end } = exact ?? runs[runs.length - 1]
     return { start, end }
   }
 
   const text = cardText(card)
+
+  // Spans covered by a fixed multi-word chunk — "est-ce que", "quelque chose",
+  // "parce que". These are learned and heard whole, so blanking one word out of
+  // the middle asks a question the language never asks; the gap goes elsewhere.
+  const chunks: { start: number; end: number }[] = []
+  for (const el of ELEMENTS) {
+    if (!/[\s]/.test(el.surface)) continue
+    const pattern = new RegExp(escapeRegExp(el.surface), 'giu')
+    for (const match of text.matchAll(pattern)) {
+      chunks.push({ start: match.index, end: match.index + match[0].length })
+    }
+  }
+  const insideChunk = (start: number, end: number) =>
+    chunks.some((c) => start < c.end && end > c.start)
+
   let best = { start: 0, end: 0 }
   for (const match of text.matchAll(/[\p{L}'’-]+/gu)) {
     const start = match.index
     const end = start + match[0].length
+    if (insideChunk(start, end)) continue
     if (end - start > best.end - best.start) best = { start, end }
+  }
+  // Every word belongs to a chunk (a sentence that is nothing but fixed
+  // phrases) — fall back to the longest word regardless.
+  if (best.end === best.start) {
+    for (const match of text.matchAll(/[\p{L}'’-]+/gu)) {
+      const start = match.index
+      const end = start + match[0].length
+      if (end - start > best.end - best.start) best = { start, end }
+    }
   }
   return best
 }

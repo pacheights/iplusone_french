@@ -4,6 +4,10 @@ One fixed list of sentences, written in order. You walk down it one card at a ti
 Each card is built only from the cards before it, following [rules.md](rules.md).
 The list itself lives in [sentences.md](sentences.md).
 
+# notes
+
+être, avoir, faire, aller, pouvoir, devoir, and vouloir.
+
 ## How far the course goes
 
 Everyday fluency — about A2–B1. It covers: present; past (passé composé, imparfait);
@@ -20,12 +24,12 @@ extra cards for verb conjugations — call it 1,500–1,800 cards.
 
 The deck has a scaffold and a tail, and they're written differently:
 
-| | Scaffold (Stages A–C) | Tail (Stage D) |
-|---|---|---|
-| New grammar | lots, still arriving | almost none, grammar is done |
-| Repetition (rule 3) | repeat, hold the frame | vary, change the frame |
-| How it's ordered | by hand, card by card | frequency buckets, in volume |
-| Risk of drift | high — all the care lives here | low — stable frames |
+|                     | Scaffold (Stages A–C)          | Tail (Stage D)               |
+| ------------------- | ------------------------------ | ---------------------------- |
+| New grammar         | lots, still arriving           | almost none, grammar is done |
+| Repetition (rule 3) | repeat, hold the frame         | vary, change the frame       |
+| How it's ordered    | by hand, card by card          | frequency buckets, in volume |
+| Risk of drift       | high — all the care lives here | low — stable frames          |
 
 The line between them is where new grammar runs out (end of Stage C). Before it,
 order every card by hand. After it, adding the 900th noun is just vocabulary on
@@ -33,15 +37,16 @@ frames the learner already owns.
 
 ## The stages
 
-- **Stage A — present core (~1–140).** Pronouns; être, avoir, aller, faire; first
-  *-er* verbs; vouloir / pouvoir / devoir + verb; *ne…pas*; questions; et / ou / mais;
-  parce que; core prepositions; adjective agreement. → simple true statements,
-  negatives, and questions.
-- **Stage B — fill out the present, first past and future (~140–380).** *-ir* / *-re*
+- **Stage A — present core (~1–140).** Pronouns (_je / tu / vous / il / elle / nous_,
+  all of them early); être, avoir, aller, faire; first _-er_ verbs; vouloir / pouvoir /
+  devoir + verb; _ne…pas_; questions — _est-ce que_ by card 25, then intonation;
+  et / ou / mais; parce que; core prepositions; adjective agreement. → simple true
+  statements, negatives, and questions.
+- **Stage B — fill out the present, first past and future (~140–380).** _-ir_ / _-re_
   and irregular verbs; reflexives; aller + verb (near future); passé composé; object
   pronouns; comparisons. → narrate today and what's about to happen.
 - **Stage C — imparfait, futur, conditional (~380–620).** Imparfait vs. passé composé;
-  futur simple; conditional (*je voudrais*, *si* + imparfait); relative pronouns;
+  futur simple; conditional (_je voudrais_, _si_ + imparfait); relative pronouns;
   commands; more connectors; negation variants. → tell a past story, talk about plans
   and hypotheticals.
 - **Stage D — the tail (~620–1,500).** Grammar essentially done. The long list of
@@ -61,7 +66,7 @@ come early, not as a reward.
 - **être, avoir, aller, faire:** full set of persons, re-drilled at each new tense.
 - **Irregular verbs** (prendre, venir, voir, savoir, vouloir, pouvoir, boire, …):
   full present; the common ones also get past and future.
-- **Regular verbs:** full set for the first few of each group (*-er*, *-ir*, *-re*) to
+- **Regular verbs:** full set for the first few of each group (_-er_, _-ir_, _-re_) to
   set the pattern; after that a new regular enters as infinitive plus a form or two,
   then infinitive only.
 - **Reflexives:** full treatment once; the pattern is reused after.
