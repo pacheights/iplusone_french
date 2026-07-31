@@ -7,7 +7,7 @@ a block may only use grammar and words from blocks before it.
 This is a plan, not the deck. The deck is [sentences.md](sentences.md), and
 every word is re-checked against [vocabulary.md](vocabulary.md) at writing time.
 
-**Status:** blocks 1–4 written (150 cards) · block 5 next.
+**Status:** blocks 1–5 written (185 cards) · block 6 next.
 
 ---
 
@@ -56,13 +56,19 @@ asking permission at three levels of register (`Est-ce que je peux …?`,
 **Vocabulary** entrer · sortir · rester · parler · regarder · pour · libre ·
 merci · s'il vous plaît · oui · non · d'accord · peut-être
 
-### Block 5 — devoir · cards 151–185
+### Block 5 — devoir · cards 151–185 ✅
 
-**Grammar** devoir (all six forms) · obligation vs. wanting vs. being able ·
-`il faut` (frozen, impersonal) · `parce que`
+**Grammar** devoir (all six forms) · obligation against wanting against being
+able, drilled directly · `il faut` (frozen, impersonal) · `il ne faut pas` as a
+prohibition rather than a release · `pourquoi` / `parce que` · `je voudrais` as
+a frozen politeness form
 
-**Vocabulary** payer · appeler · demander · trouver · chercher · le travail ·
-la maison · tôt · tard · vite
+**Vocabulary** payer · appeler · demander · trouver · chercher · l'argent ·
+important · tôt · tard · vite
+
+`pourquoi` is pulled forward from block 27 so that `parce que` has something to
+answer. `le travail` and `la maison` moved to block 6: both want `à` (au
+travail, à la maison), and without it they only make sentences nobody says.
 
 ### Block 6 — aller · cards 186–230
 
@@ -72,8 +78,8 @@ Two jobs, taught separately: motion first, then the near future.
 **aller + infinitive** (near future) · `ça va` (frozen — the verb underneath is
 now known) · `Comment allez-vous ?` (inversion formula)
 
-**Vocabulary** le marché · le bureau · la ville · le restaurant · la gare ·
-l'école · demain · aujourd'hui · comment · mal
+**Vocabulary** le travail · la maison · le marché · le bureau · la ville ·
+le restaurant · la gare · l'école · demain · aujourd'hui · comment · mal
 
 ### Block 7 — faire · cards 231–270
 
@@ -210,7 +216,8 @@ ferai / viendrai / pourrai / devrai / voudrai` · `quand` + futur
 ### Block 22 — conditional and *si* · cards 831–870
 
 **Grammar** the conditional endings (futur stem + imparfait endings) ·
-`je voudrais` / `je pourrais` as politeness · `si` + imparfait → conditional
+`je pourrais` as politeness, and the pattern behind the `je voudrais` learned
+frozen in block 5 · `si` + imparfait → conditional
 
 **Vocabulary** sûrement · à votre place
 
@@ -243,8 +250,9 @@ nouveau · beau
 
 ### Block 27 — questions in full · cards 1021–1060
 
-**Grammar** `qui` · `quoi` · `quel` (agreeing) · `combien` · `pourquoi` ·
-`quand` · `qu'est-ce qui` vs. `qu'est-ce que`
+**Grammar** `qui` · `quoi` · `quel` (agreeing) · `combien` · `quand` ·
+`qu'est-ce qui` vs. `qu'est-ce que` (`pourquoi` arrived in block 5, with
+`parce que`)
 
 ---
 

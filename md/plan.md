@@ -64,6 +64,15 @@ word against [vocabulary.md](vocabulary.md) before using it.
 
 Trigger: **"read plan.md and rules.md, then write the next block."**
 
-Then transcribe the block into `src/data/elements.ts` and `src/data/cards.ts`,
-and run the i+1 validator (`src/engine/i1.ts`) — it fails the build if any card
-uses a unit that no earlier card taught.
+Then transcribe the block into three files:
+
+- `src/data/elements.ts` — the new learnable units. Data only: surface, gloss,
+  and what the unit provides. No prose.
+- `src/data/cards.ts` — the sentences.
+- `src/data/explanations.ts` — **every word of explanation the learner ever
+  sees**, written to the "Explaining" rules in [rules.md](rules.md). This is the
+  only place explanation prose lives; nothing else in the app displays it.
+
+Then run the tests: the i+1 validator (`src/engine/i1.ts`) fails if any card
+uses a unit that no earlier card taught, and `explanations.test.ts` fails if any
+card is missing an explanation or leaves a word of its French unexplained.

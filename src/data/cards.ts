@@ -109,7 +109,6 @@ export const CARDS: Card[] = [
     id: 'c12',
     segments: [t('Vous êtes occupé ?')],
     translation: [v('Are you'), t(' busy?')],
-    note: 'The simplest way to ask a yes/no question in French is to say the statement and let your voice rise at the end. Nothing is added and no words move: vous êtes occupé becomes vous êtes occupé ? This is what people use most in conversation.',
   },
   {
     id: 'c13',
@@ -149,7 +148,6 @@ export const CARDS: Card[] = [
     id: 'c19',
     segments: [t('Tu n\'es pas malade')],
     translation: [t('You are not '), v('sick')],
-    note: 'When ne meets a word starting with a vowel, it loses its e and joins on with an apostrophe: ne es → n\'es. French does this with several short words (je → j\', que → qu\', de → d\', le → l\'). It is automatic and never optional.',
   },
   {
     id: 'c20',
@@ -167,7 +165,6 @@ export const CARDS: Card[] = [
     segments: [t('Est-ce qu\'il est ici ?')],
     blank: 'ici',
     translation: [t('Is he '), v('here'), t('?')],
-    note: 'que drops its e in front of a vowel and joins on: est-ce que il → est-ce qu\'il. The same happens with elle and on: est-ce qu\'elle, est-ce qu\'on.',
   },
   {
     id: 'c23',
@@ -267,7 +264,6 @@ export const CARDS: Card[] = [
     segments: [t('Où est ma voiture ?')],
     blank: 'voiture',
     translation: [t('Where is my '), v('car'), t('?')],
-    note: 'To ask where something is, French puts où first and the verb straight after it: où est ma voiture ? The subject follows the verb. This is a fixed shape worth learning whole — où est-ce que ma voiture est is not something anyone says.',
   },
   {
     id: 'c39',
@@ -423,7 +419,6 @@ export const CARDS: Card[] = [
     segments: [t('Je n\'ai pas faim')],
     blank: 'faim',
     translation: [t('I am not '), g('hungry')],
-    note: 'faim takes no article at all, so there is nothing for a negative to collapse: je n\'ai pas faim. Compare je n\'ai pas de voiture, where une had to become de.',
   },
   {
     id: 'c64',
@@ -447,7 +442,6 @@ export const CARDS: Card[] = [
     id: 'c67',
     segments: [t('Je n\'ai pas le temps')],
     translation: [t('I don\'t '), v('have'), t(' time')],
-    note: 'le survives a negative, unlike un, une and des: je n\'ai pas le temps, not \'pas de temps\'. le points at a specific, definite thing — the time for this — and a negative does not dissolve it.',
   },
   {
     id: 'c68',
@@ -525,7 +519,6 @@ export const CARDS: Card[] = [
     id: 'c79',
     segments: [t('Tu veux un café')],
     translation: [v('You'), t(' want a coffee')],
-    note: 'With tu, vouloir keeps exactly the form it has with je: je veux, tu veux. Only the subject changes. This is worth noticing because it is not the usual pattern — être and avoir both change (je suis / tu es, j\'ai / tu as).',
   },
   {
     id: 'c80',
@@ -654,7 +647,6 @@ export const CARDS: Card[] = [
     id: 'c101',
     segments: [t('Ils ne veulent pas partir')],
     translation: [t('They don\'t '), v('want'), t(' to leave')],
-    note: 'ne … pas wraps the conjugated verb only. The infinitive stays outside, behind pas: ils ne veulent pas partir.',
   },
   {
     id: 'c102',
@@ -756,7 +748,6 @@ export const CARDS: Card[] = [
     segments: [t('Tu peux partir')],
     blank: 'Tu',
     translation: [v('You'), t(' can leave')],
-    note: 'With tu, pouvoir keeps exactly the form it has with je: je peux, tu peux. Only the subject changes, so the subject is the only thing telling the two apart.',
   },
   {
     id: 'c118',
@@ -802,7 +793,6 @@ export const CARDS: Card[] = [
     segments: [t('Elle ne peut pas travailler')],
     blank: 'travailler',
     translation: [t('She can\'t '), v('work')],
-    note: 'When a sentence has two verbs, ne … pas wraps the conjugated one and the infinitive stays outside, behind pas: elle ne peut pas travailler. The two halves never split up to go around both verbs.',
   },
   {
     id: 'c125',
@@ -829,7 +819,6 @@ export const CARDS: Card[] = [
     segments: [t('Je peux entrer ?')],
     blank: 'peux',
     translation: [v('Can'), t(' I come in?')],
-    note: 'Asking permission needs nothing added: say the statement and let your voice rise at the end. je peux entrer becomes je peux entrer ? This is the form people actually use, and est-ce que je peux entrer ? is its slightly more careful twin.',
   },
   {
     id: 'c129',
@@ -880,7 +869,6 @@ export const CARDS: Card[] = [
     segments: [t('Pouvez-vous aider ?')],
     blank: 'aider',
     translation: [t('Can you '), v('help'), t('?')],
-    note: 'Putting the verb in front of its subject and hyphenating the two — pouvez-vous — is the polite way to ask. It is worth learning whole, because French only inverts like this in a handful of set questions; everywhere else est-ce que does the work.',
   },
   {
     id: 'c137',
@@ -969,5 +957,231 @@ export const CARDS: Card[] = [
     segments: [t('Je veux partir, mais je ne peux pas')],
     blank: 'peux',
     translation: [t('I want to leave, but I '), v('can'), t('\'t')],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 5 — devoir · cards 151–185
+  // ───────────────────────────────────────────────────────────────────────────
+
+  // The persons — the third verb to take an infinitive, so no setup card again.
+  {
+    id: 'c151',
+    element: 'je_dois',
+    segments: [t('Je '), v('dois'), t(' travailler')],
+    translation: [t('I '), v('have to'), t(' work')],
+  },
+  {
+    id: 'c152',
+    segments: [t('Tu dois travailler')],
+    blank: 'Tu',
+    translation: [v('You'), t(' have to work')],
+  },
+  {
+    id: 'c153',
+    element: 'il_doit',
+    segments: [t('Il '), v('doit'), t(' travailler')],
+    translation: [t('He '), v('has to'), t(' work')],
+  },
+  {
+    id: 'c154',
+    segments: [t('Elle doit rester ici')],
+    blank: 'rester',
+    translation: [t('She has to '), v('stay'), t(' here')],
+  },
+  {
+    id: 'c155',
+    element: 'nous_devons',
+    segments: [t('Nous '), v('devons'), t(' partir')],
+    translation: [t('We '), v('have to'), t(' leave')],
+  },
+  {
+    id: 'c156',
+    element: 'vous_devez',
+    segments: [t('Vous '), v('devez'), t(' rester')],
+    translation: [t('You '), v('have to'), t(' stay')],
+  },
+  {
+    id: 'c157',
+    element: 'ils_doivent',
+    segments: [t('Ils '), v('doivent'), t(' travailler')],
+    translation: [t('They '), v('have to'), t(' work')],
+  },
+  {
+    id: 'c158',
+    segments: [t('On doit partir maintenant')],
+    blank: 'On',
+    translation: [v('We'), t(' have to leave now')],
+  },
+
+  // Why — pourquoi asks it, parce que answers it.
+  {
+    id: 'c159',
+    element: 'pourquoi',
+    segments: [g('Pourquoi'), t(' est-ce que tu dois partir ?')],
+    translation: [g('Why'), t(' do you have to leave?')],
+  },
+  {
+    id: 'c160',
+    element: 'parce_que',
+    segments: [t('Je dois partir '), g('parce que'), t(' je suis fatigué')],
+    translation: [t('I have to leave '), g('because'), t(' I am tired')],
+  },
+  {
+    id: 'c161',
+    segments: [t('Pourquoi est-ce qu\'elles doivent rester ?')],
+    blank: 'rester',
+    translation: [t('Why do they have to '), v('stay'), t('?')],
+  },
+  {
+    id: 'c162',
+    segments: [t('Elles doivent rester parce qu\'elles sont malades')],
+    blank: 'malades',
+    translation: [t('They have to stay because they are '), v('sick')],
+  },
+  {
+    id: 'c163',
+    segments: [t('On ne peut pas manger parce qu\'on doit partir')],
+    blank: 'manger',
+    translation: [t('We can\'t '), v('eat'), t(' because we have to leave')],
+  },
+
+  // Il faut — an obligation with nobody attached to it.
+  {
+    id: 'c164',
+    element: 'il_faut',
+    segments: [g('Il faut'), t(' partir')],
+    translation: [g('We have to'), t(' leave')],
+  },
+  {
+    id: 'c165',
+    segments: [t('Il faut travailler')],
+    blank: 'travailler',
+    translation: [t('You have to '), v('work')],
+  },
+  {
+    id: 'c166',
+    element: 'payer',
+    segments: [t('Est-ce qu\'il faut '), v('payer'), t(' ?')],
+    translation: [t('Do we have to '), v('pay'), t('?')],
+  },
+  {
+    id: 'c167',
+    segments: [t('Il faut manger quelque chose')],
+    blank: 'quelque chose',
+    translation: [t('You have to eat '), v('something')],
+  },
+  {
+    id: 'c168',
+    segments: [t('Il ne faut pas rester ici')],
+    blank: 'pas',
+    translation: [t('You must '), g('not'), t(' stay here')],
+  },
+  {
+    id: 'c169',
+    element: 'argent',
+    segments: [t('Il faut de l\''), v('argent')],
+    translation: [t('You need '), v('money')],
+  },
+
+  // The infinitive slot pays for itself — a verb a card.
+  {
+    id: 'c170',
+    element: 'appeler',
+    segments: [t('Je dois '), v('appeler'), t(' mon ami')],
+    translation: [t('I have to '), v('call'), t(' my friend')],
+  },
+  {
+    id: 'c171',
+    segments: [t('Est-ce que tu peux appeler maintenant ?')],
+    blank: 'appeler',
+    translation: [t('Can you '), v('call'), t(' now?')],
+  },
+  {
+    id: 'c172',
+    element: 'demander',
+    segments: [t('Il faut '), v('demander')],
+    translation: [t('You have to '), v('ask')],
+  },
+  {
+    id: 'c173',
+    element: 'trouver',
+    segments: [t('On doit '), v('trouver'), t(' une voiture')],
+    translation: [t('We have to '), v('find'), t(' a car')],
+  },
+  {
+    id: 'c174',
+    segments: [t('Je ne peux pas trouver ma voiture')],
+    blank: 'trouver',
+    translation: [t('I can\'t '), v('find'), t(' my car')],
+  },
+  {
+    id: 'c175',
+    element: 'chercher',
+    segments: [t('Il faut '), v('chercher'), t(' mon ami')],
+    translation: [t('We have to '), v('look for'), t(' my friend')],
+  },
+  {
+    id: 'c176',
+    segments: [t('Pourquoi est-ce que tu dois chercher une voiture ?')],
+    blank: 'Pourquoi',
+    translation: [g('Why'), t(' do you have to look for a car?')],
+  },
+  {
+    id: 'c177',
+    element: 'je_voudrais',
+    segments: [t('Je '), v('voudrais'), t(' un café, s\'il vous plaît')],
+    translation: [t('I\'d '), v('like'), t(' a coffee, please')],
+  },
+
+  // Early, late, quickly.
+  {
+    id: 'c178',
+    element: 'tot',
+    segments: [t('Je dois partir '), v('tôt')],
+    translation: [t('I have to leave '), v('early')],
+  },
+  {
+    id: 'c179',
+    element: 'tard',
+    segments: [t('Elle doit travailler '), v('tard')],
+    translation: [t('She has to work '), v('late')],
+  },
+  {
+    id: 'c180',
+    element: 'vite',
+    segments: [t('Il faut manger '), v('vite')],
+    translation: [t('You have to eat '), v('quickly')],
+  },
+  {
+    id: 'c181',
+    element: 'important',
+    segments: [t('C\'est '), v('important')],
+    translation: [t('It\'s '), v('important')],
+  },
+  {
+    id: 'c182',
+    segments: [t('Pourquoi est-ce que c\'est important ?')],
+    blank: 'important',
+    translation: [t('Why is it '), v('important'), t('?')],
+  },
+
+  // All three modals at once — what the last three blocks were building toward.
+  {
+    id: 'c183',
+    segments: [t('Je veux partir, mais je dois travailler')],
+    blank: 'dois',
+    translation: [t('I want to leave, but I '), v('have to'), t(' work')],
+  },
+  {
+    id: 'c184',
+    segments: [t('On doit payer, mais on n\'a pas d\'argent')],
+    blank: 'payer',
+    translation: [t('We have to '), v('pay'), t(', but we don\'t have any money')],
+  },
+  {
+    id: 'c185',
+    segments: [t('Il faut chercher une voiture parce qu\'on doit partir tôt')],
+    blank: 'tôt',
+    translation: [t('We have to look for a car because we have to leave '), v('early')],
   },
 ]

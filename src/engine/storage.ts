@@ -6,9 +6,11 @@ const TTS_VOICE_KEY = 'tts-voice-v1'
 const TTS_RATE_KEY = 'tts-rate-v1'
 const REVIEW_DEFAULTS_KEY = 'review-defaults-v1'
 const SHOW_PHONETIC_KEY = 'show-phonetic-v1'
+const MUTE_MODE_KEY = 'mute-mode-v1'
+const LISTEN_FIRST_KEY = 'listen-first-v1'
 
 /** How fast the voice speaks. 1 = normal; the Web Speech API accepts 0.1–10. */
-export const DEFAULT_SPEECH_RATE = 1
+const DEFAULT_SPEECH_RATE = 1
 export const MIN_SPEECH_RATE = 0.5
 export const MAX_SPEECH_RATE = 1.5
 
@@ -76,7 +78,7 @@ export function saveSrsState(states: Record<string, CardState>): void {
  * Where a learner starts before they've told the app anything: a correct answer
  * pushes the card out a few days, a wrong one brings it back this session.
  */
-export const INITIAL_REVIEW_DEFAULTS: ReviewDefaults = { correct: 'good', wrong: 'again' }
+const INITIAL_REVIEW_DEFAULTS: ReviewDefaults = { correct: 'good', wrong: 'again' }
 
 const REVIEW_CHOICES: ReviewChoice[] = ['again', 'hard', 'good', 'easy', 'never']
 
@@ -126,7 +128,7 @@ export function saveSpeechRate(rate: number): void {
  * who doesn't need the crutch turns it off, but one who does shouldn't have to
  * discover the setting to get it.
  */
-export const DEFAULT_SHOW_PHONETIC = true
+const DEFAULT_SHOW_PHONETIC = true
 
 export function loadShowPhonetic(): boolean {
   const raw = localStorage.getItem(SHOW_PHONETIC_KEY)
@@ -136,5 +138,39 @@ export function loadShowPhonetic(): boolean {
 
 export function saveShowPhonetic(show: boolean): void {
   localStorage.setItem(SHOW_PHONETIC_KEY, String(show))
+}
+
+/**
+ * Mute mode: the English shows before the answer instead of after it, for a
+ * learner who can't turn the sound on. Off by default — with the audio playing,
+ * the English up front would answer the question for you.
+ */
+const DEFAULT_MUTE_MODE = false
+
+export function loadMuteMode(): boolean {
+  const raw = localStorage.getItem(MUTE_MODE_KEY)
+  if (raw === null) return DEFAULT_MUTE_MODE
+  return raw === 'true'
+}
+
+export function saveMuteMode(mute: boolean): void {
+  localStorage.setItem(MUTE_MODE_KEY, String(mute))
+}
+
+/**
+ * Listen first: the question stays covered until the sentence has finished
+ * playing, so the ear does the work before the eye gets a chance. Off by
+ * default — it's a discipline a learner chooses, not one to impose on arrival.
+ */
+const DEFAULT_LISTEN_FIRST = false
+
+export function loadListenFirst(): boolean {
+  const raw = localStorage.getItem(LISTEN_FIRST_KEY)
+  if (raw === null) return DEFAULT_LISTEN_FIRST
+  return raw === 'true'
+}
+
+export function saveListenFirst(listen: boolean): void {
+  localStorage.setItem(LISTEN_FIRST_KEY, String(listen))
 }
 

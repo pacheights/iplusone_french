@@ -320,6 +320,57 @@ body {
   letter-spacing: 1px;
 }
 
+/* The covered question in listen-first mode. It holds the French line's slot so
+   the card doesn't jump when the sentence lands in it. */
+.french-covered {
+  color: #bbb;
+}
+
+.listening {
+  font-size: var(--ui-size);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  animation: listening-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes listening-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listening {
+    animation: none;
+  }
+}
+
+/* Turns the covered card over. One word, so it's sized to the word — the
+   choices below fill the card's width because there are four of them to tell
+   apart, and this has nothing to be told apart from. */
+.flip {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: var(--ui-size);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.flip:hover {
+  background: #f4f4f4;
+}
+
+.flip:active {
+  transform: scale(0.99);
+}
+
 .choices {
   display: grid;
   grid-template-columns: 1fr 1fr;

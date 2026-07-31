@@ -270,3 +270,75 @@ for: wanting and being able are different things, and French keeps them apart.
 148. Il y a un problème, mais on peut aider - There is a problem, but we can help  `[rest]`
 149. Est-ce que tu es libre maintenant ? - Are you free now?  `[new: libre]`
 150. Je veux partir, mais je ne peux pas - I want to leave, but I can't  `[rest]`
+
+## Batch 5 — devoir
+
+The third verb to take an infinitive, so it needs no setup card either. It is
+also the third verb whose je and tu forms are spelled the same — by now that is
+a pattern rather than a surprise, and the rest card says so.
+
+Two things make this block harder than the last. `il faut` has no real subject:
+the il stands for nobody, exactly as it does in `il y a`, and falloir turns up
+in no other form in the present, so it is taught whole. And `il ne faut pas` is
+not the negative it looks like — it forbids rather than excuses.
+
+`pourquoi` is pulled forward from the block of question words so that
+`parce que` has something to answer. `je voudrais` enters here as a frozen
+politeness form: the verb underneath it is already known, which is the same
+condition `ça va` waits on.
+
+The block closes on all three modals in one sentence, which is what the last
+three blocks were building toward.
+
+### The persons (infinitive held still)
+
+151. Je dois travailler - I have to work  `[new: je dois]`
+152. Tu dois travailler - You have to work  `[rest + note: the third verb whose je and tu forms are spelled alike]`
+153. Il doit travailler - He has to work  `[new: il doit]`
+154. Elle doit rester ici - She has to stay here  `[rest]`
+155. Nous devons partir - We have to leave  `[new: nous devons]`
+156. Vous devez rester - You have to stay  `[new: vous devez]`
+157. Ils doivent travailler - They have to work  `[new: ils doivent]`
+158. On doit partir maintenant - We have to leave now  `[rest]`
+
+### Why
+
+159. Pourquoi est-ce que tu dois partir ? - Why do you have to leave?  `[new: pourquoi]`
+160. Je dois partir parce que je suis fatigué - I have to leave because I am tired  `[new: parce que]`
+161. Pourquoi est-ce qu'elles doivent rester ? - Why do they have to stay?  `[rest]`
+162. Elles doivent rester parce qu'elles sont malades - They have to stay because they are sick  `[rest]`
+163. On ne peut pas manger parce qu'on doit partir - We can't eat because we have to leave  `[rest]`
+
+### Il faut
+
+164. Il faut partir - We have to leave  `[new: il faut]`
+165. Il faut travailler - You have to work  `[rest]`
+166. Est-ce qu'il faut payer ? - Do we have to pay?  `[new: payer]`
+167. Il faut manger quelque chose - You have to eat something  `[rest]`
+168. Il ne faut pas rester ici - You must not stay here  `[rest + note: il ne faut pas forbids, it does not excuse]`
+169. Il faut de l'argent - You need money  `[new: argent]`
+
+### The slot pays for itself
+
+170. Je dois appeler mon ami - I have to call my friend  `[new: appeler]`
+171. Est-ce que tu peux appeler maintenant ? - Can you call now?  `[rest]`
+172. Il faut demander - You have to ask  `[new: demander]`
+173. On doit trouver une voiture - We have to find a car  `[new: trouver]`
+174. Je ne peux pas trouver ma voiture - I can't find my car  `[rest]`
+175. Il faut chercher mon ami - We have to look for my friend  `[new: chercher]`
+176. Pourquoi est-ce que tu dois chercher une voiture ? - Why do you have to look for a car?  `[rest]`
+177. Je voudrais un café, s'il vous plaît - I'd like a coffee, please  `[new: je voudrais]`
+
+### Early, late, quickly
+
+178. Je dois partir tôt - I have to leave early  `[new: tôt]`
+179. Elle doit travailler tard - She has to work late  `[new: tard]`
+180. Il faut manger vite - You have to eat quickly  `[new: vite]`
+181. C'est important - It's important  `[new: important]`
+182. Pourquoi est-ce que c'est important ? - Why is it important?  `[rest]`
+
+### All three at once
+
+183. Je veux partir, mais je dois travailler - I want to leave, but I have to work  `[rest]`
+184. On doit payer, mais on n'a pas d'argent - We have to pay, but we don't have any money  `[rest]`
+185. Il faut chercher une voiture parce qu'on doit partir tôt - We have to look for a car because we have to leave early  `[rest]`

@@ -468,6 +468,105 @@ const libre = p(
   'This is an adjective meaning \'free\' in the sense of not busy and not taken. It already ends in -e, so it looks the same for a masculine or feminine subject; only the plural adds -s. Free of charge is a different word, \'gratuit.\'',
 )
 const ensemble = p('ensemble', 'This is an adverb meaning \'together.\'')
+
+// ─── devoir ─────────────────────────────────────────────────────────────────
+const dois = p(
+  'dois',
+  'This is the verb \'devoir\' (to have to), conjugated for \'je.\' It means \'must\' or \'have to.\' \'devoir\' also carries a second, unrelated meaning — to owe someone something — which behaves differently and is not what is happening here.',
+)
+const doisTu = p(
+  'dois',
+  'This is the verb \'devoir\' (to have to), conjugated for \'tu.\' It means \'must\' or \'have to.\' The \'je\' and \'tu\' forms are spelled identically, so the subject in front is what separates them.',
+)
+const doit = p(
+  'doit',
+  'This is the verb \'devoir\' (to have to), conjugated for \'il,\' \'elle\' or \'on.\' It means \'must\' or \'has to.\' It sounds exactly like the \'dois\' used with \'je\' and \'tu\'; only the spelling changes.',
+)
+const devons = p(
+  'devons',
+  'This is the verb \'devoir\' (to have to), conjugated for \'nous.\' It means \'must\' or \'have to.\'',
+)
+const devez = p(
+  'devez',
+  'This is the verb \'devoir\' (to have to), conjugated for \'vous.\' It means \'must\' or \'have to.\' The \'-ez\' ending sounds like é.',
+)
+const doivent = p(
+  'doivent',
+  'This is the verb \'devoir\' (to have to), conjugated for \'ils\' or \'elles.\' It means \'must\' or \'have to.\' The \'-ent\' ending is silent, and the vowel shifts away from the \'nous\' and \'vous\' forms: nous devons, but ils doivent.',
+)
+
+// ─── Why, and obligation with nobody attached ───────────────────────────────
+const POURQUOI = p(
+  'Pourquoi',
+  'This is a question word meaning \'why.\' It goes at the very front of the question, ahead of \'est-ce que,\' and everything after it keeps ordinary statement order.',
+)
+const parceQueNote =
+  'This is a conjunction meaning \'because.\' It joins a reason onto a statement, and each half keeps its own subject and its own verb.'
+const parceQue = p('parce que', parceQueNote)
+const parceQuLower = (rest: string) =>
+  p(
+    `parce qu'${rest}`,
+    `${parceQueNote} In front of a vowel 'que' drops its e and joins the next word with an apostrophe: parce que ${rest} → parce qu'${rest}.`,
+  )
+const ilFautNote =
+  'This is a fixed expression meaning \'it is necessary to\' — the way French says something must be done without naming who has to do it. The \'il\' in it stands for nobody, just as \'it\' stands for nobody in \'it is raining.\' The verb behind it, \'falloir,\' appears in no other present-tense form, so the phrase is used whole.'
+const ilFaut = p('Il faut', ilFautNote)
+const faut = p('faut', ilFautNote)
+const ilNeFautPas = p(
+  'Il ne faut pas',
+  'This is the negative of \'il faut,\' and it forbids rather than excuses: \'il faut rester\' means you have to stay, and \'il ne faut pas rester\' means you must not stay. It never means that the thing is optional — French says that another way entirely.',
+)
+
+// ─── Block 5 infinitives and words ──────────────────────────────────────────
+const payer = p(
+  'payer',
+  'This is an infinitive verb meaning \'to pay.\' Paying for something takes no preposition in French — the thing follows the verb directly.',
+)
+const appeler = p(
+  'appeler',
+  'This is an infinitive verb meaning \'to call\' — on the phone, or calling out to someone.',
+)
+const demander = p(
+  'demander',
+  'This is an infinitive verb meaning \'to ask\' or \'to ask for.\' It is milder than the English \'to demand,\' which is a much stronger word: this is the ordinary, neutral way to ask.',
+)
+const trouver = p(
+  'trouver',
+  'This is an infinitive verb meaning \'to find\' — arriving at the thing. Searching for it, which may or may not succeed, is \'chercher.\'',
+)
+const chercher = p(
+  'chercher',
+  'This is an infinitive verb meaning \'to look for.\' The \'for\' is already inside the French verb, so nothing is added after it.',
+)
+const voudrais = p(
+  'voudrais',
+  'This is a softened form of \'veux\' (want), meaning \'would like.\' It is what people actually say when asking for something: \'je veux un café\' sounds blunt where \'je voudrais un café\' is an ordinary request. Treat it as a fixed politeness form.',
+)
+const argent = p(
+  'argent',
+  'This is a masculine noun meaning \'money.\' It starts with a vowel, so \'the money\' is \'l\'argent.\' The same word also names the metal silver.',
+)
+const dArgent = p(
+  'd\'argent',
+  'This is \'de\' plus \'argent\' (money), with \'de\' dropping its e in front of the vowel. After a negative, the word for \'some\' collapses into plain \'de,\' which is why nothing else stands in front of the noun here.',
+)
+const tot = p('tôt', 'This is an adverb meaning \'early.\' It goes at the end of the sentence.')
+const tard = p(
+  'tard',
+  'This is an adverb meaning \'late,\' in the sense of at a late hour. It is a separate idea from \'en retard,\' which is late for something — you can arrive \'tard\' without being \'en retard,\' if nobody was waiting.',
+)
+const vite = p(
+  'vite',
+  'This is an adverb meaning \'quickly\' or \'fast.\' It describes how something is done and follows the verb.',
+)
+const important = p(
+  'important',
+  'This is an adjective meaning \'important.\' A feminine subject writes \'importante,\' and the final t is then heard; a plural adds -s.',
+)
+const malades = p(
+  'malades',
+  'This is the adjective \'malade\' (sick) with the -s that matches a plural subject. The -s is silent.',
+)
 const avec = p('avec', 'This is a preposition meaning \'with.\'')
 const bien = p(
   'bien',
@@ -807,7 +906,7 @@ export const EXPLANATIONS: Record<string, CardExplanation> = {
         'This is a pronoun meaning \'that\' or \'it.\' It points at a thing or a situation without naming it.',
       ),
     ],
-    whole: '\"c\'est ça\" is an everyday phrase in its own right: that\'s it, that\'s right, exactly.',
+    whole: '"c\'est ça" is an everyday phrase in its own right: that\'s it, that\'s right, exactly.',
   },
 
   c40: {
@@ -1434,7 +1533,7 @@ export const EXPLANATIONS: Record<string, CardExplanation> = {
       leNeg,
       temps,
     ],
-    whole: `${secondVerb} And where English can say 'he wants to eat but doesn\'t have time,' French repeats the subject: il veut … mais il n'a pas ….`,
+    whole: `${secondVerb} And where English can say 'he wants to eat but doesn't have time,' French repeats the subject: il veut … mais il n'a pas ….`,
   },
 
   c111: {
@@ -1740,6 +1839,251 @@ export const EXPLANATIONS: Record<string, CardExplanation> = {
     ],
     whole:
       'The two halves put the block\'s two verbs against each other: \'vouloir\' is wanting something, \'pouvoir\' is being able to do it. French keeps them apart, and the second half needs no second verb after \'peux\' — what he can\'t do is already established by the first half.',
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 5 — devoir
+  // ───────────────────────────────────────────────────────────────────────────
+  c151: {
+    summary: opens('Je dois travailler', 'I have to work'),
+    parts: [JE, dois, travailler],
+    whole: `Like the other verbs of obligation and ability, 'devoir' is followed by a second verb. ${secondVerb}`,
+  },
+
+  c152: {
+    summary: opens('Tu dois travailler', 'You have to work'),
+    parts: [TU, doisTu, travailler],
+    whole:
+      'Three verbs are built this way — \'vouloir,\' \'pouvoir\' and \'devoir\' all leave their \'je\' and \'tu\' forms spelled identically: je veux / tu veux, je peux / tu peux, je dois / tu dois. Nothing on the verb marks which one it is, so the pronoun carries the whole distinction.',
+  },
+
+  c153: {
+    summary: opens('Il doit travailler', 'He has to work'),
+    parts: [IL, doit, travailler],
+  },
+
+  c154: {
+    summary: opens('Elle doit rester ici', 'She has to stay here'),
+    parts: [ELLE, doit, rester, ici],
+  },
+
+  c155: {
+    summary: opens('Nous devons partir', 'We have to leave'),
+    parts: [NOUS, devons, partir],
+  },
+
+  c156: {
+    summary: opens('Vous devez rester', 'You have to stay'),
+    parts: [VOUS, devez, rester],
+  },
+
+  c157: {
+    summary: opens('Ils doivent travailler', 'They have to work'),
+    parts: [ILS, doivent, travailler],
+  },
+
+  c158: {
+    summary: opens('On doit partir maintenant', 'We have to leave now'),
+    parts: [ON, doit, partir, maintenant],
+  },
+
+  c159: {
+    summary: opens('Pourquoi est-ce que tu dois partir ?', 'Why do you have to leave?'),
+    parts: [POURQUOI, estCeQue, tu, doisTu, partir],
+    whole:
+      'The question word comes first and \'est-ce que\' follows it; after that the sentence keeps the order it would have as a plain statement.',
+  },
+
+  c160: {
+    summary: opens('Je dois partir parce que je suis fatigué', 'I have to leave because I am tired'),
+    parts: [JE, dois, partir, parceQue, je, suis, fatigue],
+    whole:
+      'Two full sentences joined by \'parce que,\' each with its own subject and verb. \'parce que\' is the answer \'pourquoi\' asks for.',
+  },
+
+  c161: {
+    summary: opens('Pourquoi est-ce qu\'elles doivent rester ?', 'Why do they have to stay?'),
+    parts: [
+      POURQUOI,
+      estCeQuLower(
+        'elles',
+        '\'elles\' means \'they\' for a group in which everyone is female.',
+      ),
+      doivent,
+      rester,
+    ],
+  },
+
+  c162: {
+    summary: opens(
+      'Elles doivent rester parce qu\'elles sont malades',
+      'They have to stay because they are sick',
+    ),
+    parts: [ELLES, doivent, rester, parceQuLower('elles'), sont, malades],
+  },
+
+  c163: {
+    summary: opens(
+      'On ne peut pas manger parce qu\'on doit partir',
+      'We can\'t eat because we have to leave',
+    ),
+    parts: [ON, nePas, peut, mangerShort, parceQuLower('on'), doit, partir],
+    whole:
+      'Each half has its own two verbs: a conjugated one and an infinitive behind it. The negative in the first half wraps only the conjugated verb.',
+  },
+
+  c164: {
+    summary: opens('Il faut partir', 'We have to leave'),
+    parts: [ilFaut, partir],
+    whole:
+      'Nobody is named as having to leave. English has to pick a subject — \'we have to,\' \'you have to,\' \'one must\' — but French leaves it open, and who is meant comes from the situation.',
+  },
+
+  c165: {
+    summary: opens('Il faut travailler', 'You have to work'),
+    parts: [ilFaut, travailler],
+  },
+
+  c166: {
+    summary: opens('Est-ce qu\'il faut payer ?', 'Do we have to pay?'),
+    parts: [
+      estCeQuLower('il', 'The \'il\' here belongs to \'il faut\' and stands for nobody.'),
+      faut,
+      payer,
+    ],
+  },
+
+  c167: {
+    summary: opens('Il faut manger quelque chose', 'You have to eat something'),
+    parts: [ilFaut, mangerShort, quelqueChose],
+  },
+
+  c168: {
+    summary: opens('Il ne faut pas rester ici', 'You must not stay here'),
+    parts: [ilNeFautPas, rester, ici],
+    whole:
+      'Negating \'il faut\' turns it into a prohibition, not a release. This sentence says that staying is forbidden — never that it is optional.',
+  },
+
+  c169: {
+    summary: opens('Il faut de l\'argent', 'You need money'),
+    parts: [ilFaut, deL, argent],
+    whole:
+      'Word for word this is \'it is necessary to have some money.\' \'il faut\' can be followed by a thing as well as by a verb, and then it means that the thing is needed.',
+  },
+
+  c170: {
+    summary: opens('Je dois appeler mon ami', 'I have to call my friend'),
+    parts: [JE, dois, appeler, mon, ami],
+  },
+
+  c171: {
+    summary: opens('Est-ce que tu peux appeler maintenant ?', 'Can you call now?'),
+    parts: [estCeQue, tu, peuxTu, appeler, maintenant],
+  },
+
+  c172: {
+    summary: opens('Il faut demander', 'You have to ask'),
+    parts: [ilFaut, demander],
+  },
+
+  c173: {
+    summary: opens('On doit trouver une voiture', 'We have to find a car'),
+    parts: [ON, doit, trouver, une, voiture],
+  },
+
+  c174: {
+    summary: opens('Je ne peux pas trouver ma voiture', 'I can\'t find my car'),
+    parts: [JE, nePas, peux, trouver, ma, voiture],
+  },
+
+  c175: {
+    summary: opens('Il faut chercher mon ami', 'We have to look for my friend'),
+    parts: [ilFaut, chercher, mon, ami],
+    whole:
+      'Nothing stands between \'chercher\' and what is being looked for. The English \'for\' has no French counterpart here — it is already inside the verb.',
+  },
+
+  c176: {
+    summary: opens(
+      'Pourquoi est-ce que tu dois chercher une voiture ?',
+      'Why do you have to look for a car?',
+    ),
+    parts: [POURQUOI, estCeQue, tu, doisTu, chercher, une, voiture],
+  },
+
+  c177: {
+    summary: opens('Je voudrais un café, s\'il vous plaît', 'I\'d like a coffee, please'),
+    parts: [JE, voudrais, un, cafe, silVousPlait],
+    whole:
+      'This is the standard way to order or ask for something. \'un café\' is one cup of it, and the polite phrase goes at the end after a comma.',
+  },
+
+  c178: {
+    summary: opens('Je dois partir tôt', 'I have to leave early'),
+    parts: [JE, dois, partir, tot],
+  },
+
+  c179: {
+    summary: opens('Elle doit travailler tard', 'She has to work late'),
+    parts: [ELLE, doit, travailler, tard],
+  },
+
+  c180: {
+    summary: opens('Il faut manger vite', 'You have to eat quickly'),
+    parts: [ilFaut, mangerShort, vite],
+  },
+
+  c181: {
+    summary: opens('C\'est important', 'It\'s important'),
+    parts: [CEST, important],
+  },
+
+  c182: {
+    summary: opens('Pourquoi est-ce que c\'est important ?', 'Why is it important?'),
+    parts: [POURQUOI, estCeQue, cEst, important],
+  },
+
+  c183: {
+    summary: opens('Je veux partir, mais je dois travailler', 'I want to leave, but I have to work'),
+    parts: [
+      JE,
+      veux,
+      partir,
+      mais,
+      p('je', 'This is the subject pronoun meaning \'I,\' said again to open the second half.'),
+      dois,
+      travailler,
+    ],
+    whole:
+      'Wanting and having to are two different verbs in French, and this sentence sets one against the other. Both take a plain infinitive behind them.',
+  },
+
+  c184: {
+    summary: opens(
+      'On doit payer, mais on n\'a pas d\'argent',
+      'We have to pay, but we don\'t have any money',
+    ),
+    parts: [
+      ON,
+      doit,
+      payer,
+      mais,
+      p('on', 'This is the subject pronoun meaning \'we,\' said again to open the second half.'),
+      nApostrophePas,
+      a,
+      dArgent,
+    ],
+  },
+
+  c185: {
+    summary: opens(
+      'Il faut chercher une voiture parce qu\'on doit partir tôt',
+      'We have to look for a car because we have to leave early',
+    ),
+    parts: [ilFaut, chercher, une, voiture, parceQuLower('on'), doit, partir, tot],
+    whole:
+      'Two obligations in one sentence, said two different ways: \'il faut\' names nobody, and \'on doit\' names a \'we.\'',
   },
 }
 

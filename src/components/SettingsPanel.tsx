@@ -20,6 +20,12 @@ interface SettingsPanelProps {
   /** Whether the pronunciation line shows under an answered sentence. */
   showPhonetic: boolean
   onSetShowPhonetic: (show: boolean) => void
+  /** Whether the English shows before the answer, standing in for the audio. */
+  muteMode: boolean
+  onSetMuteMode: (mute: boolean) => void
+  /** Whether the question stays covered until the sentence has finished playing. */
+  listenFirst: boolean
+  onSetListenFirst: (listen: boolean) => void
 }
 
 /** Plain-language account of the last utterance, so a silent failure names itself. */
@@ -59,6 +65,10 @@ export function SettingsPanel({
   status,
   showPhonetic,
   onSetShowPhonetic,
+  muteMode,
+  onSetMuteMode,
+  listenFirst,
+  onSetListenFirst,
 }: SettingsPanelProps) {
   const [open, setOpen] = useState(false)
   const [debug, setDebug] = useState(isSpeechDebugEnabled)
@@ -120,6 +130,35 @@ export function SettingsPanel({
             </label>
             <p className="settings-note">
               The English-reader spelling of the sentence, under the French once you've answered.
+            </p>
+
+            {/* The two modes stack: with both on, the card stays covered until
+                you flip it, and then the English is there with the choices. */}
+            <label className="settings-switch">
+              <input
+                type="checkbox"
+                checked={muteMode}
+                onChange={(e) => onSetMuteMode(e.target.checked)}
+              />
+              <span>Mute mode</span>
+            </label>
+            <p className="settings-note">
+              Shows the English translation with the question instead of after it, so the sentence
+              can be worked out by reading when the sound has to be off.
+              {listenFirst ? ' With Listen first on, it appears when you flip the card.' : ''}
+            </p>
+
+            <label className="settings-switch">
+              <input
+                type="checkbox"
+                checked={listenFirst}
+                onChange={(e) => onSetListenFirst(e.target.checked)}
+              />
+              <span>Listen first</span>
+            </label>
+            <p className="settings-note">
+              Keeps the sentence and the words to choose from hidden until you press Flip, so the
+              ear gets the question before the eye does — listen as many times as you like first.
             </p>
           </section>
 

@@ -39,8 +39,11 @@ export function spokenForm(written: string): string {
   // 2. `il y a` loses its subject entirely — the single most common reduction.
   out = out.replace(/\bil y en a/gi, "y'en a").replace(/\bil y a/gi, "y'a")
 
-  // 3. Impersonal `il faut` likewise drops the `il`.
-  out = out.replace(/\bil faut\b/gi, 'faut')
+  // 3. Impersonal `il faut` likewise drops the `il` — but only as a standalone
+  //    subject. In `est-ce qu'il faut` the pronoun is fused to the word in front
+  //    of it and stays put: dropping it there gives "est-ce qu'faut", which is
+  //    not a thing anyone says.
+  out = out.replace(new RegExp(`${notAfterApostrophe}\\bil faut\\b`, 'gi'), 'faut')
 
   // 4. `je suis` / `je sais` collapse to one syllable. These two are lexicalised
   //    ("chuis", "chais") rather than a plain schwa drop, so they come first.

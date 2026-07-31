@@ -11,9 +11,13 @@ import {
   suspendCard,
 } from './engine/srs'
 import {
+  loadListenFirst,
+  loadMuteMode,
   loadReviewDefaults,
   loadShowPhonetic,
   loadSrsState,
+  saveListenFirst,
+  saveMuteMode,
   saveReviewDefaults,
   saveShowPhonetic,
   saveSrsState,
@@ -24,22 +28,21 @@ import { SettingsPanel } from './components/SettingsPanel'
 
 /**
  * Bare shell: the deck, the scheduler, and audio. One fill-in-the-blank
- * question at a time. Everything that used to sit around it (listening track,
- * sidebar, settings, explanations) is gone — see git history to pull any of it
+ * question at a time, with settings above it. The listening track and the
+ * sidebar that used to sit around it are gone — see git history to pull either
  * back.
  */
 /** How many answers back Undo can walk. Deep enough for a slip, bounded so a
  *  long session doesn't hold every snapshot of the deck in memory. */
 const UNDO_LIMIT = 20
 
+/** Where each card sits in the deck, 1-based. The indicator counts against the
+ *  whole deck rather than the session, so a card's number is the same every
+ *  time it comes up and the total never moves. */
+const DECK_POSITION = new Map(CARDS.map((card, i) => [card.id, i + 1]))
+
 function App() {
   const [states, setStates] = useState(() => loadSrsState())
-  // The deck as it stood when the session opened, by id. A card's number is its
-  // place in this list, so it keeps that number however many times it comes
-  // back for a repeat — the count tracks progress through the deck, not answers
-  // given. Frozen for the session: answering reshuffles the live queue, and a
-  // total that moved underneath the learner would tell them nothing.
-  const [sessionOrder] = useState(() => computeQueue(CARDS, states, new Date()).map((c) => c.id))
   // Undo restores the whole scheduler state as it stood before an answer, rather
   // than trying to invert the grade — FSRS isn't reversible from the new state
   // alone, and the queue is a pure function of these states, so putting them
@@ -51,14 +54,16 @@ function App() {
   const [undoEpoch, setUndoEpoch] = useState(0)
   const [defaults, setDefaults] = useState(() => loadReviewDefaults())
   const [showPhonetic, setShowPhoneticState] = useState(() => loadShowPhonetic())
+  const [muteMode, setMuteModeState] = useState(() => loadMuteMode())
+  const [listenFirst, setListenFirstState] = useState(() => loadListenFirst())
   const { voices, selectedVoice, setSelectedVoice, rate, setRate, speak, status } = useSpeech()
 
   const queue = useMemo(() => computeQueue(CARDS, states, new Date()), [states])
   const currentCard = queue[0]
 
-  // 0 for a card that wasn't in the deck at session start — nothing honest to
-  // count it as, so the indicator sits it out rather than inventing a place.
-  const position = currentCard ? sessionOrder.indexOf(currentCard.id) + 1 : 0
+  // Every card the queue can hand back comes from CARDS, so this is only 0
+  // between decks, when there is no card to number.
+  const position = currentCard ? (DECK_POSITION.get(currentCard.id) ?? 0) : 0
 
   // When each grade would bring this card back, worded for the buttons. Computed
   // against the card's state as it stands now, before the grade lands.
@@ -111,6 +116,16 @@ function App() {
     saveShowPhonetic(show)
   }
 
+  const setMuteMode = (mute: boolean) => {
+    setMuteModeState(mute)
+    saveMuteMode(mute)
+  }
+
+  const setListenFirst = (listen: boolean) => {
+    setListenFirstState(listen)
+    saveListenFirst(listen)
+  }
+
   return (
     <main id="app">
       <SettingsPanel
@@ -123,6 +138,10 @@ function App() {
         status={status}
         showPhonetic={showPhonetic}
         onSetShowPhonetic={setShowPhonetic}
+        muteMode={muteMode}
+        onSetMuteMode={setMuteMode}
+        listenFirst={listenFirst}
+        onSetListenFirst={setListenFirst}
       />
 
       <div className="stage">
@@ -142,7 +161,7 @@ function App() {
 
           {position > 0 && (
             <span className="progress">
-              {position} <span className="progress-of">of</span> {sessionOrder.length}
+              {position} <span className="progress-of">of</span> {CARDS.length}
             </span>
           )}
         </div>
@@ -152,7 +171,9 @@ function App() {
             key={`${currentCard.id}:${undoEpoch}`}
             card={currentCard}
             onSpeak={speak}
+            listenFirst={listenFirst}
             showPhonetic={showPhonetic}
+            muteMode={muteMode}
             onAnswer={handleAnswer}
             schedule={schedule}
             defaults={defaults}

@@ -21,8 +21,12 @@ const CHOICE_LABEL: Record<ReviewChoice, string> = {
 interface FillBlankCardProps {
   card: Card
   onSpeak: (text: string) => void
+  /** Whether the question stays covered until the learner flips it over. */
+  listenFirst: boolean
   /** Whether to print the pronunciation line under the answered sentence. */
   showPhonetic: boolean
+  /** Whether the English stands in for the audio, and so shows before the answer. */
+  muteMode: boolean
   /** Called once the learner has answered and chosen when to see the card again. */
   onAnswer: (choice: ReviewChoice) => void
   /** When each grade would bring the card back, already worded for display. */
@@ -36,7 +40,9 @@ interface FillBlankCardProps {
 export function FillBlankCard({
   card,
   onSpeak,
+  listenFirst,
   showPhonetic,
+  muteMode,
   onAnswer,
   schedule,
   defaults,
@@ -48,6 +54,8 @@ export function FillBlankCard({
   /** Set only if the learner overrode the interval the answer earned. */
   const [override, setOverride] = useState<ReviewChoice | null>(null)
   const [adjusting, setAdjusting] = useState(false)
+  /** Set once the learner has turned this card over in listen-first mode. */
+  const [flipped, setFlipped] = useState(false)
 
   // Reset for a new card during render rather than in an effect, so the reset
   // lands before the new card paints — an effect runs after render, which would
@@ -59,7 +67,11 @@ export function FillBlankCard({
     setExplaining(false)
     setOverride(null)
     setAdjusting(false)
+    setFlipped(false)
   }
+
+  /** Question covered: the learner is still listening and hasn't flipped it. */
+  const gated = listenFirst && !flipped
 
   const speak = () => onSpeak(cardSpeech(card))
 
@@ -112,8 +124,14 @@ export function FillBlankCard({
         ▶
       </button>
 
-      <p className="french">
-        {answered ? (
+      {/* Covered until the learner flips it: with the French on screen the
+          question is a reading exercise, and the ear never gets asked. How many
+          hearings that takes is theirs to decide, so the wait ends on the button
+          below rather than on the audio finishing. */}
+      <p className={gated ? 'french french-covered' : 'french'}>
+        {gated ? (
+          <span className="listening">Listening…</span>
+        ) : answered ? (
           cardText(card)
         ) : (
           <>
@@ -135,8 +153,16 @@ export function FillBlankCard({
           out, so bolding the highlighted segments points at the gloss of what
           was just filled in — on every card, whether or not it taught anything
           new. It reads plain only where the blanked word has no English word of
-          its own (see data/cards.ts). */}
-      {answered && (
+          its own (see data/cards.ts).
+
+          It waits for the answer, because before that the sentence is the
+          question. Mute mode is the exception: with no sound to go on, the
+          English is the only clue to what belongs in the gap, so it moves up
+          front and takes the audio's place. Not while the question is still
+          covered, though — the two modes stack, and a listen-first card turns
+          over with the English already there, which is the point: the ear gets
+          the sentence first, then the meaning arrives with the choices. */}
+      {(answered || (muteMode && !gated)) && (
         <p className="english">
           {card.translation.map((segment, i) =>
             segment.highlight ? (
@@ -150,18 +176,28 @@ export function FillBlankCard({
         </p>
       )}
 
+      {/* Ends the wait. It stands where the choices will be, so the card doesn't
+          reshuffle under the cursor when it turns over. */}
+      {gated && (
+        <button type="button" className="flip" onClick={() => setFlipped(true)}>
+          Flip
+        </button>
+      )}
+
+      {/* The words are part of the question, so they wait with it. */}
       <div className="choices">
-        {question.choices.map((choice) => (
-          <button
-            key={choice}
-            type="button"
-            className={choiceClass(choice)}
-            onClick={() => choose(choice)}
-            disabled={answered}
-          >
-            {choice}
-          </button>
-        ))}
+        {!gated &&
+          question.choices.map((choice) => (
+            <button
+              key={choice}
+              type="button"
+              className={choiceClass(choice)}
+              onClick={() => choose(choice)}
+              disabled={answered}
+            >
+              {choice}
+            </button>
+          ))}
       </div>
 
       {/* Everything below waits for an answer: the panel names every word of the

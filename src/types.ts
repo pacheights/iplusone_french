@@ -22,7 +22,6 @@ export interface Element {
   kind: ElementKind
   surface: string
   gloss: string
-  note?: string
   provides?: string[][]
   /**
    * Agreement forms this card unlocks "for free" (rules.md: an ending is free
@@ -98,12 +97,6 @@ export interface Card {
    */
   blank?: string
   /**
-   * Optional grammar explanation shown on this card only, independent of its
-   * element. Use it when a card reinforces a rule that belongs to no single new
-   * word — e.g. the partitive collapsing to `de` under negation.
-   */
-  note?: string
-  /**
    * What TTS says when the natural spoken form differs from what `spokenForm`
    * derives from `segments` — the escape hatch for reductions the rules can't
    * see, e.g. the silent plural in "Ils parlent" → "I parle". Omit it and the
@@ -124,16 +117,19 @@ export interface CardState {
   stability: number
   difficulty: number
   /**
-   * Consecutive successful recalls; resets to 0 on "again". Not used by the
-   * scheduler — it only gates listening vocabulary ("recalled ≥ once and not
-   * currently lapsed"), see engine/listening.ts.
+   * Consecutive successful recalls; resets to 0 on "again". Recorded but not
+   * currently read: FSRS schedules from stability and difficulty alone. Kept
+   * because it is history that cannot be recovered once we stop writing it.
    */
   reps: number
   /** ISO timestamp the card is next due. */
   dueDate: string
   /** ISO timestamp of the most recent grade; '' if never reviewed. FSRS needs elapsed time to score recall. */
   lastReview: string
-  /** Local calendar day (YYYY-MM-DD) the card was first graded — used to cap new words per day. */
+  /**
+   * Local calendar day (YYYY-MM-DD) the card was first graded. Recorded but not
+   * currently read — kept for the same reason as `reps`.
+   */
   introducedDate: string
   /**
    * Set when the learner asked never to see this card again. It leaves the deck

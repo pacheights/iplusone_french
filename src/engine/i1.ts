@@ -10,7 +10,7 @@ export interface Violation {
 }
 
 /** The surface unit(s) that become known once `el` is learned. */
-export function unitsFor(el: Element): string[][] {
+function unitsFor(el: Element): string[][] {
   return el.provides ?? [tokenize(el.surface)]
 }
 
