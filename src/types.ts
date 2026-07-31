@@ -1,3 +1,4 @@
+import { phoneticForm } from './engine/phonetic'
 import { spokenForm } from './engine/speech'
 
 export type ElementKind = 'vocab' | 'grammar'
@@ -33,6 +34,40 @@ export interface Element {
   free?: string[][]
 }
 
+/**
+ * One piece of a card's sentence, explained on its own.
+ *
+ * `part` is the stretch of French being explained, written exactly as it
+ * appears on the card — except for a wrapped pair like `ne … pas`, which is
+ * explained as the one thing it is and so is written with the verb elided out.
+ */
+export interface ExplainedPart {
+  part: string
+  note: string
+}
+
+/**
+ * The full breakdown behind a card: what the sentence says, then every part of
+ * it in turn, then what the parts add up to.
+ *
+ * `parts` covers the whole sentence — every word of the French appears in
+ * exactly one part (enforced by data/explanations.test.ts), so nothing on the
+ * card is left unexplained. `whole` is there when assembling the pieces teaches
+ * something the pieces alone don't (word order, a fixed shape, a form that
+ * survives or collapses); it is omitted when the breakdown already says it all.
+ *
+ * Each note names what kind of word the part is and what it means in English —
+ * "This is a possessive adjective meaning your" — and then says how it behaves
+ * in French, in English terms wherever the two languages differ.
+ *
+ * Explanations stand alone: no "you already know", no "you'll meet this later".
+ */
+export interface CardExplanation {
+  summary: string
+  parts: ExplainedPart[]
+  whole?: string
+}
+
 export interface Card {
   id: string
   /**
@@ -43,7 +78,25 @@ export interface Card {
    */
   element?: string
   segments: Segment[]
+  /**
+   * The English, with the counterpart of the blanked word highlighted — that is
+   * what the answer bolds, so it points at the gloss of the word just filled in
+   * whether or not the card teaches anything new. It is left plain only when the
+   * blank has no English word of its own (`Est-ce que`, which asks the question
+   * by being there where English asks by inverting).
+   */
   translation: Segment[]
+  /**
+   * The word the gap takes out, written exactly as it appears in `segments`.
+   *
+   * A card with an element needs none: the gap goes to what the card teaches,
+   * which the highlight already marks. A rest card highlights nothing, so the
+   * gap falls to a heuristic (engine/fillBlank.ts) — good enough on most, but
+   * it has no way past an elision, and on a sentence of short words it picks by
+   * length. This names the word instead, and the translation's bold is written
+   * to match it.
+   */
+  blank?: string
   /**
    * Optional grammar explanation shown on this card only, independent of its
    * element. Use it when a card reinforces a rule that belongs to no single new
@@ -82,9 +135,31 @@ export interface CardState {
   lastReview: string
   /** Local calendar day (YYYY-MM-DD) the card was first graded — used to cap new words per day. */
   introducedDate: string
+  /**
+   * Set when the learner asked never to see this card again. It leaves the deck
+   * without being forgotten: the memory state above is kept untouched, so
+   * clearing the flag resumes the card exactly where it left off.
+   */
+  suspended?: boolean
 }
 
 export type Grade = 'again' | 'hard' | 'good' | 'easy'
+
+/** What the learner does with a card once answered: schedule it, or retire it. */
+export type ReviewChoice = Grade | 'never'
+
+/**
+ * What answering right and answering wrong do by default, so the common case
+ * takes one press. These are the learner's own, not fixed: overriding the
+ * interval after a correct answer becomes the new default for correct answers,
+ * and likewise for wrong ones. The two are kept apart because they say
+ * different things — how well you know the words you know, and how hard you
+ * want to be chased on the ones you don't.
+ */
+export interface ReviewDefaults {
+  correct: ReviewChoice
+  wrong: ReviewChoice
+}
 
 /** The French (written) side of a card as a plain string — what is displayed. */
 export function cardText(card: Card): string {
@@ -98,4 +173,13 @@ export function cardText(card: Card): string {
  */
 export function cardSpeech(card: Card): string {
   return card.speech ?? spokenForm(cardText(card))
+}
+
+/**
+ * The same sentence written in English spelling, so the learner can read back
+ * what they just heard. Derived from `cardSpeech`, so it follows the voice —
+ * including any `speech` override — rather than the written French.
+ */
+export function cardPhonetic(card: Card): string {
+  return phoneticForm(cardSpeech(card))
 }

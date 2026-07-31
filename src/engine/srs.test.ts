@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createCardState, gradeCard, isDue } from './srs'
+import { createCardState, describeInterval, gradeCard, isDue, previewSchedule } from './srs'
 import type { Grade } from '../types'
 
 const DAY = 86_400_000
@@ -65,5 +65,37 @@ describe('FSRS scheduling over repeated reviews', () => {
     const state = gradeCard(createCardState(now), 'good', now)
     expect(isDue(state, now)).toBe(false)
     expect(isDue(state, new Date(now.getTime() + 10 * DAY))).toBe(true)
+  })
+})
+
+describe('showing the learner when each grade brings the card back', () => {
+  it('previews exactly what grading would do — no second implementation to drift', () => {
+    const state = gradeCard(createCardState(now), 'good', now)
+    const at = new Date(state.dueDate)
+    const preview = previewSchedule(state, at)
+
+    for (const grade of ['again', 'hard', 'good', 'easy'] as Grade[]) {
+      expect(preview[grade].toISOString()).toBe(gradeCard(state, grade, at).dueDate)
+    }
+  })
+
+  it('offers four intervals that get longer from again to easy', () => {
+    const preview = previewSchedule(createCardState(now), now)
+    expect(preview.again.getTime()).toBeLessThan(preview.hard.getTime())
+    expect(preview.hard.getTime()).toBeLessThan(preview.good.getTime())
+    expect(preview.good.getTime()).toBeLessThan(preview.easy.getTime())
+  })
+
+  it('words each interval the way a learner would say it', () => {
+    const at = (days: number) => describeInterval(new Date(now.getTime() + days * DAY), now)
+    expect(at(0.02)).toBe('Today')
+    expect(at(1)).toBe('Tomorrow')
+    expect(at(1.6)).toBe('Tomorrow')
+    expect(at(4)).toBe('4 days')
+    expect(at(29)).toBe('29 days')
+    expect(at(31)).toBe('1 month')
+    expect(at(180)).toBe('6 months')
+    expect(at(365)).toBe('1 year')
+    expect(at(900)).toBe('2.5 years')
   })
 })

@@ -17,6 +17,9 @@ interface SettingsPanelProps {
   onSetRate: (rate: number) => void
   onSpeak: (text: string) => void
   status: SpeechStatus
+  /** Whether the pronunciation line shows under an answered sentence. */
+  showPhonetic: boolean
+  onSetShowPhonetic: (show: boolean) => void
 }
 
 /** Plain-language account of the last utterance, so a silent failure names itself. */
@@ -54,6 +57,8 @@ export function SettingsPanel({
   onSetRate,
   onSpeak,
   status,
+  showPhonetic,
+  onSetShowPhonetic,
 }: SettingsPanelProps) {
   const [open, setOpen] = useState(false)
   const [debug, setDebug] = useState(isSpeechDebugEnabled)
@@ -95,64 +100,96 @@ export function SettingsPanel({
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
       >
-        ⚙︎ Voice
+        ⚙︎ Settings
       </button>
 
       {open && (
         <div className="settings-body">
-          <label>
-            Voice
-            <select
-              value={selectedVoice?.voiceURI ?? ''}
-              onChange={(e) => {
-                const voice = voices.find((v) => v.voiceURI === e.target.value)
-                if (voice) onSelectVoice(voice)
-              }}
-              disabled={frenchVoices.length === 0}
-            >
-              {frenchVoices.length === 0 && <option value="">No French voice found</option>}
-              {/* The engine fell back to a non-French voice; show it so the
-                  dropdown isn't silently blank while something else speaks. */}
-              {selectedVoice && !selectedIsFrench && (
-                <option value={selectedVoice.voiceURI}>
-                  {selectedVoice.name} ({selectedVoice.lang}) — not French
-                </option>
-              )}
-              {frenchVoices.map((voice) => (
-                <option key={voice.voiceURI} value={voice.voiceURI}>
-                  {voice.name} ({voice.lang}){voice.localService ? '' : ' — online'}
-                </option>
-              ))}
-            </select>
-          </label>
+          {/* Everything that changes what the card shows. Speech, which changes
+              what it sounds like, follows below. */}
+          <section className="settings-section">
+            <h2 className="settings-heading">Display</h2>
 
-          <label>
-            Speed <span className="settings-value">{rate.toFixed(2)}×</span>
-            <input
-              type="range"
-              min={MIN_SPEECH_RATE}
-              max={MAX_SPEECH_RATE}
-              step={0.05}
-              value={rate}
-              onChange={(e) => onSetRate(Number(e.target.value))}
-            />
-          </label>
+            <label className="settings-switch">
+              <input
+                type="checkbox"
+                checked={showPhonetic}
+                onChange={(e) => onSetShowPhonetic(e.target.checked)}
+              />
+              <span>Pronunciation line</span>
+            </label>
+            <p className="settings-note">
+              The English-reader spelling of the sentence, under the French once you've answered.
+            </p>
+          </section>
 
-          <button type="button" className="settings-test" onClick={() => onSpeak(SAMPLE)}>
-            ▶ Test
-          </button>
+          <section className="settings-section">
+            <h2 className="settings-heading">Speech</h2>
 
-          {/* Silence is usually one of: no voices loaded at all, no French one,
-              or a chosen voice that never speaks. Showing the counts says which. */}
-          <p className="settings-note">
-            {voices.length} voice{voices.length === 1 ? '' : 's'} available ·{' '}
-            {frenchVoices.length} French
-            <br />
-            {describeStatus(status)}
-          </p>
+            <label>
+              Voice
+              <select
+                value={selectedVoice?.voiceURI ?? ''}
+                onChange={(e) => {
+                  const voice = voices.find((v) => v.voiceURI === e.target.value)
+                  if (voice) onSelectVoice(voice)
+                }}
+                disabled={frenchVoices.length === 0}
+              >
+                {frenchVoices.length === 0 && <option value="">No French voice found</option>}
+                {/* The engine fell back to a non-French voice; show it so the
+                    dropdown isn't silently blank while something else speaks. */}
+                {selectedVoice && !selectedIsFrench && (
+                  <option value={selectedVoice.voiceURI}>
+                    {selectedVoice.name} ({selectedVoice.lang}) — not French
+                  </option>
+                )}
+                {frenchVoices.map((voice) => (
+                  <option key={voice.voiceURI} value={voice.voiceURI}>
+                    {voice.name} ({voice.lang}){voice.localService ? '' : ' — online'}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-          <div className="settings-debug">
-            <label className="settings-debug-toggle">
+            <label>
+              Speed <span className="settings-value">{rate.toFixed(2)}×</span>
+              <input
+                type="range"
+                min={MIN_SPEECH_RATE}
+                max={MAX_SPEECH_RATE}
+                step={0.05}
+                value={rate}
+                onChange={(e) => onSetRate(Number(e.target.value))}
+              />
+            </label>
+
+            <button type="button" className="settings-test" onClick={() => onSpeak(SAMPLE)}>
+              ▶ Test
+            </button>
+
+            {/* Silence is usually one of: no voices loaded at all, no French one,
+                or a chosen voice that never speaks. Showing the counts says which. */}
+            <p className="settings-note">
+              {voices.length} voice{voices.length === 1 ? '' : 's'} available ·{' '}
+              {frenchVoices.length} French
+              <br />
+              {describeStatus(status)}
+            </p>
+
+            {frenchVoices.length === 0 && (
+              <p className="settings-warning">
+                No French voice is installed, so the app is falling back to whatever it can find.
+                On macOS: System Settings → Accessibility → Spoken Content → System Voice → Manage
+                Voices, and add a French one. In Chrome, quit and reopen after installing.
+              </p>
+            )}
+          </section>
+
+          <section className="settings-section">
+            <h2 className="settings-heading">Diagnostics</h2>
+
+            <label className="settings-switch">
               <input
                 type="checkbox"
                 checked={debug}
@@ -161,7 +198,7 @@ export function SettingsPanel({
                   setDebug(e.target.checked)
                 }}
               />
-              <span>Debug log{debug ? ' (also to console)' : ''}</span>
+              <span>Speech debug log{debug ? ' (also to console)' : ''}</span>
             </label>
 
             {debug && (
@@ -180,15 +217,7 @@ export function SettingsPanel({
                 </div>
               </>
             )}
-          </div>
-
-          {frenchVoices.length === 0 && (
-            <p className="settings-warning">
-              No French voice is installed, so the app is falling back to whatever it can find.
-              On macOS: System Settings → Accessibility → Spoken Content → System Voice → Manage
-              Voices, and add a French one. In Chrome, quit and reopen after installing.
-            </p>
-          )}
+          </section>
         </div>
       )}
     </div>

@@ -290,6 +290,28 @@ Verbs are given as infinitives.
 - pareil (the same, colloquial)
 - pile (exactly, colloquial)
 
+## Glue words: politeness & greetings
+
+- merci (thank you)
+- merci beaucoup (thank you very much)
+- s'il vous plaît (please, formal)
+- s'il te plaît (please, informal)
+- de rien (you're welcome)
+- je vous en prie (you're welcome, formal)
+- pardon (sorry / excuse me)
+- excusez-moi (excuse me, formal)
+- désolé (sorry)
+- bonjour (hello / good morning)
+- bonsoir (good evening)
+- bonne nuit (good night)
+- salut (hi / bye, informal)
+- au revoir (goodbye)
+- à bientôt (see you soon)
+- à demain (see you tomorrow)
+- bienvenue (welcome)
+- enchanté (pleased to meet you)
+- ça va (how's it going / it's fine)
+
 ## Numbers
 
 - zéro (zero)

@@ -104,6 +104,50 @@ function stabilityAfterLapse(d: number, s: number, r: number): number {
   return Math.min(postLapse, s)
 }
 
+export const GRADES: Grade[] = ['again', 'hard', 'good', 'easy']
+
+/**
+ * Retire a card from the queue without erasing what the learner built up on it.
+ * Nothing about the memory state changes — only the flag — so a card taken out
+ * this way can be put back later and pick up its old schedule rather than
+ * starting over as new.
+ */
+export function suspendCard(state: CardState): CardState {
+  return { ...state, suspended: true }
+}
+
+/**
+ * What each grade would do to this card, so the learner can be shown the four
+ * outcomes before choosing one. It runs the real scheduler rather than
+ * re-deriving the maths, so the preview and the eventual grade can't drift.
+ */
+export function previewSchedule(state: CardState, now: Date): Record<Grade, Date> {
+  const preview = {} as Record<Grade, Date>
+  for (const grade of GRADES) {
+    preview[grade] = new Date(gradeCard(state, grade, now).dueDate)
+  }
+  return preview
+}
+
+/**
+ * A due date said the way a learner thinks about it — "Today", "Tomorrow",
+ * "4 days", "3 months". Sub-day intervals (a lapsed card coming back this
+ * session) read as "Today"; past a month the day count stops meaning anything,
+ * so it rounds up to months and then years.
+ */
+export function describeInterval(due: Date, now: Date): string {
+  const days = (due.getTime() - now.getTime()) / MS_PER_DAY
+  if (days < 1) return 'Today'
+  if (days < 2) return 'Tomorrow'
+  if (days < 30) return `${Math.round(days)} days`
+  if (days < 365) {
+    const months = Math.round(days / 30)
+    return months === 1 ? '1 month' : `${months} months`
+  }
+  const years = Math.round((days / 365) * 10) / 10
+  return years === 1 ? '1 year' : `${years} years`
+}
+
 export function gradeCard(state: CardState, grade: Grade, now: Date): CardState {
   const g = RATING[grade]
   const firstReview = !state.lastReview

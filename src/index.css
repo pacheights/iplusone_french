@@ -11,11 +11,51 @@ body {
   background: #fff;
 }
 
+/* Every size the card and its neighbours use, in one place, so a screen size is
+   a change of variables rather than a change of rules. The steps are deliberate
+   rather than fluid: the card holds one sentence and four short words, and text
+   that resizes with every pixel of the window reads as unsteady.
+
+   Baseline is the phone-to-small-laptop case. */
+:root {
+  --card-width: 34rem;
+  --card-pad: 2rem;
+  --french-size: 1.6rem;
+  --ui-size: 1rem;
+  --explain-width: 38rem;
+}
+
+/* Phones: the card is the whole screen, so the padding stops being a frame and
+   starts being wasted line length. */
+@media (max-width: 30rem) {
+  :root {
+    --card-pad: 1.15rem;
+    --french-size: 1.3rem;
+    --ui-size: 0.95rem;
+  }
+}
+
+/* A laptop at full screen. Wider and a size up throughout — at 34rem the card
+   reads as a postage stamp adrift in the middle of a 1440-wide window. Gated on
+   height too, so a short or half-height window keeps the compact card instead of
+   getting one it has to scroll. */
+@media (min-width: 64rem) and (min-height: 40rem) {
+  :root {
+    --card-width: 39rem;
+    --card-pad: 2.35rem;
+    --french-size: 1.8rem;
+    --ui-size: 1.05rem;
+    --explain-width: 42rem;
+  }
+}
+
 #app {
   min-height: 100vh;
+  /* Discounts the mobile browser's address bar, which 100vh does not. */
+  min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: 1.5rem;
+  padding: clamp(0.85rem, 3vw, 2rem);
 }
 
 .settings {
@@ -38,7 +78,12 @@ body {
 .settings-body {
   margin-top: 0.5rem;
   padding: 1rem;
-  width: 20rem;
+  /* Narrower than 20rem only when the screen can't hold 20rem, and never taller
+     than the window — the panel is fixed, so anything past the bottom edge is
+     unreachable rather than merely below the fold. */
+  width: min(20rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 5rem);
+  overflow-y: auto;
   border: 1px solid #ddd;
   border-radius: 6px;
   background: #fff;
@@ -48,11 +93,42 @@ body {
   box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
 }
 
+/* The panel holds every setting there is, so it's read in groups rather than as
+   one list. Each group but the first is fenced off by a rule above its name. */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.settings-section + .settings-section {
+  border-top: 1px solid #eee;
+  padding-top: 0.85rem;
+}
+
+.settings-heading {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+}
+
 .settings-body label {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   color: #555;
+}
+
+/* A checkbox and its name sit on one line, unlike the stacked controls above. */
+.settings-switch {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.45rem;
+  color: #111 !important;
+  cursor: pointer;
 }
 
 .settings-body select,
@@ -70,20 +146,6 @@ body {
   border-radius: 4px;
   background: #fff;
   cursor: pointer;
-}
-
-.settings-debug {
-  border-top: 1px solid #eee;
-  padding-top: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.settings-debug-toggle {
-  flex-direction: row !important;
-  align-items: center;
-  gap: 0.4rem;
 }
 
 .settings-log {
@@ -129,10 +191,62 @@ body {
 }
 
 
+/* The card plus the strip of controls above it, sharing the card's width so
+   anything in that strip lines up with the card's edges. */
+.stage {
+  width: min(var(--card-width), 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.stage-bar {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Same quiet register as Undo — a place marker, not part of the answer. */
+.progress {
+  color: #666;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-of {
+  color: #aaa;
+}
+
+/* Quiet by design: a way back, not a step in the review. */
+.undo {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #666;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.undo:hover:not(:disabled) {
+  border-color: #bbb;
+  color: #111;
+}
+
+.undo:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 .card {
-  width: min(34rem, 100%);
-  min-height: 16rem;
-  padding: 2rem;
+  width: min(var(--card-width), 100%);
+  /* Holds its shape while the question is unanswered so the card doesn't jump
+     when the translation and the buttons appear — but it gives that up on a
+     short window, where a floor of 16rem is what forces the page to scroll. */
+  min-height: clamp(12rem, 30vh, 18rem);
+  padding: var(--card-pad);
   border: 1px solid #ddd;
   border-radius: 8px;
   display: flex;
@@ -145,12 +259,23 @@ body {
 
 .french {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: var(--french-size);
+}
+
+/* A pronunciation aid, not a third sentence to read: set apart from the French
+   above and the English below so the eye can skip it once it isn't needed. */
+.phonetic {
+  margin: -0.35rem 0 0;
+  color: #8a8a8a;
+  font-size: calc(var(--ui-size) * 0.95);
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .english {
   margin: 0;
   color: #666;
+  font-size: var(--ui-size);
 }
 
 /* The English counterpart of the word the gap took out. Weight only — the
@@ -204,12 +329,16 @@ body {
 }
 
 .choice {
-  padding: 0.75rem 1rem;
+  /* The four answers are the only thing here that gets tapped on a phone, so the
+     vertical padding holds a comfortable target even where the text shrinks. */
+  padding: 0.75rem 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
-  font-size: 1rem;
+  font-size: var(--ui-size);
+  font-family: inherit;
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 
 .choice:hover:not(:disabled) {
@@ -230,11 +359,269 @@ body {
   opacity: 0.45;
 }
 
-.next {
+/* Four grades in one strip, each saying when it brings the card back. Shared
+   borders so it reads as one control rather than four loose buttons. Only on
+   screen when the learner opens it. */
+.schedule {
+  margin-top: 0.25rem;
+  /* One row of five where there's room, folding to two rows where there isn't —
+     a grade whose interval has been squeezed to "2.5 y…" isn't a grade you can
+     pick. Wrapping flex rather than a grid so the buttons left on the last row
+     grow to fill it, instead of sitting beside an empty column.
+
+     The dividers are the 1px gaps with the container's colour showing through,
+     not borders on the buttons: that way they land between whatever ends up
+     next to whatever, in rows as well as columns. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #ddd;
+  overflow: hidden;
+}
+
+.grade {
+  /* The basis is what the longest labels ("Tomorrow", "2.5 years") need to print
+     in full: five of them fit the card's width, so the strip stays one row until
+     the card gets narrow, then breaks a row rather than clipping a word. */
+  flex: 1 1 5.75rem;
+  min-width: 0;
+  padding: 0.6rem 0.3rem;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: inherit;
+}
+
+.grade:hover {
+  background: #f4f4f4;
+}
+
+.grade-label,
+.grade-when {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grade-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.grade-when {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+/* The interval currently in force — the one the answer earned, or the one the
+   learner picked over it. */
+.grade-chosen {
+  background: #f2f2f2;
+  box-shadow: inset 0 0 0 2px #111;
+}
+
+.grade-chosen:hover {
+  background: #ebebeb;
+}
+
+/* One row, always: Explain and Next hold their size and the interval line —
+   the only part whose text varies — gives way first. */
+.actions {
   margin-top: 0.5rem;
-  padding: 0.5rem 1.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.explain-open,
+.when,
+.next {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 0.5rem clamp(0.6rem, 2.5vw, 1rem);
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
   cursor: pointer;
+  font-size: var(--ui-size);
+  font-family: inherit;
+}
+
+.explain-open:hover,
+.when:hover,
+.next:hover {
+  background: #f4f4f4;
+}
+
+/* States what happens next and, on click, offers to change it. Quieter than the
+   two buttons flanking it: nothing here needs doing. */
+.when {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: calc(var(--ui-size) * 0.9);
+  color: #555;
+}
+
+.when-open {
+  background: #f2f2f2;
+}
+
+.when-caret {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Weight alone marks it as the one to press — the card's only colour is the
+   green/red on the answer itself. */
+.next {
+  font-weight: 700;
+}
+
+/* Below this the three don't fit a line without the interval being squeezed to
+   a couple of legible words, so the two buttons keep the row and the sentence
+   about the interval — the part that's read, not pressed — drops beneath them. */
+@media (max-width: 26rem) {
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .next {
+    order: 1;
+  }
+
+  .when {
+    order: 2;
+    flex: 1 0 100%;
+    justify-content: center;
+  }
+
+  /* Smaller type here buys back a column, so the strip folds to two rows on a
+     phone rather than three. The basis follows the type down. */
+  .grade {
+    flex-basis: 4.25rem;
+    padding: 0.5rem 0.2rem;
+  }
+
+  .grade-label {
+    font-size: 0.8rem;
+  }
+
+  .grade-when {
+    font-size: 0.65rem;
+  }
+}
+
+/* The explain panel: the card stays clean, this carries the load. */
+
+.explain-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  background: rgb(0 0 0 / 45%);
+  overflow-y: auto;
+}
+
+.explain {
+  width: min(var(--explain-width), 100%);
+  max-height: min(85dvh, 50rem);
+  overflow-y: auto;
+  padding: clamp(1rem, 4vw, 1.6rem);
+  border-radius: 8px;
+  background: #fff;
+  text-align: left;
+  line-height: 1.55;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 25%);
+  user-select: text;
+}
+
+.explain-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.explain-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.explain-close {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #999;
+  padding: 0 0.25rem;
+}
+
+.explain-close:hover {
+  color: #111;
+}
+
+.explain-sentence {
+  margin: 1rem 0 0.25rem;
+  font-size: calc(var(--french-size) * 0.85);
+}
+
+.explain-summary {
+  margin: 0 0 1rem;
+  color: #555;
+}
+
+.explain-parts {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.explain-parts li {
+  padding-left: 0.25rem;
+}
+
+/* The piece of French being explained, then what it does. */
+.explain-part {
+  font-weight: 700;
+}
+
+.explain-part::after {
+  content: ': ';
+  font-weight: 400;
+  color: #999;
+}
+
+.explain-note {
+  color: #333;
+}
+
+.explain-whole {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  color: #333;
 }

@@ -1,87 +1,69 @@
 # The plan
 
-One fixed list of sentences, written in order. You walk down it one card at a time.
-Each card is built only from the cards before it, following [rules.md](rules.md).
-The list itself lives in [sentences.md](sentences.md).
+One fixed list of sentences, written in order. You walk down it one card at a
+time. Each card is built only from the cards before it, following
+[rules.md](rules.md). The list itself lives in [sentences.md](sentences.md), and
+the block-by-block route through it is [roadmap.md](roadmap.md).
 
-# notes
+## The medium
 
-être, avoir, faire, aller, pouvoir, devoir, and vouloir.
+The sentence plays as audio, one word is missing, and you pick that word from
+four written options.
 
-## How far the course goes
+Both halves matter, and they pull in different directions:
 
-Everyday fluency — about A2–B1. It covers: present; past (passé composé, imparfait);
-future (aller + verb, futur simple); conditional; commands; object and relative
-pronouns; comparisons; the common connectors and prepositions. It stops before the
-subjunctive and the literary tenses.
+- **You hear real spoken French.** Reductions are on by default — `chuis` for
+  *je suis*, `j'mange` for *je mange*, `ne` gone from `ne … pas`. The ear trains
+  on what people say, not on a careful reading voice.
+- **You choose between written forms.** So spelling that the ear cannot separate
+  is still a real choice. `veux` and `veut` sound the same and are still two
+  cards. This is why verb forms are never free (see [rules.md](rules.md)).
 
-## How big
+The blank is the one new thing on the card. Everything else must already be
+known, or there is nothing to reason from.
 
-About 1,500 words (the usable words in [vocabulary.md](vocabulary.md)), plus the
-extra cards for verb conjugations — call it 1,500–1,800 cards.
+## How far it goes
 
-## Two halves
+Everyday fluency — roughly **A2–B1**, about **1,200 cards** across 30 blocks.
+Present, past (passé composé and imparfait), future, conditional, commands,
+object and relative pronouns, comparisons, and the common connectors. It stops
+before the subjunctive and the literary tenses.
 
-The deck has a scaffold and a tail, and they're written differently:
+## The two halves of the deck
 
-|                     | Scaffold (Stages A–C)          | Tail (Stage D)               |
-| ------------------- | ------------------------------ | ---------------------------- |
-| New grammar         | lots, still arriving           | almost none, grammar is done |
-| Repetition (rule 3) | repeat, hold the frame         | vary, change the frame       |
-| How it's ordered    | by hand, card by card          | frequency buckets, in volume |
-| Risk of drift       | high — all the care lives here | low — stable frames          |
+|                 | Blocks 1–27 (grammar)          | Blocks 28+ (the tail)      |
+| --------------- | ------------------------------ | -------------------------- |
+| New grammar     | arriving constantly            | essentially none           |
+| Ordering        | by hand, card by card          | topic buckets, in volume   |
+| Repetition      | hold the frame, drill the form | vary the frame             |
+| Risk of drift   | high — the care lives here     | low — the frames are fixed |
 
-The line between them is where new grammar runs out (end of Stage C). Before it,
-order every card by hand. After it, adding the 900th noun is just vocabulary on
-frames the learner already owns.
+## Verb policy
 
-## The stages
+Settled, and the thing the first deck got wrong. In full in
+[rules.md](rules.md); the short version:
 
-- **Stage A — present core (~1–140).** Pronouns (_je / tu / vous / il / elle / nous_,
-  all of them early); être, avoir, aller, faire; first _-er_ verbs; vouloir / pouvoir /
-  devoir + verb; _ne…pas_; questions — _est-ce que_ by card 25, then intonation;
-  et / ou / mais; parce que; core prepositions; adjective agreement. → simple true
-  statements, negatives, and questions.
-- **Stage B — fill out the present, first past and future (~140–380).** _-ir_ / _-re_
-  and irregular verbs; reflexives; aller + verb (near future); passé composé; object
-  pronouns; comparisons. → narrate today and what's about to happen.
-- **Stage C — imparfait, futur, conditional (~380–620).** Imparfait vs. passé composé;
-  futur simple; conditional (_je voudrais_, _si_ + imparfait); relative pronouns;
-  commands; more connectors; negation variants. → tell a past story, talk about plans
-  and hypotheticals.
-- **Stage D — the tail (~620–1,500).** Grammar essentially done. The long list of
-  remaining words, frequency-ranked and rotated across topics so no theme comes in a
-  block.
+- A verb enters as a **block**: object on the table → all six forms with the
+  object held still → spend it with the persons moving.
+- **Every person-form costs a card**, including ones that sound identical.
+  Mechanical rules (agreement, plurals, elision) are free and live in the
+  explanation.
+- A verb is **glossed with its full range on first contact**, so no meaning has
+  to be widened later. Widening is a hidden second element — this is what made
+  *faire* an i+2 in the first deck.
+- Order: **être → avoir → vouloir → pouvoir → devoir → aller → faire.**
+  *vouloir* is the hinge; after it, any verb enters at one card.
+- Frozen expressions (`il y a`, `ça va`, `il faut`) wait for the verb underneath.
 
-## Ordering
+## Writing a block
 
-Order by what makes the smoothest chain ([rules.md](rules.md), rule 2), biased toward
-frequency. The most common verbs — être, avoir, aller, faire, vouloir, pouvoir — come
-early, but exact position serves the chain, not a ranking. Front-load glue words
-(question words, connectors, prepositions): they multiply what can be built, so they
-come early, not as a reward.
+Work one block of about 40 cards at a time — never more. Continue from the
+highest-numbered card in [sentences.md](sentences.md); don't restart. Take the
+block's grammar and vocabulary from [roadmap.md](roadmap.md), and check every
+word against [vocabulary.md](vocabulary.md) before using it.
 
-## Conjugations (the size lever)
+Trigger: **"read plan.md and rules.md, then write the next block."**
 
-- **être, avoir, aller, faire:** full set of persons, re-drilled at each new tense.
-- **Irregular verbs** (prendre, venir, voir, savoir, vouloir, pouvoir, boire, …):
-  full present; the common ones also get past and future.
-- **Regular verbs:** full set for the first few of each group (_-er_, _-ir_, _-re_) to
-  set the pattern; after that a new regular enters as infinitive plus a form or two,
-  then infinitive only.
-- **Reflexives:** full treatment once; the pattern is reused after.
-
-## Writing a batch
-
-Work one band of about 40 cards at a time — never the whole deck. Continue from the
-highest-numbered card in [sentences.md](sentences.md); don't restart. Stop at the next
-stage boundary. One band at a time keeps every card built on an already-checked start,
-and keeps each batch reviewable.
-
-Trigger: **"read plan.md and rules.md, then write the next band."**
-
-## Build order
-
-1. Stage A in full — highest care, do it first.
-2. Stages B and C — by hand, one band at a time.
-3. Stage D — frequency buckets, generated in volume against the now-stable frames.
+Then transcribe the block into `src/data/elements.ts` and `src/data/cards.ts`,
+and run the i+1 validator (`src/engine/i1.ts`) — it fails the build if any card
+uses a unit that no earlier card taught.
