@@ -1,17 +1,13 @@
-import type { Card, Element } from '../types'
+import type { Card } from '../types'
 import { CARDS } from '../data/cards'
 import { elementById } from '../data/elements'
+import { createKnownUnits, unitsFor } from './known'
 import { tokenize } from './tokenize'
 
 export interface Violation {
   cardId: string
   kind: 'missing-element' | 'not-i1' | 'no-new' | 'mismatch' | 'not-new'
   detail: string
-}
-
-/** The surface unit(s) that become known once `el` is learned. */
-function unitsFor(el: Element): string[][] {
-  return el.provides ?? [tokenize(el.surface)]
 }
 
 /**
@@ -24,31 +20,8 @@ function unitsFor(el: Element): string[][] {
  */
 export function validateDeck(cards: Card[] = CARDS): Violation[] {
   const violations: Violation[] = []
-  const known = new Set<string>()
-  let maxUnit = 1
-
-  const learn = (unit: string[]) => {
-    known.add(unit.join(' '))
-    maxUnit = Math.max(maxUnit, unit.length)
-  }
-
-  // The first token of `tokens` not covered by a known unit (longest-match
-  // tiling), or null if every token is known.
-  const firstUnknown = (tokens: string[]): string | null => {
-    let i = 0
-    while (i < tokens.length) {
-      let matched = 0
-      for (let j = Math.min(maxUnit, tokens.length - i); j >= 1; j--) {
-        if (known.has(tokens.slice(i, i + j).join(' '))) {
-          matched = j
-          break
-        }
-      }
-      if (matched === 0) return tokens[i]
-      i += matched
-    }
-    return null
-  }
+  const known = createKnownUnits()
+  const { learn, firstUnknown } = known
 
   for (const card of cards) {
     const isRest = !card.element
@@ -120,7 +93,7 @@ export function validateDeck(cards: Card[] = CARDS): Violation[] {
     // agreement form or an already-known word shown for review emphasis (e.g. a
     // blue plural-agreement highlight sitting next to the new pronoun+verb).
     const badExtras = newTokens.filter(
-      (t) => !provideSet.has(t) && !freeSet.has(t) && !known.has(t),
+      (t) => !provideSet.has(t) && !freeSet.has(t) && !known.has([t]),
     )
 
     if (newTokens.length === 0) {
@@ -135,7 +108,7 @@ export function validateDeck(cards: Card[] = CARDS): Violation[] {
       })
     }
 
-    if (units.every((u) => known.has(u.join(' ')))) {
+    if (units.every((u) => known.has(u))) {
       violations.push({ cardId: card.id, kind: 'not-new', detail: `element "${el.id}" is already known` })
     }
 

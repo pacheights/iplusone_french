@@ -26,6 +26,9 @@ interface SettingsPanelProps {
   /** Whether the question stays covered until the sentence has finished playing. */
   listenFirst: boolean
   onSetListenFirst: (listen: boolean) => void
+  /** Whether the cover is limited to cards whose every word has been introduced. */
+  listenFirstReviewsOnly: boolean
+  onSetListenFirstReviewsOnly: (reviewsOnly: boolean) => void
 }
 
 /** Plain-language account of the last utterance, so a silent failure names itself. */
@@ -69,6 +72,8 @@ export function SettingsPanel({
   onSetMuteMode,
   listenFirst,
   onSetListenFirst,
+  listenFirstReviewsOnly,
+  onSetListenFirstReviewsOnly,
 }: SettingsPanelProps) {
   const [open, setOpen] = useState(false)
   const [debug, setDebug] = useState(isSpeechDebugEnabled)
@@ -159,6 +164,29 @@ export function SettingsPanel({
             <p className="settings-note">
               Keeps the sentence and the words to choose from hidden until you press Flip, so the
               ear gets the question before the eye does — listen as many times as you like first.
+            </p>
+
+            {/* Nested under Listen first, and dead without it: it narrows that
+                setting rather than doing anything of its own. */}
+            <label
+              className={
+                listenFirst
+                  ? 'settings-switch settings-sub'
+                  : 'settings-switch settings-sub settings-sub-off'
+              }
+            >
+              <input
+                type="checkbox"
+                checked={listenFirstReviewsOnly}
+                disabled={!listenFirst}
+                onChange={(e) => onSetListenFirstReviewsOnly(e.target.checked)}
+              />
+              <span>Review cards only</span>
+            </label>
+            <p className="settings-note settings-sub">
+              Covers only the cards whose every word you've already met. A card carrying a new word
+              arrives flipped: with something on it you've never heard, listening first is guessing,
+              so you see it, then hear it.
             </p>
           </section>
 

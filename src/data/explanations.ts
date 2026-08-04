@@ -574,6 +574,506 @@ const bien = p(
 )
 const on = p('on', onNote)
 
+// ─── Block 6: getting to a place ────────────────────────────────────────────
+const aPlaceNote =
+  'This is a preposition meaning \'to\' or \'at.\' French uses the one word for both, so it is the verb in front that decides which one English says: \'je vais à la gare\' is going to the station, \'je suis à la gare\' is being at it.'
+const aPlace = p('à', aPlaceNote)
+const laArticle = p(
+  'la',
+  'This is the definite article meaning \'the,\' used in front of a feminine noun. The masculine form is \'le.\'',
+)
+const au = p(
+  'au',
+  'This is \'à\' (to, at) and \'le\' (the) written as one word. In front of a masculine noun the two always contract — \'à le travail\' is never written — while the feminine \'à la\' stays as it is.',
+)
+const aL = p(
+  'à l\'',
+  'This is \'à\' (to, at) in front of a noun starting with a vowel, where both \'le\' and \'la\' shorten to \'l\'.\' The vowel, not the gender, is what decides this form.',
+)
+const enVille = p(
+  'en ville',
+  'This is a fixed expression meaning \'into town\' or \'in town.\' Most places take \'à\' and an article — au bureau, à la gare — but \'ville\' takes \'en\' and no article at all, and the two words travel together.',
+)
+
+const maison = p(
+  'maison',
+  'This is a feminine singular noun meaning \'house\': la maison, ma maison. Behind \'à la\' it is also how French says \'home\' — \'à la maison\' is at home, and \'je vais à la maison\' is I am going home.',
+)
+const travail = p(
+  'travail',
+  'This is a masculine singular noun meaning \'work\' — the job, and the place it is done: le travail, au travail.',
+)
+const bureau = p(
+  'bureau',
+  'This is a masculine singular noun meaning \'office\': le bureau, au bureau. It also means the desk standing in one.',
+)
+const marche = p(
+  'marché',
+  'This is a masculine singular noun meaning \'market\' — the open-air kind, food sold from stalls: le marché, au marché.',
+)
+const restaurant = p(
+  'restaurant',
+  'This is a masculine singular noun meaning \'restaurant\': le restaurant, au restaurant.',
+)
+const gare = p(
+  'gare',
+  'This is a feminine singular noun meaning \'station,\' the train kind: la gare, à la gare. A bus station is \'la gare routière.\'',
+)
+const ecole = p(
+  'école',
+  'This is a feminine singular noun meaning \'school.\' It starts with a vowel, so \'la\' shortens to \'l\'\': l\'école, à l\'école.',
+)
+
+// ─── aller ──────────────────────────────────────────────────────────────────
+const vais = p(
+  'vais',
+  'This is the verb \'aller\' (to go), conjugated for \'je.\' It means \'am going.\'',
+)
+const vas = p(
+  'vas',
+  'This is the verb \'aller\' (to go), conjugated for \'tu.\' It means \'are going.\'',
+)
+const va = p(
+  'va',
+  'This is the verb \'aller\' (to go), conjugated for \'il,\' \'elle\' or \'on.\' It means \'is going.\'',
+)
+const allons = p(
+  'allons',
+  'This is the verb \'aller\' (to go), conjugated for \'nous.\' It means \'are going.\' The \'nous\' and \'vous\' forms are the two that keep the \'all-\' of the infinitive; the rest of the present tense is built on \'v-\'.',
+)
+const allez = p(
+  'allez',
+  'This is the verb \'aller\' (to go), conjugated for \'vous.\' It means \'are going.\' The \'-ez\' ending sounds like é.',
+)
+const vont = p(
+  'vont',
+  'This is the verb \'aller\' (to go), conjugated for \'ils\' or \'elles.\' It means \'are going.\' The \'-ont\' ending is heard, unlike the silent \'-ent\' of most verbs.',
+)
+const allerInf = p('aller', `This is an infinitive verb meaning 'to go.' ${infinitiveNote}`)
+
+/** The near future, explained on the card that opens it and on the two that lean hardest on it. */
+const nearFuture =
+  'A conjugated \'aller\' with an infinitive behind it says something is about to happen. French builds it exactly as English does — \'je vais manger,\' I am going to eat — and it is the everyday way to talk about the future, far more common in speech than the future tense proper.'
+
+// ─── How things are going ───────────────────────────────────────────────────
+const COMMENT = p(
+  'Comment',
+  'This is a question word meaning \'how.\' It goes at the very front of the question.',
+)
+const commentAllezVous = p(
+  'Comment allez-vous',
+  'This is the formal way to ask how someone is. The verb and its pronoun swap places and are joined with a hyphen — \'allez-vous\' rather than \'vous allez\' — which is what makes it a question without \'est-ce que.\' Word for word it asks \'how are you going,\' because French asks after health with \'aller\' rather than \'être.\'',
+)
+const CA_VA = p(
+  'Ça va',
+  'This is a fixed expression built from \'ça\' (that, it) and \'va\' (goes). With a rise at the end it asks \'how are you?\' or \'is everything all right?\'; said flat it answers \'I\'m fine.\' It is the most-used sentence in spoken French, and it covers health, mood and how something is turning out.',
+)
+const demain = p(
+  'demain',
+  'This is an adverb meaning \'tomorrow.\' French usually puts it at the end of the sentence.',
+)
+const aujourdhui = p(
+  'aujourd\'hui',
+  'This is an adverb meaning \'today.\' The apostrophe sits inside the word and never comes apart.',
+)
+const mal = p(
+  'mal',
+  'This is an adverb meaning \'badly.\' It is the opposite of \'bien,\' and like \'bien\' it follows the verb.',
+)
+
+// ─── Block 7: faire ─────────────────────────────────────────────────────────
+const faireNote =
+  'This is an infinitive verb meaning \'to do\' or \'to make.\' English keeps those two apart — you make a cake but do the dishes — and French does not: \'faire\' covers both, and which one English says is decided by what follows it.'
+const faireInf = p('faire', `${faireNote} ${infinitiveNote}`)
+const faireShort = p(
+  'faire',
+  `${faireNote} It follows straight on from the conjugated verb in front of it, with nothing in between.`,
+)
+const faireIrregular =
+  '\'faire\' is irregular, so its forms are learned one at a time: je fais, tu fais, il/elle fait, nous faisons, vous faites, ils/elles font.'
+const fais = p(
+  'fais',
+  `This is the verb 'faire' (to do, to make), conjugated for 'je' and 'tu' — one spelling serves both. It means 'do.' ${faireIrregular}`,
+)
+const fait = p(
+  'fait',
+  'This is the verb \'faire\' (to do, to make), conjugated for \'il,\' \'elle\' and \'on.\' It means \'does.\' The final -t is silent, so it sounds exactly like the \'je\' and \'tu\' form \'fais.\'',
+)
+const faisons = p(
+  'faisons',
+  'This is the verb \'faire\' (to do, to make), conjugated for \'nous.\' It means \'do.\' It is said \'fuh-zon\': the ai here is not the \'eh\' of \'fais\' but a swallowed uh, which happens in this form alone.',
+)
+const faites = p(
+  'faites',
+  'This is the verb \'faire\' (to do, to make), conjugated for \'vous.\' It means \'do.\' Almost every French verb ends its \'vous\' form in -ez; this one does not, and \'vous faisez\' does not exist.',
+)
+const font = p(
+  'font',
+  'This is the verb \'faire\' (to do, to make), conjugated for \'ils\' and \'elles.\' It means \'do.\' The \'-ont\' ending is heard, unlike the silent \'-ent\' of most verbs.',
+)
+const sport = p(
+  'sport',
+  'This is a masculine singular noun meaning \'sport.\' French has no single verb for playing sport — it says \'faire du sport,\' doing sport, and that is the ordinary way to talk about exercise of any kind.',
+)
+const cuisine = p(
+  'cuisine',
+  'This is a feminine singular noun meaning \'kitchen,\' and behind \'faire\' it is the cooking: \'faire la cuisine\' is to cook. It takes \'la\' and not \'de la\' — the cooking is the whole job, not an amount of it.',
+)
+const menage = p(
+  'ménage',
+  'This is a masculine singular noun meaning \'housework\': \'faire le ménage\' is to clean the house. Like \'la cuisine\' it takes a plain \'le,\' where \'sport\' takes \'du.\'',
+)
+
+// ─── Asking what ────────────────────────────────────────────────────────────
+const questCeQueNote =
+  'This is the question word \'what,\' asking after the thing a verb is done to. It is \'que\' (what) with \'est-ce que\' behind it, and the whole four-word block sits at the front of the question; everything after it keeps ordinary statement order.'
+const questCeQue = p('Qu\'est-ce que', questCeQueNote)
+const questCeQuLower = (rest: string) =>
+  p(
+    `Qu'est-ce qu'${rest}`,
+    `${questCeQueNote} In front of a vowel the last 'que' drops its e and joins the next word with an apostrophe: qu'est-ce que ${rest} → qu'est-ce qu'${rest}.`,
+  )
+const quoi = p(
+  'quoi',
+  'This is the question word \'what\' in the form it takes after a verb. \'Tu fais quoi ?\' asks exactly what \'qu\'est-ce que tu fais ?\' asks, with the statement left standing and the question carried by the rise of the voice — it is what French speakers say to each other, where the longer form suits a stranger or a written question.',
+)
+
+// ─── The weather ────────────────────────────────────────────────────────────
+const ilFaitNote =
+  'French makes the weather with \'faire\': \'il fait chaud\' is word for word \'it makes hot.\' The \'il\' stands for nobody, just as \'it\' stands for nobody in \'it is raining,\' and the verb never changes person. \'il est chaud\' would be about a thing being hot to the touch, not about the day.'
+const ilFait = p('Il fait', ilFaitNote)
+const faitWeather = p('fait', ilFaitNote)
+const ilImpersonal = p(
+  'Il',
+  'This is the subject pronoun \'il\' standing for nobody at all. French will not leave a verb without a subject, so weather sentences borrow it the way English borrows \'it\' in \'it is raining.\'',
+)
+const chaud = p(
+  'chaud',
+  'This is an adjective meaning \'hot.\' The final d is silent. A feminine thing is \'chaude,\' where the d is heard.',
+)
+const froid = p(
+  'froid',
+  'This is an adjective meaning \'cold.\' The final d is silent. A feminine thing is \'froide,\' where the d is heard.',
+)
+const froidAvoir = p(
+  'froid',
+  'This is the adjective \'cold\' used with \'avoir\': French says you have cold rather than that you are cold, the same way it does with \'avoir faim\' (to be hungry) and \'avoir soif\' (to be thirsty), and no article comes in between.',
+)
+const beau = p(
+  'beau',
+  'This is an adjective meaning \'beautiful,\' and of the weather it means fine or nice out. A feminine thing is \'belle\' — an irregular pair, not the usual added -e.',
+)
+const quelTempsFaitIl = p(
+  'Quel temps fait-il',
+  'This is the fixed way to ask what the weather is like. \'quel\' means \'what\' or \'which,\' \'temps\' is the same noun that means \'time\' — French uses the one word for both — and the verb swaps places with its pronoun and joins it with a hyphen, \'fait-il\' rather than \'il fait,\' which is what makes it a question without \'est-ce que.\'',
+)
+const aussi = p(
+  'aussi',
+  'This is an adverb meaning \'too\' or \'also.\' It goes at the end of the sentence, where English puts \'too.\'',
+)
+
+// ─── Block 8: the -er pattern ───────────────────────────────────────────────
+const erPattern =
+  'Regular -er verbs all take the same six endings on the stem left when -er is dropped: -e, -es, -e, -ons, -ez, -ent. parler → je parle, tu parles, il/elle parle, nous parlons, vous parlez, ils/elles parlent. This is by far the largest group of verbs in French, so the pattern is worth more than any single verb in it.'
+const parle = p(
+  'parle',
+  `This is the verb 'parler' (to speak, to talk), conjugated for 'je,' 'il,' 'elle' and 'on' — one spelling covers all four. ${erPattern}`,
+)
+const parles = p(
+  'parles',
+  'This is the verb \'parler\' (to speak, to talk), conjugated for \'tu.\' The -es ending is silent, so it sounds exactly like the \'je\' form \'parle.\'',
+)
+const parlons = p(
+  'parlons',
+  'This is the verb \'parler\' (to speak, to talk), conjugated for \'nous.\' The -ons ending is the one ending of a regular -er verb that is always clearly heard.',
+)
+const parlez = p(
+  'parlez',
+  'This is the verb \'parler\' (to speak, to talk), conjugated for \'vous.\' The -ez ending sounds like é.',
+)
+const parlent = p(
+  'parlent',
+  'This is the verb \'parler\' (to speak, to talk), conjugated for \'ils\' and \'elles.\' The -ent ending is written and never pronounced, so this sounds exactly like the \'je\' and \'il\' form \'parle.\'',
+)
+const ILS_lower = p(
+  'ils',
+  'This is the subject pronoun meaning \'they,\' used for a group of men or for any mixed group.',
+)
+
+const television = p(
+  'télévision',
+  'This is a feminine singular noun meaning \'television\': la télévision, une télévision. French keeps the article where English drops it — \'je regarde la télévision\' is I watch television.',
+)
+const regarderForms =
+  'It is a regular -er verb: je regarde, tu regardes, il/elle regarde, nous regardons, vous regardez, ils/elles regardent.'
+const regarde = p(
+  'regarde',
+  `This is the verb 'regarder' (to watch, to look at), conjugated for 'je,' 'il,' 'elle' and 'on.' ${regarderForms}`,
+)
+const regardons = p(
+  'regardons',
+  `This is the verb 'regarder' (to watch, to look at), conjugated for 'nous.' ${regarderForms}`,
+)
+const regardez = p(
+  'regardez',
+  `This is the verb 'regarder' (to watch, to look at), conjugated for 'vous.' ${regarderForms}`,
+)
+const regardent = p(
+  'regardent',
+  `This is the verb 'regarder' (to watch, to look at), conjugated for 'ils' and 'elles.' The -ent is silent, so it sounds the same as 'regarde.' ${regarderForms}`,
+)
+
+const musique = p(
+  'musique',
+  'This is a feminine singular noun meaning \'music\': la musique, de la musique.',
+)
+const ecouterForms =
+  'It is a regular -er verb: j\'écoute, tu écoutes, il/elle écoute, nous écoutons, vous écoutez, ils/elles écoutent.'
+const ecouterNote = `'écouter' means 'to listen to,' and the 'to' is already inside it — French says 'j'écoute la musique' with nothing between the verb and what is listened to. ${ecouterForms}`
+const jEcoute = p(
+  'J\'écoute',
+  `This is two words joined: 'je' (I) and 'écoute,' the verb 'écouter' conjugated for 'je.' In front of a vowel 'je' drops its e and joins on with an apostrophe: je écoute → j'écoute. ${ecouterNote}`,
+)
+const ecoute = p('écoute', `This is the verb 'écouter', conjugated for 'il,' 'elle' or 'on.' ${ecouterNote}`)
+const ecouterInf = p(
+  'écouter',
+  `This is an infinitive verb meaning 'to listen' or 'to listen to.' ${infinitiveNote}`,
+)
+
+const habiterForms =
+  'It is a regular -er verb: j\'habite, tu habites, il/elle habite, nous habitons, vous habitez, ils/elles habitent.'
+const jHabite = p(
+  'J\'habite',
+  `This is two words joined: 'je' (I) and 'habite,' the verb 'habiter' (to live, to reside) conjugated for 'je.' The h is silent, so 'je' elides in front of it exactly as it would before a vowel: je habite → j'habite. ${habiterForms}`,
+)
+const habites = p(
+  'habites',
+  `This is the verb 'habiter' (to live, to reside), conjugated for 'tu.' It is about where someone's home is, not about being alive. ${habiterForms}`,
+)
+const habitent = p(
+  'habitent',
+  `This is the verb 'habiter' (to live, to reside), conjugated for 'ils' and 'elles.' ${habiterForms}`,
+)
+
+const donnerForms =
+  'It is a regular -er verb: je donne, tu donnes, il/elle donne, nous donnons, vous donnez, ils/elles donnent.'
+const donne = p(
+  'donne',
+  `This is the verb 'donner' (to give), conjugated for 'je,' 'il,' 'elle' and 'on.' ${donnerForms}`,
+)
+const donnez = p('donnez', `This is the verb 'donner' (to give), conjugated for 'vous.' ${donnerForms}`)
+
+const aimerForms =
+  'It is a regular -er verb: j\'aime, tu aimes, il/elle aime, nous aimons, vous aimez, ils/elles aiment.'
+const aimerNote = `'aimer' covers both 'to like' and 'to love' — of a thing it is liking, of a person it is loving, and 'aimer bien' is what French says when it wants to like a person without loving them. ${aimerForms}`
+const jAime = p(
+  'J\'aime',
+  `This is two words joined: 'je' (I) and 'aime,' the verb 'aimer' conjugated for 'je,' with 'je' dropping its e in front of the vowel: je aime → j'aime. ${aimerNote}`,
+)
+const aimes = p('aimes', `This is the verb 'aimer', conjugated for 'tu.' ${aimerNote}`)
+const aimons = p('aimons', `This is the verb 'aimer', conjugated for 'nous.' ${aimerNote}`)
+
+const penserForms =
+  'It is a regular -er verb: je pense, tu penses, il/elle pense, nous pensons, vous pensez, ils/elles pensent.'
+const pense = p(
+  'pense',
+  `This is the verb 'penser' (to think), conjugated for 'je,' 'il,' 'elle' and 'on.' ${penserForms}`,
+)
+const penses = p('penses', `This is the verb 'penser' (to think), conjugated for 'tu.' ${penserForms}`)
+
+const personne = p(
+  'personne',
+  'This is a feminine singular noun meaning \'person\': la personne, une personne. It stays feminine whoever it refers to — a man is still \'une personne.\' On its own, without an article and next to a negative, the same word means \'nobody,\' which is a different word doing a different job.',
+)
+const deux = p(
+  'deux',
+  'This is the number \'two.\' The x is silent on its own, but it links onto a following vowel as a z: \'deux amis\' comes out deu-zamis.',
+)
+const personnes = p(
+  'personnes',
+  'This is the plural of \'personne\' (person). French adds -s in the plural and the -s is silent. Where English switches to \'people,\' French just counts persons: deux personnes.',
+)
+
+// ─── Block 9: more -er verbs, adverbs, frequency ────────────────────────────
+const travaillons = p(
+  'travaillons',
+  'This is the verb \'travailler\' (to work), conjugated for \'nous.\' Every verb whose infinitive ends in -er takes the same six endings on the stem left when -er is dropped — travailler → travaille, travailles, travaille, travaillons, travaillez, travaillent — so an infinitive and the pattern together are enough to build any of its forms.',
+)
+const travaille = p(
+  'travaille',
+  'This is the verb \'travailler\' (to work), conjugated for \'je,\' \'il,\' \'elle\' and \'on.\' It is a regular -er verb: je travaille, tu travailles, il/elle travaille, nous travaillons, vous travaillez, ils/elles travaillent.',
+)
+
+const arriverForms =
+  'It is a regular -er verb: j\'arrive, tu arrives, il/elle arrive, nous arrivons, vous arrivez, ils/elles arrivent.'
+const arriverNote = `'arriver' means 'to arrive,' and on its own 'j'arrive' is what French says for 'I'm on my way' or 'coming!' ${arriverForms}`
+const jArrive = p(
+  'J\'arrive',
+  `This is two words joined: 'je' (I) and 'arrive,' the verb 'arriver' conjugated for 'je,' with 'je' dropping its e in front of the vowel. ${arriverNote}`,
+)
+const arrivez = p('arrivez', `This is the verb 'arriver' (to arrive), conjugated for 'vous.' ${arriverForms}`)
+const arrivent = p(
+  'arrivent',
+  `This is the verb 'arriver' (to arrive), conjugated for 'ils' and 'elles.' The -ent is silent. ${arriverForms}`,
+)
+
+const commencerForms =
+  'It is a regular -er verb apart from one spelling: je commence, tu commences, il/elle commence, nous commençons, vous commencez, ils/elles commencent.'
+const commence = p(
+  'commence',
+  `This is the verb 'commencer' (to start, to begin), conjugated for 'je,' 'il,' 'elle' and 'on.' ${commencerForms}`,
+)
+const commences = p('commences', `This is the verb 'commencer' (to start), conjugated for 'tu.' ${commencerForms}`)
+const commencons = p(
+  'commençons',
+  'This is the verb \'commencer\' (to start), conjugated for \'nous.\' The c takes a cedilla — ç — because a plain c in front of o would be said like a k: \'commencons\' would come out ko-man-kon. The cedilla keeps the s sound the rest of the verb has. It is the only form of this verb that needs it.',
+)
+const commencez = p('commencez', `This is the verb 'commencer' (to start), conjugated for 'vous.' ${commencerForms}`)
+const commencent = p(
+  'commencent',
+  `This is the verb 'commencer' (to start), conjugated for 'ils' and 'elles.' ${commencerForms}`,
+)
+
+const arreterForms =
+  'It is a regular -er verb: j\'arrête, tu arrêtes, il/elle arrête, nous arrêtons, vous arrêtez, ils/elles arrêtent.'
+const jArrete = p(
+  'J\'arrête',
+  `This is two words joined: 'je' (I) and 'arrête,' the verb 'arrêter' (to stop) conjugated for 'je,' with 'je' dropping its e in front of the vowel. The circumflex on the ê is a scar where an old s used to be — the same s English kept in 'arrest.' ${arreterForms}`,
+)
+const arrete = p(
+  'arrête',
+  `This is the verb 'arrêter' (to stop), conjugated for 'je,' 'il,' 'elle' and 'on.' ${arreterForms}`,
+)
+const arretez = p('arrêtez', `This is the verb 'arrêter' (to stop), conjugated for 'vous.' ${arreterForms}`)
+
+const oublierForms =
+  'It is a regular -er verb: j\'oublie, tu oublies, il/elle oublie, nous oublions, vous oubliez, ils/elles oublient.'
+const jOublie = p(
+  'J\'oublie',
+  `This is two words joined: 'je' (I) and 'oublie,' the verb 'oublier' (to forget) conjugated for 'je,' with 'je' dropping its e in front of the vowel. ${oublierForms}`,
+)
+const oubliez = p('oubliez', `This is the verb 'oublier' (to forget), conjugated for 'vous.' ${oublierForms}`)
+const oublierInf = p('oublier', `This is an infinitive verb meaning 'to forget.' ${infinitiveNote}`)
+
+const toujours = p(
+  'toujours',
+  'This is an adverb meaning \'always.\' It goes straight after the verb, where English puts it in front of one: \'je parle toujours vite\' is word for word \'I speak always fast.\'',
+)
+const souvent = p(
+  'souvent',
+  'This is an adverb meaning \'often.\' Like other short adverbs of frequency it follows the verb rather than coming before it.',
+)
+const beaucoup = p(
+  'beaucoup',
+  'This is an adverb meaning \'a lot\' or \'much.\' It follows the verb: \'j\'aime beaucoup la musique\' is I like music a lot. The final p is silent.',
+)
+const assez = p(
+  'assez',
+  'This is an adverb meaning \'enough.\' It follows the verb, where English puts it after the whole phrase: \'vous ne parlez pas assez\' is you don\'t speak enough. It also means \'fairly\' in front of an adjective.',
+)
+const deja = p(
+  'déjà',
+  'This is an adverb meaning \'already.\' Both accents lean in different directions and both matter: é is said like ay, à is said like ah.',
+)
+
+const neJamaisNote =
+  'This is the French negative for \'never,\' and like the ordinary negative it comes in two pieces around the verb. \'jamais\' takes the place of \'pas\' rather than joining it: je ne parle pas becomes je ne parle jamais, and \'ne parle pas jamais\' is not French. In ordinary speech the \'ne\' is dropped and only \'jamais\' is heard.'
+const neJamais = p('ne … jamais', neJamaisNote)
+const nApostropheJamais = p(
+  'n\' … jamais',
+  `${neJamaisNote} Before a vowel 'ne' drops its e and joins the next word with an apostrophe: ne écoutent → n'écoutent.`,
+)
+const ca = p('ça', 'This is a pronoun meaning \'that\' or \'it.\' It stands in for a thing, an idea or a whole situation, and never changes shape.')
+const elleLower = p(
+  'elle',
+  'This is the subject pronoun meaning \'she.\' It also means \'it\' when the thing being talked about is a feminine noun.',
+)
+const aimeLower = p(
+  'aime',
+  `This is the verb 'aimer', conjugated for 'il,' 'elle' or 'on.' ${aimerNote}`,
+)
+const ecoutent = p(
+  'écoutent',
+  `This is the verb 'écouter', conjugated for 'ils' and 'elles.' The -ent is silent. ${ecouterNote}`,
+)
+
+// ─── Block 10: stem-changing -er verbs ──────────────────────────────────────
+const stemRule =
+  'The stem moves in the four forms where the ending is silent — je, tu, il/elle and ils/elles — and stays exactly as the infinitive has it at nous and vous, where the ending is heard. The sound is what drives it: when nothing follows, the last vowel of the stem has to carry the word.'
+const mange = p(
+  'mange',
+  'This is the verb \'manger\' (to eat), conjugated for \'je,\' \'il,\' \'elle\' and \'on.\' It takes the ordinary -er endings everywhere except at \'nous.\'',
+)
+const mangeons = p(
+  'mangeons',
+  'This is the verb \'manger\' (to eat), conjugated for \'nous.\' The e of the stem survives in front of the -ons, which no other form needs: a g followed by o is said like the g in \'go,\' and \'mangons\' would come out man-gon. The e keeps the soft zh sound the rest of the verb has.',
+)
+
+const appelerForms =
+  'je appelle → j\'appelle, tu appelles, il/elle appelle, nous appelons, vous appelez, ils/elles appellent.'
+const jAppelle = p(
+  'J\'appelle',
+  `This is two words joined: 'je' (I) and 'appelle,' the verb 'appeler' (to call) conjugated for 'je.' The l doubles here and stays single at nous and vous — ${appelerForms} ${stemRule}`,
+)
+
+const payerForms = 'je paie, tu paies, il/elle paie, nous payons, vous payez, ils/elles paient.'
+const paie = p(
+  'paie',
+  `This is the verb 'payer' (to pay), conjugated for 'je,' 'il,' 'elle' and 'on.' The y of the infinitive becomes i: ${payerForms} 'payer' means to pay *for* something, and French puts no word between the verb and what is paid for — 'elle paie le café.' ${stemRule}`,
+)
+const payons = p(
+  'payons',
+  `This is the verb 'payer' (to pay), conjugated for 'nous.' The y comes back here, where the ending is heard. ${payerForms}`,
+)
+
+const essayerForms = 'j\'essaie, tu essaies, il/elle essaie, nous essayons, vous essayez, ils/elles essaient.'
+const jEssaie = p(
+  'J\'essaie',
+  `This is two words joined: 'je' (I) and 'essaie,' the verb 'essayer' (to try) conjugated for 'je,' with 'je' dropping its e in front of the vowel. The y turns to i the same way 'payer' does: ${essayerForms} ${stemRule}`,
+)
+const essayez = p('essayez', `This is the verb 'essayer' (to try), conjugated for 'vous.' ${essayerForms}`)
+const essayerInf = p('essayer', `This is an infinitive verb meaning 'to try.' ${infinitiveNote}`)
+
+const prefererForms =
+  'je préfère, tu préfères, il/elle préfère, nous préférons, vous préférez, ils/elles préfèrent.'
+const prefere = p(
+  'préfère',
+  `This is the verb 'préférer' (to prefer), conjugated for 'je,' 'il,' 'elle' and 'on.' The second é flips to è: ${prefererForms} An é is a tight, closed sound; an è is open, like the e in 'bed.' ${stemRule}`,
+)
+const preferons = p(
+  'préférons',
+  `This is the verb 'préférer' (to prefer), conjugated for 'nous.' Both accents point the same way here, as they do in the infinitive. ${prefererForms}`,
+)
+
+const acheterForms = 'j\'achète, tu achètes, il/elle achète, nous achetons, vous achetez, ils/elles achètent.'
+const jAchete = p(
+  'J\'achète',
+  `This is two words joined: 'je' (I) and 'achète,' the verb 'acheter' (to buy) conjugated for 'je.' A bare e in the stem takes a grave accent: ${acheterForms} ${stemRule}`,
+)
+const achete = p(
+  'achète',
+  `This is the verb 'acheter' (to buy), conjugated for 'je,' 'il,' 'elle' and 'on.' ${acheterForms}`,
+)
+const achetez = p('achetez', `This is the verb 'acheter' (to buy), conjugated for 'vous.' ${acheterForms}`)
+const appelez = p('appelez', `This is the verb 'appeler' (to call), conjugated for 'vous.' One l here, as at nous. ${stemRule}`)
+const appellent = p(
+  'appellent',
+  `This is the verb 'appeler' (to call), conjugated for 'ils' and 'elles.' The -ent is silent, so it sounds exactly like 'appelle.' ${appelerForms}`,
+)
+const essaient = p(
+  'essaient',
+  `This is the verb 'essayer' (to try), conjugated for 'ils' and 'elles.' The -ent is silent, so it sounds exactly like 'essaie.' ${essayerForms}`,
+)
+const achetes = p('achètes', `This is the verb 'acheter' (to buy), conjugated for 'tu.' ${acheterForms}`)
+const arrive = p(
+  'arrive',
+  `This is the verb 'arriver' (to arrive), conjugated for 'il,' 'elle,' 'on' — and for any single thing, which is what a noun subject counts as. ${arriverForms}`,
+)
+const arretent = p(
+  'arrêtent',
+  `This is the verb 'arrêter' (to stop), conjugated for 'ils' and 'elles.' ${arreterForms}`,
+)
+
 export const EXPLANATIONS: Record<string, CardExplanation> = {
   // ───────────────────────────────────────────────────────────────────────────
   // Block 1 — être
@@ -2084,6 +2584,945 @@ export const EXPLANATIONS: Record<string, CardExplanation> = {
     parts: [ilFaut, chercher, une, voiture, parceQuLower('on'), doit, partir, tot],
     whole:
       'Two obligations in one sentence, said two different ways: \'il faut\' names nobody, and \'on doit\' names a \'we.\'',
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 6 — aller
+  // ───────────────────────────────────────────────────────────────────────────
+
+  c186: {
+    summary: opens('C\'est ma maison', 'It\'s my house'),
+    parts: [CEST, ma, maison],
+  },
+
+  c187: {
+    summary: opens('Mon ami est à la maison', 'My friend is at home'),
+    parts: [mon, ami, est, aPlace, laArticle, maison],
+    whole:
+      'French says where someone is with \'à\' and an article, and English drops both: \'à la maison\' is three words for the one word \'home.\'',
+  },
+
+  c188: {
+    summary: opens('C\'est mon travail', 'It\'s my work'),
+    parts: [CEST, mon, travail],
+  },
+
+  c189: {
+    summary: opens('Il est au travail', 'He is at work'),
+    parts: [IL, est, au, travail],
+    whole:
+      'English says \'at work\' with no \'the\'; French cannot leave the article out, so the \'the\' is sitting inside \'au.\'',
+  },
+
+  c190: {
+    summary: opens('Je veux aller au travail', 'I want to go to work'),
+    parts: [JE, veux, allerInf, au, travail],
+  },
+
+  c191: {
+    summary: opens('Je vais au travail', 'I am going to work'),
+    parts: [JE, vais, au, travail],
+    whole:
+      'French has one present tense where English has two: \'je vais\' is both \'I go\' and \'I am going,\' and the situation decides which one English says.',
+  },
+
+  c192: {
+    summary: opens('Tu vas au travail', 'You are going to work'),
+    parts: [TU, vas, au, travail],
+  },
+
+  c193: {
+    summary: opens('Il va au travail', 'He is going to work'),
+    parts: [IL, va, au, travail],
+  },
+
+  c194: {
+    summary: opens('Elle va au travail', 'She is going to work'),
+    parts: [ELLE, va, au, travail],
+  },
+
+  c195: {
+    summary: opens('Nous allons au travail', 'We are going to work'),
+    parts: [NOUS, allons, au, travail],
+  },
+
+  c196: {
+    summary: opens('Vous allez au travail', 'You are going to work'),
+    parts: [VOUS, allez, au, travail],
+  },
+
+  c197: {
+    summary: opens('Ils vont au travail', 'They are going to work'),
+    parts: [ILS, vont, au, travail],
+  },
+
+  c198: {
+    summary: opens('Elles vont au travail', 'They are going to work'),
+    parts: [ELLES, vont, au, travail],
+  },
+
+  c199: {
+    summary: opens('On va au travail', 'We are going to work'),
+    parts: [ON, va, au, travail],
+    whole:
+      '\'on\' takes the same verb form as \'il\' and \'elle\' — one person\'s worth of verb — even though it means \'we\' here.',
+  },
+
+  c200: {
+    summary: opens('Est-ce que tu vas à la maison ?', 'Are you going home?'),
+    parts: [estCeQue, tu, vas, aPlace, laArticle, maison],
+  },
+
+  c201: {
+    summary: opens('On va au bureau', 'We are going to the office'),
+    parts: [ON, va, au, bureau],
+  },
+
+  c202: {
+    summary: opens('Où est le bureau ?', 'Where is the office?'),
+    parts: [ouWhere, est, le, bureau],
+    whole:
+      'After \'où\' the verb comes before its subject — \'où est le bureau\' rather than \'où le bureau est.\' This is how the question is actually asked.',
+  },
+
+  c203: {
+    summary: opens('Elle ne va pas au bureau', 'She is not going to the office'),
+    parts: [ELLE, nePas, va, au, bureau],
+  },
+
+  c204: {
+    summary: opens('Il faut chercher du pain au marché', 'One has to look for bread at the market'),
+    parts: [ilFaut, chercher, du, pain, au, marche],
+    whole:
+      '\'au\' is doing \'at\' here and \'to\' in \'je vais au marché\' — the same word either way, because French does not separate being somewhere from going there.',
+  },
+
+  c205: {
+    summary: opens('Nous allons au restaurant', 'We are going to the restaurant'),
+    parts: [NOUS, allons, au, restaurant],
+  },
+
+  c206: {
+    summary: opens('Ils ont des amis au restaurant', 'They have some friends at the restaurant'),
+    parts: [ILS, ont, des, amis, au, restaurant],
+  },
+
+  c207: {
+    summary: opens('Vous allez à la gare ?', 'Are you going to the station?'),
+    parts: [VOUS, allez, aPlace, laArticle, gare],
+    whole:
+      'This is a statement asked as a question, with nothing changed but the rise of the voice at the end.',
+  },
+
+  c208: {
+    summary: opens('Le bus va à la gare', 'The bus goes to the station'),
+    parts: [le, bus, va, aPlace, laArticle, gare],
+    whole:
+      'The subject here is a thing rather than a person, and nothing about the verb changes: \'va\' is the form for any single subject, he, she or it.',
+  },
+
+  c209: {
+    summary: opens(
+      'Vous êtes à la gare, mais il n\'y a pas de bus',
+      'You are at the station, but there is no bus',
+    ),
+    parts: [
+      VOUS,
+      etes,
+      aPlace,
+      laArticle,
+      gare,
+      mais,
+      p('il n\'y a pas', ilNYAPas.note),
+      deNeg,
+      bus,
+    ],
+  },
+
+  c210: {
+    summary: opens('Mon ami va à l\'école', 'My friend is going to school'),
+    parts: [mon, ami, va, aL, ecole],
+  },
+
+  c211: {
+    summary: opens('Est-ce que tu vas à l\'école ou au travail ?', 'Are you going to school or to work?'),
+    parts: [estCeQue, tu, vas, aL, ecole, ou, au, travail],
+    whole:
+      'Two destinations, two different shapes of the same preposition: \'à l\'\' in front of a vowel, \'au\' in front of a masculine noun.',
+  },
+
+  c212: {
+    summary: opens('On va en ville', 'We are going into town'),
+    parts: [ON, va, enVille],
+  },
+
+  c213: {
+    summary: opens('Comment est-ce qu\'on va en ville ?', 'How do we go into town?'),
+    parts: [
+      COMMENT,
+      estCeQuLower('on', '\'on\' means \'we\' here — the way French normally says it.'),
+      va,
+      enVille,
+    ],
+    whole:
+      'A question word goes in front of \'est-ce que,\' and everything behind it keeps ordinary statement order.',
+  },
+
+  c214: {
+    summary: opens('Je vais manger', 'I am going to eat'),
+    parts: [JE, vais, mangerShort],
+    whole: nearFuture,
+  },
+
+  c215: {
+    summary: opens('Tu vas manger ?', 'Are you going to eat?'),
+    parts: [TU, vas, mangerShort],
+  },
+
+  c216: {
+    summary: opens('On va payer demain', 'We are going to pay tomorrow'),
+    parts: [ON, va, payer, demain],
+  },
+
+  c217: {
+    summary: opens('Elle va travailler aujourd\'hui', 'She is going to work today'),
+    parts: [ELLE, va, travailler, aujourdhui],
+  },
+
+  c218: {
+    summary: opens('Je ne vais pas travailler aujourd\'hui', 'I am not going to work today'),
+    parts: [JE, nePas, vais, travailler, aujourdhui],
+    whole:
+      'The negative closes around \'vais\' alone. The infinitive stays outside it, behind \'pas\' — never \'je vais ne pas travailler.\'',
+  },
+
+  c219: {
+    summary: opens('Est-ce que vous allez rester là ?', 'Are you going to stay there?'),
+    parts: [estCeQue, vous, allez, rester, la],
+  },
+
+  c220: {
+    summary: opens(
+      'Ils vont manger et boire au restaurant',
+      'They are going to eat and drink at the restaurant',
+    ),
+    parts: [ILS, vont, mangerShort, et, boire, au, restaurant],
+    whole:
+      'One conjugated verb can carry two infinitives: \'vont\' is said once, and \'manger\' and \'boire\' hang off it side by side.',
+  },
+
+  c221: {
+    summary: opens('Nous allons chercher une voiture', 'We are going to look for a car'),
+    parts: [NOUS, allons, chercher, une, voiture],
+    whole:
+      '\'chercher\' already means \'to look for,\' so nothing stands between it and its object: French says \'chercher une voiture,\' never \'chercher pour une voiture.\'',
+  },
+
+  c222: {
+    summary: opens('Vous voulez aller en ville ?', 'Do you want to go into town?'),
+    parts: [vous, voulez, allerInf, enVille],
+  },
+
+  c223: {
+    summary: opens(
+      'Nous avons besoin d\'une voiture pour aller à la gare',
+      'We need a car to go to the station',
+    ),
+    parts: [
+      NOUS,
+      avons,
+      besoin,
+      p(
+        'd\'',
+        'This is the preposition \'de\' (of), the fixed last piece of \'avoir besoin de\' — it never drops away. In front of a vowel it shortens to \'d\'.\'',
+      ),
+      une,
+      voiture,
+      pour,
+      allerInf,
+      aPlace,
+      laArticle,
+      gare,
+    ],
+  },
+
+  c224: {
+    summary: opens('Il faut aller au travail tôt', 'One has to go to work early'),
+    parts: [ilFaut, allerInf, au, travail, tot],
+  },
+
+  c225: {
+    summary: opens(
+      'Je suis content parce qu\'on va aller au restaurant demain',
+      'I am glad because we are going to go to the restaurant tomorrow',
+    ),
+    parts: [
+      JE,
+      suis,
+      p(
+        'content',
+        'This is an adjective meaning \'glad\' or \'pleased\' — happy about something in particular. A woman writes \'contente,\' and there the final t is heard; a group writes \'contents\' or \'contentes.\'',
+      ),
+      parceQuLower('on'),
+      va,
+      allerInf,
+      au,
+      restaurant,
+      demain,
+    ],
+    whole:
+      'The infinitive behind \'va\' is \'aller\' itself, which is why the verb appears twice: the first is the near future, the second is the going. French says it without blinking.',
+  },
+
+  c226: {
+    summary: opens('Ça va ?', 'How are you?'),
+    parts: [CA_VA],
+  },
+
+  c227: {
+    summary: opens('Ça va bien', 'It\'s going well'),
+    parts: [CA_VA, bien],
+  },
+
+  c228: {
+    summary: opens('Ça va mal aujourd\'hui', 'It\'s going badly today'),
+    parts: [CA_VA, mal, aujourdhui],
+  },
+
+  c229: {
+    summary: opens('Comment allez-vous ?', 'How are you?'),
+    parts: [commentAllezVous],
+    whole:
+      'This is the formal counterpart of \'ça va ?\' — said to someone addressed as \'vous,\' or in a situation that calls for care.',
+  },
+
+  c230: {
+    summary: opens('Je vais bien, merci', 'I am well, thank you'),
+    parts: [
+      JE,
+      p(
+        'vais',
+        'This is the verb \'aller\' (to go), conjugated for \'je.\' Health and how things are going take \'aller\' in French, so \'je vais bien\' — word for word \'I go well\' — is how you say you are well. \'je suis bien\' means something else entirely: comfortable, well placed.',
+      ),
+      bien,
+      merci,
+    ],
+  },
+
+  c231: {
+    summary: opens('Ça va, mais je suis très fatigué', 'It\'s all right, but I am very tired'),
+    parts: [CA_VA, mais, je, suis, tres, fatigue],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 7 — faire
+  // ───────────────────────────────────────────────────────────────────────────
+  c232: {
+    summary: opens('Je vais faire quelque chose maintenant', 'I\'m going to do something now'),
+    parts: [JE, vais, faireInf, quelqueChose, maintenant],
+    whole: nearFuture,
+  },
+
+  c233: {
+    summary: opens('Il faut faire du sport', 'One has to do sport'),
+    parts: [ilFaut, faireShort, du, sport],
+  },
+
+  c234: {
+    summary: opens('Nous voulons faire du sport ensemble', 'We want to do sport together'),
+    parts: [NOUS, voulons, faireShort, du, sport, ensemble],
+  },
+
+  c235: {
+    summary: opens('Je fais du sport', 'I do sport'),
+    parts: [JE, fais, du, sport],
+  },
+
+  c236: {
+    summary: opens('Tu fais du sport', 'You do sport'),
+    parts: [TU, fais, du, sport],
+    whole:
+      'The \'je\' and \'tu\' forms of \'faire\' are the same word on the page and the same sound in the ear: je fais, tu fais. Only the pronoun in front tells them apart.',
+  },
+
+  c237: {
+    summary: opens('Il fait du sport', 'He does sport'),
+    parts: [IL, fait, du, sport],
+  },
+
+  c238: {
+    summary: opens('Elle fait du sport', 'She does sport'),
+    parts: [ELLE, fait, du, sport],
+  },
+
+  c239: {
+    summary: opens('Nous faisons du sport', 'We do sport'),
+    parts: [NOUS, faisons, du, sport],
+  },
+
+  c240: {
+    summary: opens('Vous faites du sport', 'You do sport'),
+    parts: [VOUS, faites, du, sport],
+  },
+
+  c241: {
+    summary: opens('Ils font du sport', 'They do sport'),
+    parts: [ILS, font, du, sport],
+  },
+
+  c242: {
+    summary: opens('Elles font du sport', 'They do sport'),
+    parts: [ELLES, font, du, sport],
+  },
+
+  c243: {
+    summary: opens('On fait du sport', 'We do sport'),
+    parts: [ON, fait, du, sport],
+  },
+
+  c244: {
+    summary: opens('Je ne fais pas de sport', 'I don\'t do sport'),
+    parts: [
+      JE,
+      nePas,
+      fais,
+      p(
+        'de',
+        'After a negative, \'du,\' \'de la\' and \'de l\'\' all flatten to plain \'de\': je fais du sport → je ne fais pas de sport.',
+      ),
+      sport,
+    ],
+  },
+
+  c245: {
+    summary: opens('Ils font du sport avec des amis', 'They do sport with friends'),
+    parts: [ILS, font, du, sport, avec, des, amis],
+  },
+
+  c246: {
+    summary: opens('Je vais faire la cuisine', 'I\'m going to do the cooking'),
+    parts: [JE, vais, faireShort, laArticle, cuisine],
+  },
+
+  c247: {
+    summary: opens('Est-ce que tu fais la cuisine ?', 'Do you do the cooking?'),
+    parts: [estCeQue, tu, fais, laArticle, cuisine],
+    whole:
+      'English needs \'do\' twice over to ask this — once to make the question, once for the verb itself. French makes the question with \'est-ce que\' and leaves the verb alone.',
+  },
+
+  c248: {
+    summary: opens('Il faut faire le ménage', 'One has to do the housework'),
+    parts: [ilFaut, faireShort, le, menage],
+  },
+
+  c249: {
+    summary: opens('Ils ne veulent pas faire le ménage', 'They don\'t want to do the housework'),
+    parts: [ILS, nePas, veulent, faireShort, le, menage],
+    whole:
+      'The negative closes around the conjugated verb only — \'ne veulent pas\' — and the infinitive stays outside it, behind \'pas.\'',
+  },
+
+  c250: {
+    summary: opens(
+      'On fait le ménage, mais on n\'a pas le temps',
+      'We\'re doing the housework, but we don\'t have time',
+    ),
+    parts: [ON, fait, le, menage, mais, on, nApostrophePas, a, leNeg, temps],
+  },
+
+  c251: {
+    summary: opens('Nous pouvons faire le ménage demain', 'We can do the housework tomorrow'),
+    parts: [NOUS, pouvons, faireShort, le, menage, demain],
+  },
+
+  c252: {
+    summary: opens('Je suis occupé, je fais le ménage', 'I am busy, I\'m doing the housework'),
+    parts: [JE, suis, occupe, je, fais, le, menage],
+    whole:
+      'French has one present tense where English has two: \'je fais\' is both \'I do\' and \'I am doing,\' and only the situation says which one English would use.',
+  },
+
+  c253: {
+    summary: opens('Qu\'est-ce que tu fais ?', 'What are you doing?'),
+    parts: [questCeQue, tu, fais],
+  },
+
+  c254: {
+    summary: opens('Tu fais quoi ?', 'What are you doing?'),
+    parts: [TU, fais, quoi],
+  },
+
+  c255: {
+    summary: opens('Qu\'est-ce que c\'est ?', 'What is it?'),
+    parts: [questCeQue, cEst],
+    whole:
+      'Word for word this is \'what is it that it is\' — French asks it with the verb twice and finds nothing odd in it. The four words never come apart, so \'qu\'est c\'est\' is not a thing anyone writes.',
+  },
+
+  c256: {
+    summary: opens('Qu\'est-ce qu\'on va faire aujourd\'hui ?', 'What are we going to do today?'),
+    parts: [questCeQuLower('on'), va, faireShort, aujourdhui],
+  },
+
+  c257: {
+    summary: opens('Qu\'est-ce que vous faites ici ?', 'What do you do here?'),
+    parts: [questCeQue, vous, faites, ici],
+  },
+
+  c258: {
+    summary: opens('Qu\'est-ce qu\'ils font au bureau ?', 'What are they doing at the office?'),
+    parts: [questCeQuLower('ils'), font, au, bureau],
+  },
+
+  c259: {
+    summary: opens('Le café est chaud', 'The coffee is hot'),
+    parts: [le, cafe, est, chaud],
+  },
+
+  c260: {
+    summary: opens('Il fait chaud aujourd\'hui', 'It is hot today'),
+    parts: [ilFait, chaud, aujourdhui],
+  },
+
+  c261: {
+    summary: opens(
+      'Il fait chaud, j\'ai soif et je veux de l\'eau',
+      'It is hot, I am thirsty and I want water',
+    ),
+    parts: [ilFait, chaud, jApostropheAi, soif, et, je, veux, deL, eau],
+  },
+
+  c262: {
+    summary: opens('Il fait froid', 'It is cold'),
+    parts: [ilFait, froid],
+  },
+
+  c263: {
+    summary: opens('Il fait froid, mais je vais sortir', 'It is cold, but I\'m going to go out'),
+    parts: [ilFait, froid, mais, je, vais, sortir],
+  },
+
+  c264: {
+    summary: opens('Est-ce qu\'il fait froid en ville ?', 'Is it cold in town?'),
+    parts: [
+      estCeQuLower(
+        'il',
+        'The \'il\' it joins onto stands for nobody — it is the empty subject weather sentences are built on.',
+      ),
+      faitWeather,
+      froid,
+      enVille,
+    ],
+  },
+
+  c265: {
+    summary: opens('Est-ce que vous avez froid ?', 'Are you cold?'),
+    parts: [estCeQue, vous, avez, froidAvoir],
+    whole:
+      '\'avoir froid\' is about the person and \'il fait froid\' is about the day: \'vous avez froid\' asks whether you feel cold, where \'il fait froid\' says the weather is.',
+  },
+
+  c266: {
+    summary: opens('Il fait beau', 'It is nice out'),
+    parts: [ilFait, beau],
+  },
+
+  c267: {
+    summary: opens(
+      'Il ne fait pas beau, je vais rester à la maison',
+      'It is not nice out, I\'m going to stay home',
+    ),
+    parts: [ilImpersonal, nePas, faitWeather, beau, je, vais, rester, aPlace, laArticle, maison],
+  },
+
+  c268: {
+    summary: opens('Quel temps fait-il ?', 'What is the weather like?'),
+    parts: [quelTempsFaitIl],
+  },
+
+  c269: {
+    summary: opens(
+      'Il fait beau aujourd\'hui, on va faire du sport',
+      'It is nice out today, we\'re going to do sport',
+    ),
+    parts: [ilFait, beau, aujourdhui, on, va, faireShort, du, sport],
+  },
+
+  c270: {
+    summary: opens('Vous faites du sport aussi ?', 'Do you do sport too?'),
+    parts: [VOUS, faites, du, sport, aussi],
+    whole:
+      'This is a statement asked as a question, with nothing changed but the rise of the voice at the end.',
+  },
+
+  c271: {
+    summary: opens('On peut faire du sport ou aller en ville', 'We can do sport or go into town'),
+    parts: [ON, peut, faireShort, du, sport, ou, allerInf, enVille],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 8 — regular -er verbs
+  // ───────────────────────────────────────────────────────────────────────────
+  c272: {
+    summary: opens('Je parle vite', 'I speak fast'),
+    parts: [JE, parle, vite],
+  },
+
+  c273: {
+    summary: opens('Tu parles vite', 'You speak fast'),
+    parts: [TU, parles, vite],
+  },
+
+  c274: {
+    summary: opens('Il parle vite', 'He speaks fast'),
+    parts: [IL, parle, vite],
+    whole:
+      'The \'il\' form and the \'je\' form of a regular -er verb are the same word — je parle, il parle. Only the pronoun in front tells them apart.',
+  },
+
+  c275: {
+    summary: opens('Elle parle vite', 'She speaks fast'),
+    parts: [ELLE, parle, vite],
+  },
+
+  c276: {
+    summary: opens('Nous parlons vite', 'We speak fast'),
+    parts: [NOUS, parlons, vite],
+  },
+
+  c277: {
+    summary: opens('Vous parlez vite', 'You speak fast'),
+    parts: [VOUS, parlez, vite],
+  },
+
+  c278: {
+    summary: opens('Ils parlent vite', 'They speak fast'),
+    parts: [ILS, parlent, vite],
+    whole:
+      'Said aloud, this sentence and \'il parle vite\' are the same sound. The -ent is silent, and before a consonant both \'il\' and \'ils\' reduce to a bare \'i\' — so nothing in the audio separates one person from several. The written pronoun is the only thing that does.',
+  },
+
+  c279: {
+    summary: opens('Elles parlent vite', 'They speak fast'),
+    parts: [ELLES, parlent, vite],
+  },
+
+  c280: {
+    summary: opens('On parle vite', 'We speak fast'),
+    parts: [ON, parle, vite],
+  },
+
+  c281: {
+    summary: opens('Ils ne parlent pas vite', 'They don\'t speak fast'),
+    parts: [ILS, nePas, parlent, vite],
+  },
+
+  c282: {
+    summary: opens('Je parle avec des amis au bureau', 'I talk with friends at the office'),
+    parts: [JE, parle, avec, des, amis, au, bureau],
+  },
+
+  c283: {
+    summary: opens('Pourquoi est-ce qu\'ils ne parlent pas ?', 'Why don\'t they talk?'),
+    parts: [
+      POURQUOI,
+      estCeQuLower('ils', 'Everything after it keeps ordinary statement order.'),
+      nePas,
+      parlent,
+    ],
+  },
+
+  c284: {
+    summary: opens('On parle un peu, mais on doit travailler', 'We talk a little, but we have to work'),
+    parts: [ON, parle, unPeu, mais, on, doit, travailler],
+  },
+
+  c285: {
+    summary: opens('Il y a une télévision à la maison', 'There is a television at home'),
+    parts: [ilYA, une, television, aPlace, laArticle, maison],
+  },
+
+  c286: {
+    summary: opens('Je regarde la télévision', 'I watch television'),
+    parts: [JE, regarde, laArticle, television],
+    whole:
+      '\'regarder\' is one word for what English splits into \'look at\' and \'watch,\' and it needs no preposition after it: the thing looked at follows the verb directly.',
+  },
+
+  c287: {
+    summary: opens('Nous regardons la télévision ensemble', 'We watch television together'),
+    parts: [NOUS, regardons, laArticle, television, ensemble],
+  },
+
+  c288: {
+    summary: opens('Est-ce que vous regardez la télévision ?', 'Do you watch television?'),
+    parts: [estCeQue, vous, regardez, laArticle, television],
+  },
+
+  c289: {
+    summary: opens(
+      'Ils regardent la télévision, mais ils ne parlent pas',
+      'They watch television, but they don\'t talk',
+    ),
+    parts: [ILS, regardent, laArticle, television, mais, ILS_lower, nePas, parlent],
+  },
+
+  c290: {
+    summary: opens('Elle ne regarde pas la télévision', 'She doesn\'t watch television'),
+    parts: [ELLE, nePas, regarde, laArticle, television],
+  },
+
+  c291: {
+    summary: opens('Il y a de la musique au restaurant', 'There is music at the restaurant'),
+    parts: [ilYA, deLa, musique, au, restaurant],
+  },
+
+  c292: {
+    summary: opens('J\'écoute la musique', 'I listen to music'),
+    parts: [jEcoute, laArticle, musique],
+  },
+
+  c293: {
+    summary: opens('On écoute la musique et on ne parle pas', 'We listen to music and we don\'t talk'),
+    parts: [ON, ecoute, laArticle, musique, et, on, nePas, parle],
+  },
+
+  c294: {
+    summary: opens('J\'habite en ville', 'I live in town'),
+    parts: [jHabite, enVille],
+  },
+
+  c295: {
+    summary: opens('Où est-ce que tu habites ?', 'Where do you live?'),
+    parts: [ouWhere, estCeQue, tu, habites],
+  },
+
+  c296: {
+    summary: opens('Est-ce qu\'elles habitent ensemble ?', 'Do they live together?'),
+    parts: [
+      estCeQuLower('elles', 'The group being asked about is entirely female.'),
+      habitent,
+      ensemble,
+    ],
+  },
+
+  c297: {
+    summary: opens('Je donne un peu d\'argent', 'I give a little money'),
+    parts: [JE, donne, unPeu, dArgent],
+  },
+
+  c298: {
+    summary: opens('Qu\'est-ce que vous donnez ?', 'What do you give?'),
+    parts: [questCeQue, vous, donnez],
+  },
+
+  c299: {
+    summary: opens('On ne donne pas d\'argent', 'We don\'t give money'),
+    parts: [ON, nePas, donne, dArgent],
+  },
+
+  c300: {
+    summary: opens('J\'aime la musique', 'I like music'),
+    parts: [jAime, laArticle, musique],
+  },
+
+  c301: {
+    summary: opens('Est-ce que tu aimes le café ?', 'Do you like coffee?'),
+    parts: [estCeQue, tu, aimes, le, cafe],
+  },
+
+  c302: {
+    summary: opens('Nous aimons faire du sport', 'We like to do sport'),
+    parts: [NOUS, aimons, faireShort, du, sport],
+  },
+
+  c303: {
+    summary: opens('Elle pense vite', 'She thinks fast'),
+    parts: [ELLE, pense, vite],
+  },
+
+  c304: {
+    summary: opens('Qu\'est-ce que tu penses ?', 'What do you think?'),
+    parts: [questCeQue, tu, penses],
+  },
+
+  c305: {
+    summary: opens('Je ne pense pas', 'I don\'t think so'),
+    parts: [JE, nePas, pense],
+    whole:
+      'English needs a \'so\' to finish this — \'I don\'t think so\' — and French does not: \'je ne pense pas\' stands complete, with nothing standing in for the thing not thought.',
+  },
+
+  c306: {
+    summary: opens('Il y a une personne ici', 'There is a person here'),
+    parts: [ilYA, une, personne, ici],
+  },
+
+  c307: {
+    summary: opens('Il y a deux personnes ici', 'There are two people here'),
+    parts: [ilYA, deux, personnes, ici],
+  },
+
+  c308: {
+    summary: opens('Est-ce que la personne parle vite ?', 'Does the person speak fast?'),
+    parts: [estCeQue, laArticle, personne, parle, vite],
+  },
+
+  c309: {
+    summary: opens('Est-ce que vous avez de la musique ?', 'Do you have music?'),
+    parts: [estCeQue, vous, avez, deLa, musique],
+  },
+
+  c310: {
+    summary: opens('Vous pouvez parler ou écouter', 'You can speak or listen'),
+    parts: [VOUS, pouvez, parler, ou, ecouterInf],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 9 — more -er verbs, adverbs, frequency
+  // ───────────────────────────────────────────────────────────────────────────
+  c311: { summary: opens('Nous travaillons ensemble', 'We work together'), parts: [NOUS, travaillons, ensemble] },
+  c312: { summary: opens('J\'arrive maintenant', 'I\'m arriving now'), parts: [jArrive, maintenant] },
+  c313: { summary: opens('Est-ce que vous arrivez tôt ?', 'Do you arrive early?'), parts: [estCeQue, vous, arrivez, tot] },
+  c314: { summary: opens('Ils n\'arrivent pas', 'They aren\'t arriving'), parts: [ILS, nApostrophePas, arrivent] },
+  c315: { summary: opens('On commence maintenant', 'We start now'), parts: [ON, commence, maintenant] },
+  c316: { summary: opens('Est-ce que tu commences le travail ?', 'Are you starting work?'), parts: [estCeQue, tu, commences, le, travail] },
+  c317: { summary: opens('Nous commençons le travail', 'We start work'), parts: [NOUS, commencons, le, travail] },
+  c318: { summary: opens('Ils ne commencent pas tôt', 'They don\'t start early'), parts: [ILS, nePas, commencent, tot] },
+  c319: { summary: opens('J\'arrête le travail', 'I stop work'), parts: [jArrete, le, travail] },
+  c320: { summary: opens('Pourquoi est-ce que vous arrêtez ?', 'Why are you stopping?'), parts: [POURQUOI, estCeQue, vous, arretez] },
+  c321: {
+    summary: opens('On arrête maintenant, il n\'y a pas de problème', 'We stop now, there is no problem'),
+    parts: [ON, arrete, maintenant, ilNYAPas, deNeg, probleme],
+  },
+  c322: { summary: opens('J\'oublie le problème', 'I forget the problem'), parts: [jOublie, le, probleme] },
+  c323: { summary: opens('Est-ce que vous oubliez le travail ?', 'Do you forget work?'), parts: [estCeQue, vous, oubliez, le, travail] },
+  c324: {
+    summary: opens('Je ne veux pas oublier mon ami', 'I don\'t want to forget my friend'),
+    parts: [JE, nePas, veux, oublierInf, mon, ami],
+  },
+  c325: {
+    summary: opens('Je parle toujours vite', 'I always speak fast'),
+    parts: [JE, parle, toujours, vite],
+    whole:
+      'The adverb sits between the verb and what follows it, which is where French keeps this kind of word. English moves it in front of the verb instead.',
+  },
+  c326: { summary: opens('Il est toujours en retard', 'He is always late'), parts: [IL, est, toujours, enRetard] },
+  c327: { summary: opens('On travaille toujours ensemble', 'We always work together'), parts: [ON, travaille, toujours, ensemble] },
+  c328: { summary: opens('Elle écoute souvent la musique', 'She often listens to music'), parts: [ELLE, ecoute, souvent, laArticle, musique] },
+  c329: {
+    summary: opens('Est-ce que vous parlez souvent avec des amis ?', 'Do you often talk with friends?'),
+    parts: [estCeQue, vous, parlez, souvent, avec, des, amis],
+  },
+  c330: { summary: opens('Nous allons souvent boire du café', 'We often go to drink coffee'), parts: [NOUS, allons, souvent, boire, du, cafe] },
+  c331: { summary: opens('J\'aime beaucoup la musique', 'I like music a lot'), parts: [jAime, beaucoup, laArticle, musique] },
+  c332: { summary: opens('Est-ce que tu penses beaucoup ?', 'Do you think a lot?'), parts: [estCeQue, tu, penses, beaucoup] },
+  c333: {
+    summary: opens('Peut-être, mais on ne parle pas beaucoup', 'Maybe, but we don\'t talk much'),
+    parts: [peutEtre, mais, on, nePas, parle, beaucoup],
+  },
+  c334: { summary: opens('Vous ne parlez pas assez', 'You don\'t speak enough'), parts: [VOUS, nePas, parlez, assez] },
+  c335: { summary: opens('Est-ce que c\'est assez ?', 'Is that enough?'), parts: [estCeQue, cEst, assez] },
+  c336: { summary: opens('Elle ne donne pas assez', 'She doesn\'t give enough'), parts: [ELLE, nePas, donne, assez] },
+  c337: { summary: opens('Il est déjà tard', 'It is already late'), parts: [IL, est, deja, tard] },
+  c338: { summary: opens('Est-ce que vous commencez déjà ?', 'Are you already starting?'), parts: [estCeQue, vous, commencez, deja] },
+  c339: { summary: opens('On est déjà en ville', 'We\'re already in town'), parts: [ON, est, deja, enVille] },
+  c340: { summary: opens('Je ne parle jamais vite', 'I never speak fast'), parts: [JE, neJamais, parle, vite] },
+  c341: { summary: opens('Elle ne regarde jamais la télévision', 'She never watches television'), parts: [ELLE, neJamais, regarde, laArticle, television] },
+  c342: { summary: opens('Ils n\'écoutent jamais la musique', 'They never listen to music'), parts: [ILS, nApostropheJamais, ecoutent, laArticle, musique] },
+  c343: {
+    summary: opens('On ne donne jamais d\'argent', 'We never give money'),
+    parts: [ON, neJamais, donne, dArgent],
+    whole:
+      'A negative flattens the article behind it whichever negative it is: \'de l\'argent\' becomes \'d\'argent\' after \'jamais\' exactly as it would after \'pas.\'',
+  },
+  c344: { summary: opens('Vous n\'êtes jamais en retard', 'You are never late'), parts: [VOUS, nApostropheJamais, etes, enRetard] },
+  c345: { summary: opens('Tu as toujours faim', 'You are always hungry'), parts: [TU, as, toujours, faim] },
+  c346: { summary: opens('Nous sommes toujours ensemble', 'We are always together'), parts: [NOUS, sommes, toujours, ensemble] },
+  c347: { summary: opens('Il veut souvent parler ou écouter', 'He often wants to talk or listen'), parts: [IL, veut, souvent, parler, ou, ecouterInf] },
+  c348: { summary: opens('Ils peuvent entrer maintenant', 'They can come in now'), parts: [ILS, peuvent, entrer, maintenant] },
+  c349: { summary: opens('Oui, d\'accord, on commence', 'Yes, okay, we start'), parts: [OUI, dAccord, on, commence] },
+  c350: {
+    summary: opens('Non, elle n\'aime pas ça et elle ne regarde jamais', 'No, she doesn\'t like that and she never watches'),
+    parts: [NON, elleLower, nApostrophePas, aimeLower, ca, et, elleLower, neJamais, regarde],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Block 10 — stem-changing -er verbs
+  // ───────────────────────────────────────────────────────────────────────────
+  c351: { summary: opens('Je mange du pain', 'I eat bread'), parts: [JE, mange, du, pain] },
+  c352: {
+    summary: opens('Nous mangeons du pain', 'We eat bread'),
+    parts: [NOUS, mangeons, du, pain],
+    whole:
+      'This is the one form of \'manger\' that is not built the ordinary way, and the reason is spelling rather than grammar: French writes what it needs in order to keep the sound.',
+  },
+  c353: {
+    summary: opens('Mon ami mange au restaurant', 'My friend eats at the restaurant'),
+    parts: [mon, ami, mange, au, restaurant],
+    whole:
+      'A noun subject takes the same form as \'il\' or \'elle\' — one person or thing doing the verb, whether it is named or pointed at with a pronoun.',
+  },
+  c354: { summary: opens('J\'appelle mon ami', 'I call my friend'), parts: [jAppelle, mon, ami] },
+  c355: {
+    summary: opens('Est-ce que vous appelez le bureau ?', 'Are you calling the office?'),
+    parts: [estCeQue, vous, appelez, le, bureau],
+  },
+  c356: { summary: opens('Elles appellent souvent', 'They call often'), parts: [ELLES, appellent, souvent] },
+  c357: { summary: opens('Elle paie le café', 'She pays for the coffee'), parts: [ELLE, paie, le, cafe] },
+  c358: { summary: opens('Nous payons ensemble', 'We pay together'), parts: [NOUS, payons, ensemble] },
+  c359: {
+    summary: opens('La personne ne paie jamais', 'The person never pays'),
+    parts: [laArticle, personne, neJamais, paie],
+  },
+  c360: { summary: opens('J\'essaie la voiture', 'I try the car'), parts: [jEssaie, laArticle, voiture] },
+  c361: {
+    summary: opens('Est-ce que vous essayez aussi ?', 'Are you trying too?'),
+    parts: [estCeQue, vous, essayez, aussi],
+  },
+  c362: {
+    summary: opens('Ils essaient ou ils arrêtent', 'They try or they stop'),
+    parts: [ILS, essaient, ou, ILS_lower, arretent],
+  },
+  c363: { summary: opens('On préfère le café', 'We prefer coffee'), parts: [ON, prefere, le, cafe] },
+  c364: { summary: opens('Nous préférons le pain', 'We prefer bread'), parts: [NOUS, preferons, le, pain] },
+  c365: {
+    summary: opens('Mon ami préfère rester ici', 'My friend prefers to stay here'),
+    parts: [mon, ami, prefere, rester, ici],
+  },
+  c366: { summary: opens('J\'achète du pain au marché', 'I buy bread at the market'), parts: [jAchete, du, pain, au, marche] },
+  c367: {
+    summary: opens('Vous achetez une voiture ?', 'You are buying a car?'),
+    parts: [VOUS, achetez, une, voiture],
+    whole:
+      'This is a statement asked as a question, with nothing changed but the rise of the voice at the end.',
+  },
+  c368: {
+    summary: opens('Est-ce que tu achètes du café ?', 'Are you buying coffee?'),
+    parts: [estCeQue, tu, achetes, du, cafe],
+  },
+  c369: { summary: opens('Le bus arrive tôt', 'The bus arrives early'), parts: [le, bus, arrive, tot] },
+  c370: { summary: opens('C\'est assez ?', 'Is that enough?'), parts: [CEST, assez] },
+  c371: {
+    summary: opens('Ils ont du pain, mais il n\'y a pas de café', 'They have bread, but there is no coffee'),
+    parts: [ILS, ont, du, pain, mais, ilNYAPas, deNeg, cafe],
+  },
+  c372: {
+    summary: opens('Il fait froid, mais le café est chaud', 'It is cold, but the coffee is hot'),
+    parts: [ilFait, froid, mais, le, cafe, est, chaud],
+  },
+  c373: {
+    summary: opens('Ça va, on mange avec des amis', 'It\'s fine, we eat with friends'),
+    parts: [CA_VA, on, mange, avec, des, amis],
+  },
+  c374: {
+    summary: opens('Vous devez essayer et payer', 'You have to try and pay'),
+    parts: [VOUS, devez, essayerInf, et, payer],
+  },
+  c375: {
+    summary: opens('Il fait beau, on achète du café au marché', 'It is nice out, we buy coffee at the market'),
+    parts: [ilFait, beau, on, achete, du, cafe, au, marche],
   },
 }
 

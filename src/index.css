@@ -131,6 +131,21 @@ body {
   cursor: pointer;
 }
 
+/* A setting that only narrows the one above it: indented under its parent, and
+   greyed out while that parent is off, when it does nothing. The note carries
+   the class too — and needs the extra specificity to beat the `margin: 0`
+   shorthand in .settings-note below, which would otherwise reset the indent. */
+.settings-sub,
+.settings-note.settings-sub {
+  margin-left: 1.4rem;
+}
+
+.settings-sub-off,
+.settings-sub-off + .settings-note {
+  color: #bbb !important;
+  cursor: default;
+}
+
 .settings-body select,
 .settings-body input[type='range'] {
   width: 100%;
@@ -219,6 +234,17 @@ body {
   color: #aaa;
 }
 
+/* Quieter still than the deck position: it's how far back to where the learner
+   left off, not where they are. The dot keeps the two counts apart. */
+.progress-reviews {
+  color: #aaa;
+}
+
+.progress-reviews::before {
+  content: '·';
+  margin: 0 0.4rem;
+}
+
 /* Quiet by design: a way back, not a step in the review. */
 .undo {
   padding: 0.3rem 0.6rem;
@@ -283,6 +309,13 @@ body {
 .gloss-target {
   font-weight: 700;
   color: #333;
+}
+
+/* An English word carried only because French cannot drop it — the "some"
+   behind du / de la / des. Slanted, so it reads as a word standing in for a
+   French one rather than as part of the sentence English would say. */
+.implied {
+  font-style: italic;
 }
 
 .empty {

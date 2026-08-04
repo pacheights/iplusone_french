@@ -265,6 +265,49 @@ function matchCase(surface: string, answer: string): string {
 }
 
 /**
+ * The other forms of the answer's own verb, drawn from the whole inventory.
+ *
+ * These are the sharpest wrong options a conjugation card can offer: the
+ * question such a card exists to ask is *which person*, and that can only be
+ * asked against the other persons. Two reasons the generic pool cannot supply
+ * them — a regular -er verb keeps all six forms in `free` (md/rules.md, "The
+ * -er endings"), so five of them are not element surfaces at all; and where
+ * they are surfaces, they sit among hundreds of equally-ranked words and are
+ * picked only by luck.
+ *
+ * A verb is recognised from its gloss, the same shape reuse.ts reads.
+ */
+const VERB_GLOSS = /\(([^\s()]+) — (?:[a-zà-öø-ÿ/]+ form|all six forms|the polite form)\)/
+
+function formsOf(el: (typeof ELEMENTS)[number]): string[] {
+  return [[el.surface], ...(el.free ?? [])].map((u) => u.join(' '))
+}
+
+function siblingForms(answer: string): string[] {
+  const key = answer.trim().toLowerCase()
+  const owner = ELEMENTS.find(
+    (el) => VERB_GLOSS.test(el.gloss) && formsOf(el).some((f) => f.toLowerCase() === key),
+  )
+  if (!owner) return []
+  const verb = VERB_GLOSS.exec(owner.gloss)?.[1]
+  const forms = new Set<string>()
+  for (const el of ELEMENTS) {
+    if (VERB_GLOSS.exec(el.gloss)?.[1] !== verb) continue
+    for (const form of formsOf(el)) forms.add(form)
+  }
+  const siblings = [...forms].filter((form) => form.toLowerCase() !== key)
+
+  // One element can carry more than one verb — the card that switches the -er
+  // endings on for every infinitive already known holds six of them at once.
+  // Keep only the forms built on the same stem, or the options would ask which
+  // verb rather than which person.
+  const stem = key.slice(0, 3)
+  const sameStem = siblings.filter((form) => form.toLowerCase().startsWith(stem))
+  return sameStem.length >= 3 ? sameStem : siblings
+}
+
+
+/**
  * Wrong options are drawn only from elements introduced at or before this card,
  * so every choice is a word the learner has already met — the question tests
  * whether they heard *which* known word it was, never whether they can spot an
@@ -311,9 +354,19 @@ function pickDistractors(card: Card, deck: Card[], answer: string, random: () =>
   // known words to offer yet; backfill from the rest of the inventory.
   const backfill = byRank(usable.filter((el) => !introduced.has(el.id)))
 
-  return [...known, ...backfill]
-    .slice(0, CHOICE_COUNT - 1)
-    .map((el) => matchCase(el.surface, answer))
+  // Sibling forms go first: they are the sharpest wrong answers a conjugation
+  // card can offer, and nothing else in the pool carries them.
+  const siblings = shuffle(siblingForms(answer), random).filter(
+    (form) => !new RegExp(`(^|[^\\p{L}'’])${escapeRegExp(form.toLowerCase())}([^\\p{L}'’]|$)`, 'u').test(sentence),
+  )
+
+  // A sibling form can also be some element's surface, so dedupe on the way out.
+  const chosen: string[] = []
+  for (const form of [...siblings, ...[...known, ...backfill].map((el) => el.surface)]) {
+    if (chosen.length === CHOICE_COUNT - 1) break
+    if (!chosen.some((c) => c.toLowerCase() === form.toLowerCase())) chosen.push(form)
+  }
+  return chosen.map((surface) => matchCase(surface, answer))
 }
 
 /**

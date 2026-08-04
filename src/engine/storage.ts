@@ -8,6 +8,7 @@ const REVIEW_DEFAULTS_KEY = 'review-defaults-v1'
 const SHOW_PHONETIC_KEY = 'show-phonetic-v1'
 const MUTE_MODE_KEY = 'mute-mode-v1'
 const LISTEN_FIRST_KEY = 'listen-first-v1'
+const LISTEN_FIRST_REVIEWS_KEY = 'listen-first-reviews-v1'
 
 /** How fast the voice speaks. 1 = normal; the Web Speech API accepts 0.1–10. */
 const DEFAULT_SPEECH_RATE = 1
@@ -172,5 +173,24 @@ export function loadListenFirst(): boolean {
 
 export function saveListenFirst(listen: boolean): void {
   localStorage.setItem(LISTEN_FIRST_KEY, String(listen))
+}
+
+/**
+ * Listen first, but only where the ear stands a chance: cards whose every word
+ * has already been introduced. A card carrying something new turns up already
+ * flipped, because a sentence with an unknown word in it is not a listening
+ * exercise — it's a guess. Off by default, so Listen first alone still means
+ * every card.
+ */
+const DEFAULT_LISTEN_FIRST_REVIEWS = false
+
+export function loadListenFirstReviewsOnly(): boolean {
+  const raw = localStorage.getItem(LISTEN_FIRST_REVIEWS_KEY)
+  if (raw === null) return DEFAULT_LISTEN_FIRST_REVIEWS
+  return raw === 'true'
+}
+
+export function saveListenFirstReviewsOnly(reviewsOnly: boolean): void {
+  localStorage.setItem(LISTEN_FIRST_REVIEWS_KEY, String(reviewsOnly))
 }
 

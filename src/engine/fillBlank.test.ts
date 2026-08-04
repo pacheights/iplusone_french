@@ -68,13 +68,14 @@ describe('buildFillBlank', () => {
   it('blanks a vocabulary word, not the grammar around it, on a rest card', () => {
     const restCard: Card = {
       id: 'rest-test',
-      segments: [{ text: 'Je mange du pain' }],
-      translation: [{ text: 'I eat bread' }],
+      segments: [{ text: 'Il y a du pain' }],
+      translation: [{ text: 'There is bread' }],
     }
     const question = buildFillBlank(restCard, CARDS)
-    // "du" is a unit too, but a rest card drills words before it drills articles.
+    // "du" and "il y a" are units too, but a rest card drills words before it
+    // drills the grammar holding them together.
     expect(question.answer).toBe('pain')
-    expect(question.before + question.answer + question.after).toBe('Je mange du pain')
+    expect(question.before + question.answer + question.after).toBe('Il y a du pain')
   })
 
   it('takes the elided word without the letter fused to it', () => {

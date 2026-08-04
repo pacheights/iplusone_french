@@ -15,10 +15,11 @@ import type { Element } from '../types'
  *     `de_la_viande`) — every later noun reuses the now-known word.
  * Their `provides` lists each unit that becomes known.
  *
- * `free` carries the mechanical agreement forms a card unlocks at no cost
- * (md/rules.md: agreement is one rule covering every word in the language, so
- * it rides in the explanation and never costs a card). Verb forms are the
- * opposite — every person is its own element, *including forms that sound
+ * `free` carries the mechanical forms a card unlocks at no cost (md/rules.md:
+ * a rule covering every word in the language rides in the explanation and never
+ * costs a card). Two kinds live here — adjective agreement and noun plurals,
+ * and, from block 8, the six forms of a regular -er verb. An *irregular* verb is
+ * the opposite: every person is its own element, *including forms that sound
  * identical*, because the learner picks between written options.
  *
  * Grammar elements carry a plain-language `note`, shown when a card is flipped.
@@ -708,6 +709,511 @@ export const ELEMENTS: Element[] = [
     surface: 'important',
     gloss: 'important',
     free: [['importante'], ['importants'], ['importantes']],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Block 6 — aller (cards 186–231)
+  //
+  // The first block written under the reuse clock: `à`, `au` and `en ville` are
+  // marked, because which one a place takes is a choice remade on every noun,
+  // and one card cannot offer the alternatives. The nouns are left unmarked —
+  // recalling `la gare` is the scheduler's job.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'maison',
+    kind: 'vocab',
+    surface: 'maison',
+    gloss: 'house / home (la maison)',
+  },
+  {
+    id: 'a_place',
+    kind: 'grammar',
+    surface: 'à',
+    gloss: 'to / at (a place)',
+    clock: true,
+  },
+  {
+    id: 'travail',
+    kind: 'vocab',
+    surface: 'travail',
+    gloss: 'work (le travail)',
+  },
+  {
+    id: 'au',
+    kind: 'grammar',
+    surface: 'au',
+    gloss: 'to the / at the (masculine)',
+    clock: true,
+  },
+  {
+    id: 'aller',
+    kind: 'vocab',
+    surface: 'aller',
+    gloss: 'to go (infinitive)',
+  },
+  {
+    id: 'je_vais',
+    kind: 'vocab',
+    surface: 'vais',
+    gloss: 'am going (aller — je form)',
+  },
+  {
+    id: 'tu_vas',
+    kind: 'vocab',
+    surface: 'vas',
+    gloss: 'are going (aller — tu form)',
+  },
+  {
+    id: 'il_va',
+    kind: 'vocab',
+    surface: 'va',
+    gloss: 'is going (aller — il/elle form)',
+  },
+  {
+    id: 'nous_allons',
+    kind: 'vocab',
+    surface: 'allons',
+    gloss: 'are going (aller — nous form)',
+  },
+  {
+    id: 'vous_allez',
+    kind: 'vocab',
+    surface: 'allez',
+    gloss: 'are going (aller — vous form)',
+  },
+  {
+    id: 'ils_vont',
+    kind: 'vocab',
+    surface: 'vont',
+    gloss: 'are going (aller — ils/elles form)',
+  },
+  {
+    id: 'bureau',
+    kind: 'vocab',
+    surface: 'bureau',
+    gloss: 'office (le bureau)',
+  },
+  {
+    id: 'marche',
+    kind: 'vocab',
+    surface: 'marché',
+    gloss: 'market (le marché)',
+  },
+  {
+    id: 'restaurant',
+    kind: 'vocab',
+    surface: 'restaurant',
+    gloss: 'restaurant (le restaurant)',
+  },
+  {
+    id: 'gare',
+    kind: 'vocab',
+    surface: 'gare',
+    gloss: 'station (la gare)',
+  },
+  {
+    id: 'ecole',
+    kind: 'vocab',
+    surface: 'école',
+    gloss: 'school (l\'école)',
+  },
+  {
+    id: 'en_ville',
+    kind: 'grammar',
+    surface: 'en ville',
+    gloss: 'into town / in town',
+    provides: [['en', 'ville']],
+    clock: true,
+  },
+  {
+    id: 'comment',
+    kind: 'grammar',
+    surface: 'comment',
+    gloss: 'how',
+  },
+  {
+    id: 'demain',
+    kind: 'vocab',
+    surface: 'demain',
+    gloss: 'tomorrow',
+  },
+  {
+    id: 'aujourdhui',
+    kind: 'vocab',
+    surface: 'aujourd\'hui',
+    gloss: 'today',
+  },
+  {
+    id: 'ca_va',
+    kind: 'grammar',
+    surface: 'ça va',
+    gloss: 'how are you / it\'s fine',
+    provides: [['ça', 'va']],
+  },
+  {
+    id: 'mal',
+    kind: 'vocab',
+    surface: 'mal',
+    gloss: 'badly',
+  },
+  {
+    id: 'comment_allez_vous',
+    kind: 'grammar',
+    surface: 'comment allez-vous',
+    gloss: 'how are you (polite)',
+    provides: [['comment', 'allez', 'vous']],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Block 7 — faire (cards 232–271)
+  //
+  // Nothing here is marked `clock`. The block's own choices are all made
+  // somewhere else: which article an activity takes is the article system,
+  // already on the clock from block 6, and the question words are retrieved
+  // rather than assembled — there is no third option to weigh `quoi` against.
+  // The verb forms need no mark; they are recognised from their gloss.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'faire',
+    kind: 'vocab',
+    surface: 'faire',
+    gloss: 'to do / to make (infinitive)',
+  },
+  {
+    id: 'sport',
+    kind: 'vocab',
+    surface: 'sport',
+    gloss: 'sport (le sport)',
+  },
+  {
+    id: 'je_fais',
+    kind: 'vocab',
+    surface: 'fais',
+    gloss: 'do (faire — je/tu form)',
+  },
+  {
+    id: 'il_fait',
+    kind: 'vocab',
+    surface: 'fait',
+    gloss: 'does (faire — il/elle form)',
+  },
+  {
+    id: 'nous_faisons',
+    kind: 'vocab',
+    surface: 'faisons',
+    gloss: 'do (faire — nous form)',
+  },
+  {
+    id: 'vous_faites',
+    kind: 'vocab',
+    surface: 'faites',
+    gloss: 'do (faire — vous form)',
+  },
+  {
+    id: 'ils_font',
+    kind: 'vocab',
+    surface: 'font',
+    gloss: 'do (faire — ils/elles form)',
+  },
+  {
+    id: 'cuisine',
+    kind: 'vocab',
+    surface: 'cuisine',
+    gloss: 'cooking / kitchen (la cuisine)',
+  },
+  {
+    id: 'menage',
+    kind: 'vocab',
+    surface: 'ménage',
+    gloss: 'housework (le ménage)',
+  },
+  {
+    id: 'quest_ce_que',
+    kind: 'grammar',
+    surface: 'qu\'est-ce que',
+    gloss: 'what',
+    provides: [['que', 'est', 'ce', 'que']],
+  },
+  {
+    id: 'quoi',
+    kind: 'grammar',
+    surface: 'quoi',
+    gloss: 'what (standing after the verb)',
+  },
+  {
+    id: 'chaud',
+    kind: 'vocab',
+    surface: 'chaud',
+    gloss: 'hot',
+    free: [['chaude'], ['chauds'], ['chaudes']],
+  },
+  {
+    id: 'froid',
+    kind: 'vocab',
+    surface: 'froid',
+    gloss: 'cold',
+    free: [['froide'], ['froids'], ['froides']],
+  },
+  {
+    id: 'beau',
+    kind: 'vocab',
+    surface: 'beau',
+    gloss: 'nice (of weather) / beautiful',
+  },
+  {
+    id: 'quel_temps_fait_il',
+    kind: 'grammar',
+    surface: 'quel temps fait-il',
+    gloss: 'what is the weather like',
+    provides: [['quel', 'temps', 'fait', 'il']],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Block 8 — regular -er verbs (cards 272–310)
+  //
+  // `parler` pays per form, the way an irregular verb does — five elements for
+  // five spellings. `regarder` pays once and its other forms ride on `free`,
+  // and every regular -er verb after it does the same: one element, six forms
+  // and the infinitive together (md/rules.md, "The -er endings").
+  //
+  // The gloss "(infinitive — all six forms)" is what reuse.ts reads to put a
+  // bundled verb on the clock; keep the shape.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'je_parle',
+    kind: 'vocab',
+    surface: 'parle',
+    gloss: 'speak / speaks (parler — je/il/elle form)',
+  },
+  {
+    id: 'tu_parles',
+    kind: 'vocab',
+    surface: 'parles',
+    gloss: 'speak (parler — tu form)',
+  },
+  {
+    id: 'nous_parlons',
+    kind: 'vocab',
+    surface: 'parlons',
+    gloss: 'speak (parler — nous form)',
+  },
+  {
+    id: 'vous_parlez',
+    kind: 'vocab',
+    surface: 'parlez',
+    gloss: 'speak (parler — vous form)',
+  },
+  {
+    id: 'ils_parlent',
+    kind: 'vocab',
+    surface: 'parlent',
+    gloss: 'speak (parler — ils/elles form)',
+  },
+  {
+    id: 'television',
+    kind: 'vocab',
+    surface: 'télévision',
+    gloss: 'television (la télévision)',
+  },
+  {
+    id: 'regarde',
+    kind: 'vocab',
+    surface: 'regarde',
+    gloss: 'watch (regarder — all six forms)',
+    free: [['regardes'], ['regardons'], ['regardez'], ['regardent']],
+  },
+  {
+    id: 'musique',
+    kind: 'vocab',
+    surface: 'musique',
+    gloss: 'music (la musique)',
+  },
+  {
+    id: 'ecoute',
+    kind: 'vocab',
+    surface: 'écoute',
+    gloss: 'listen to (écouter — all six forms)',
+    free: [['écouter'], ['écoutes'], ['écoutons'], ['écoutez'], ['écoutent']],
+  },
+  {
+    id: 'habite',
+    kind: 'vocab',
+    surface: 'habite',
+    gloss: 'live (habiter — all six forms)',
+    free: [['habiter'], ['habites'], ['habitons'], ['habitez'], ['habitent']],
+  },
+  {
+    id: 'donne',
+    kind: 'vocab',
+    surface: 'donne',
+    gloss: 'give (donner — all six forms)',
+    free: [['donner'], ['donnes'], ['donnons'], ['donnez'], ['donnent']],
+  },
+  {
+    id: 'aime',
+    kind: 'vocab',
+    surface: 'aime',
+    gloss: 'like (aimer — all six forms)',
+    free: [['aimer'], ['aimes'], ['aimons'], ['aimez'], ['aiment']],
+  },
+  {
+    id: 'pense',
+    kind: 'vocab',
+    surface: 'pense',
+    gloss: 'think / thinks (penser — all six forms)',
+    free: [['penser'], ['penses'], ['pensons'], ['pensez'], ['pensent']],
+  },
+  {
+    id: 'personne',
+    kind: 'vocab',
+    surface: 'personne',
+    gloss: 'person (la personne)',
+    free: [['personnes']],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Block 9 — more -er verbs, adverbs, frequency (cards 311–350)
+  //
+  // `travaillons` is the switch-on card: the -er endings were installed in
+  // block 8, so every -er infinitive already taught can be conjugated without
+  // paying again. Its `free` list carries all six of those verbs' forms, which
+  // is why it runs long — the cost is one card, not six.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'travaillons',
+    kind: 'vocab',
+    surface: 'travaillons',
+    gloss: 'work (travailler — all six forms)',
+    free: [
+      ['travaille'], ['travailles'], ['travaillez'], ['travaillent'],
+      ['aide'], ['aides'], ['aidons'], ['aidez'], ['aident'],
+      ['cherche'], ['cherches'], ['cherchons'], ['cherchez'], ['cherchent'],
+      ['trouve'], ['trouves'], ['trouvons'], ['trouvez'], ['trouvent'],
+      ['reste'], ['restes'], ['restons'], ['restez'], ['restent'],
+      ['entre'], ['entres'], ['entrons'], ['entrez'], ['entrent'],
+    ],
+  },
+  {
+    id: 'arrive',
+    kind: 'vocab',
+    surface: 'arrive',
+    gloss: 'arrive / arrives / arriving (arriver — all six forms)',
+    free: [['arriver'], ['arrives'], ['arrivons'], ['arrivez'], ['arrivent']],
+  },
+  {
+    id: 'commence',
+    kind: 'vocab',
+    surface: 'commence',
+    gloss: 'start / starting (commencer — all six forms)',
+    free: [['commencer'], ['commences'], ['commencez'], ['commencent']],
+  },
+  {
+    id: 'commencons',
+    kind: 'vocab',
+    surface: 'commençons',
+    gloss: 'start / starting (commencer — nous form)',
+  },
+  {
+    id: 'arrete',
+    kind: 'vocab',
+    surface: 'arrête',
+    gloss: 'stop / stopping (arrêter — all six forms)',
+    free: [['arrêter'], ['arrêtes'], ['arrêtons'], ['arrêtez'], ['arrêtent']],
+  },
+  {
+    id: 'oublie',
+    kind: 'vocab',
+    surface: 'oublie',
+    gloss: 'forget (oublier — all six forms)',
+    free: [['oublier'], ['oublies'], ['oublions'], ['oubliez'], ['oublient']],
+  },
+  {
+    id: 'toujours',
+    kind: 'vocab',
+    surface: 'toujours',
+    gloss: 'always',
+  },
+  {
+    id: 'souvent',
+    kind: 'vocab',
+    surface: 'souvent',
+    gloss: 'often',
+  },
+  {
+    id: 'beaucoup',
+    kind: 'vocab',
+    surface: 'beaucoup',
+    gloss: 'a lot / much',
+  },
+  {
+    id: 'assez',
+    kind: 'vocab',
+    surface: 'assez',
+    gloss: 'enough',
+  },
+  {
+    id: 'deja',
+    kind: 'vocab',
+    surface: 'déjà',
+    gloss: 'already',
+  },
+  {
+    id: 'ne_jamais',
+    kind: 'grammar',
+    surface: 'ne … jamais',
+    gloss: 'never (wraps the verb)',
+    provides: [['ne'], ['jamais']],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Block 10 — stem-changing -er verbs (cards 351–375)
+  //
+  // These end in -er but are not in the free class (md/rules.md, "The -er
+  // endings"): the stem moves. Each costs its own element and carries its own
+  // six forms, because where the stem lands is a fact about the verb rather
+  // than a rule about the language.
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'mange',
+    kind: 'vocab',
+    surface: 'mange',
+    gloss: 'eat / eats (manger — all six forms)',
+    free: [['manges'], ['mangeons'], ['mangez'], ['mangent']],
+  },
+  {
+    id: 'appelle',
+    kind: 'vocab',
+    surface: 'appelle',
+    gloss: 'call / calling (appeler — all six forms)',
+    free: [['appelles'], ['appelons'], ['appelez'], ['appellent']],
+  },
+  {
+    id: 'paie',
+    kind: 'vocab',
+    surface: 'paie',
+    gloss: 'pay / pays (payer — all six forms)',
+    free: [['paies'], ['payons'], ['payez'], ['paient']],
+  },
+  {
+    id: 'essaie',
+    kind: 'vocab',
+    surface: 'essaie',
+    gloss: 'try / trying (essayer — all six forms)',
+    free: [['essayer'], ['essaies'], ['essayons'], ['essayez'], ['essaient']],
+  },
+  {
+    id: 'prefere',
+    kind: 'vocab',
+    surface: 'préfère',
+    gloss: 'prefer / prefers (préférer — all six forms)',
+    free: [['préférer'], ['préfères'], ['préférons'], ['préférez'], ['préfèrent']],
+  },
+  {
+    id: 'achete',
+    kind: 'vocab',
+    surface: 'achète',
+    gloss: 'buy / buying (acheter — all six forms)',
+    free: [['acheter'], ['achètes'], ['achetons'], ['achetez'], ['achètent']],
   },
 ]
 

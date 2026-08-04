@@ -53,6 +53,10 @@ describe('the deck', () => {
       c68: 'the gloss is the il/elle form; the subject here is on, so English says "have"',
       c62: 'avoir faim is "to be hungry", so as answers to English "are"',
       c59: 'the gloss belongs to the bundled "mon ami"',
+      c282: 'the gloss belongs to the bundled "mon ami"; the plural stands alone here',
+      c373: 'the gloss belongs to the bundled "mon ami"; the plural stands alone here',
+      c260: 'French makes the weather with faire, so fait answers to English "is"',
+      c265: 'avoir froid is "to be cold", so avez answers to English "are"',
     }
 
     const glosses = new Map<string, string>()

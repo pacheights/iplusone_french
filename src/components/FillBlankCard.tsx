@@ -164,22 +164,37 @@ export function FillBlankCard({
           the sentence first, then the meaning arrives with the choices. */}
       {(answered || (muteMode && !gated)) && (
         <p className="english">
-          {card.translation.map((segment, i) =>
-            segment.highlight ? (
-              <strong key={i} className="gloss-target">
+          {card.translation.map((segment, i) => {
+            const className = [segment.highlight && 'gloss-target', segment.implied && 'implied']
+              .filter(Boolean)
+              .join(' ')
+            return segment.highlight ? (
+              <strong key={i} className={className}>
                 {segment.text}
               </strong>
             ) : (
-              <span key={i}>{segment.text}</span>
-            ),
-          )}
+              <span key={i} className={className || undefined}>
+                {segment.text}
+              </span>
+            )
+          })}
         </p>
       )}
 
       {/* Ends the wait. It stands where the choices will be, so the card doesn't
-          reshuffle under the cursor when it turns over. */}
+          reshuffle under the cursor when it turns over. It replays as it turns:
+          the last hearing was of a sentence with nothing on screen, and this one
+          lands with the gapped text in front of the learner, which is where the
+          sound and the spelling meet. */}
       {gated && (
-        <button type="button" className="flip" onClick={() => setFlipped(true)}>
+        <button
+          type="button"
+          className="flip"
+          onClick={() => {
+            setFlipped(true)
+            speak()
+          }}
+        >
           Flip
         </button>
       )}

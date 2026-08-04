@@ -6,6 +6,15 @@ export type ElementKind = 'vocab' | 'grammar'
 export interface Segment {
   text: string
   highlight?: ElementKind
+  /**
+   * Set on a translation segment English would not bother to say, carried only
+   * because French has no way to leave it out — the "some" that glosses
+   * `du / de la / de l' / des`. It renders in italics, and the italics mean one
+   * thing: French makes you say this word. Everywhere the same word is *not*
+   * what the gap takes out it is dropped from the English instead, so the
+   * translation reads the way English actually reads (see data/cards.ts).
+   */
+  implied?: boolean
 }
 
 /**
@@ -31,6 +40,27 @@ export interface Element {
    * un-highlighted rather than counting as the card's new thing.
    */
   free?: string[][]
+  /**
+   * On the reuse clock (md/rules.md rule 4): the deck must keep bringing this
+   * one back, rather than leaving it to the scheduler.
+   *
+   * The test is **retrieve or assemble**. A word whose whole skill is recall —
+   * `content`, `libre`, `boire` — is the SRS's job and is left unmarked; it
+   * costs no cards. A word the learner has to *assemble* is the deck's job,
+   * because assembly is a choice and a choice is only exercised against
+   * alternatives, which one card cannot offer. Mark articles, connectors, and
+   * constructions like `avoir besoin de` — where the surface may be an ordinary
+   * noun but the skill is choosing `avoir`, keeping the `de`, and collapsing the
+   * partitive behind it.
+   *
+   * Conjugated forms need no mark: engine/reuse.ts recognises them from their
+   * gloss, so every verb joins the clock the moment it is taught.
+   *
+   * Marked from block 6 on. Earlier elements are unmarked because the quotas
+   * that read this are grandfathered, not because they are all retrieve-class —
+   * the staleness ledger reports them either way.
+   */
+  clock?: true
 }
 
 /**

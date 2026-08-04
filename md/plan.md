@@ -24,14 +24,16 @@ known, or there is nothing to reason from.
 
 ## How far it goes
 
-Everyday fluency — roughly **A2–B1**, about **1,200 cards** across 30 blocks.
-Present, past (passé composé and imparfait), future, conditional, commands,
-object and relative pronouns, comparisons, and the common connectors. It stops
-before the subjunctive and the literary tenses.
+Solid **B1**, reaching into B2 vocabulary — about **3,340 cards** across 84
+blocks. The grammar is finished by card 1100: present, past (passé composé and
+imparfait), future, conditional, commands, object and relative pronouns,
+comparisons, the common connectors, and the present subjunctive on the six verbs
+where it is worth knowing. Everything after that is vocabulary on frames already
+owned. It stops before the literary tenses.
 
 ## The two halves of the deck
 
-|                 | Blocks 1–27 (grammar)          | Blocks 28+ (the tail)      |
+|                 | Blocks 1–28 (grammar)          | Blocks 29–84 (the tail)    |
 | --------------- | ------------------------------ | -------------------------- |
 | New grammar     | arriving constantly            | essentially none           |
 | Ordering        | by hand, card by card          | topic buckets, in volume   |
